@@ -17,7 +17,16 @@
     "tailwind-merge": "^2.6.0",
     "tailwind-variants": "^0.3.0"
   },
+  "peerDependencies": {
+    "@phosphor-icons/react": ">=2"
+  },
+  "peerDependenciesMeta": {
+    "@phosphor-icons/react": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",

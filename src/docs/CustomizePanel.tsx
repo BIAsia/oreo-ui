@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Slider } from "./primitives";
+import { SlidersHorizontal, X } from "@phosphor-icons/react";
+import { Slider, Segmented } from "./primitives";
+import { Icon, type IconWeight } from "@/components/icon";
+
+const ICON_WEIGHTS: readonly IconWeight[] = ["regular", "bold", "fill", "duotone"];
 
 export type CustomizeState = {
   dark: boolean;
@@ -13,18 +17,9 @@ export type CustomizeState = {
   setDuration: (v: number) => void;
   tapScale: number;
   setTapScale: (v: number) => void;
+  weight: IconWeight;
+  setWeight: (v: IconWeight) => void;
 };
-
-function SlidersIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path d="M2 4h7M12 4h2M2 12h2M7 12h7M2 8h10M14 8h0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <circle cx="10.5" cy="4" r="1.6" fill="currentColor" />
-      <circle cx="5.5" cy="12" r="1.6" fill="currentColor" />
-      <circle cx="13" cy="8" r="1.6" fill="currentColor" />
-    </svg>
-  );
-}
 
 function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
@@ -59,16 +54,14 @@ export function CustomizePanel(s: CustomizeState) {
           >
             <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] px-4 py-3">
               <span className="flex items-center gap-2 text-[13px] font-semibold">
-                <SlidersIcon /> Make them yours
+                <Icon icon={SlidersHorizontal} size="sm" /> Make them yours
               </span>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Collapse"
                 className="grid size-6 place-items-center rounded-md text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-state-hover)] hover:text-[var(--color-text-primary)]"
               >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-                  <path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
+                <Icon icon={X} className="size-3" />
               </button>
             </div>
 
@@ -89,6 +82,13 @@ export function CustomizePanel(s: CustomizeState) {
                 <Slider label="duration" value={s.duration} min={0.1} max={1} step={0.05} onChange={s.setDuration} suffix="s" />
                 <Slider label="tapScale" value={s.tapScale} min={0.8} max={1} step={0.01} onChange={s.setTapScale} />
               </div>
+
+              <div className="space-y-3 border-t border-[var(--color-border-subtle)] pt-4">
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
+                  Icon
+                </div>
+                <Segmented label="weight" value={s.weight} options={ICON_WEIGHTS} onChange={s.setWeight} />
+              </div>
             </div>
           </motion.div>
         ) : (
@@ -103,7 +103,7 @@ export function CustomizePanel(s: CustomizeState) {
             style={{ boxShadow: "var(--shadow-panel)" }}
             className="flex items-center gap-2 rounded-full bg-[var(--color-bg-inverse)] px-4 py-2.5 text-[13px] font-medium text-[var(--color-text-on-inverse)]"
           >
-            <SlidersIcon /> Make them yours
+            <Icon icon={SlidersHorizontal} size="sm" /> Make them yours
           </motion.button>
         )}
       </AnimatePresence>

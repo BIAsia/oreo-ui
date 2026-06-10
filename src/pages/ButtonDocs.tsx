@@ -2,7 +2,8 @@ import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
 import { Button } from "@/components/button";
-import { Paperclip, ChevronDown } from "@/components/button/icons";
+import { Icon } from "@/components/icon";
+import { Paperclip, CaretDown } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "button", label: "Introduction" },
@@ -31,9 +32,13 @@ const PROPS: PropRow[] = [
 ];
 
 const CODE_BASIC = `import { Button } from "@/components/button";
-import { Paperclip, ChevronDown } from "@/components/button/icons";
+import { Icon } from "@/components/icon";
+import { Paperclip, CaretDown } from "@phosphor-icons/react";
 
-<Button leadingIcon={<Paperclip />} trailingIcon={<ChevronDown />}>
+<Button
+  leadingIcon={<Icon icon={Paperclip} />}
+  trailingIcon={<Icon icon={CaretDown} />}
+>
   Button
 </Button>`;
 
@@ -55,9 +60,9 @@ const CODE_STATES = `{/* disabled */}
 export function ButtonDocs({ nav }: { nav: DocsNav }) {
   return (
     <DocsPage toc={TOC} breadcrumb={["Components", "Button"]} nav={nav}>
-      {({ spring }) => {
+      {({ spring, icon }) => {
         const Demo = ({ children }: { children?: React.ReactNode }) => (
-          <Button leadingIcon={<Paperclip />} trailingIcon={<ChevronDown />} {...spring}>
+          <Button leadingIcon={<Icon icon={Paperclip} weight={icon.weight} />} trailingIcon={<Icon icon={CaretDown} weight={icon.weight} />} {...spring}>
             {children ?? "Button"}
           </Button>
         );
@@ -108,7 +113,7 @@ export function ButtonDocs({ nav }: { nav: DocsNav }) {
                 preview={
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {SIZES.map((sz) => (
-                      <Button key={sz} size={sz} leadingIcon={<Paperclip />} {...spring}>
+                      <Button key={sz} size={sz} leadingIcon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring}>
                         {sz === "sm" ? "Small" : sz === "md" ? "Medium" : "Large"}
                       </Button>
                     ))}

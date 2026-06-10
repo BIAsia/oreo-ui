@@ -2,7 +2,8 @@ import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
 import { IconButton } from "@/components/button";
-import { Paperclip } from "@/components/button/icons";
+import { Icon } from "@/components/icon";
+import { Paperclip } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "icon-button", label: "Introduction" },
@@ -31,19 +32,20 @@ const PROPS: PropRow[] = [
 ];
 
 const CODE_BASIC = `import { IconButton } from "@/components/button";
-import { Paperclip } from "@/components/button/icons";
+import { Icon } from "@/components/icon";
+import { Paperclip } from "@phosphor-icons/react";
 
-<IconButton aria-label="Attach" icon={<Paperclip />} />`;
+<IconButton aria-label="Attach" icon={<Icon icon={Paperclip} />} />`;
 
-const CODE_SHAPES = `<IconButton aria-label="Attach" icon={<Paperclip />} shape="rounded" />
-<IconButton aria-label="Attach" icon={<Paperclip />} shape="rectangle" />`;
+const CODE_SHAPES = `<IconButton aria-label="Attach" icon={<Icon icon={Paperclip} />} shape="rounded" />
+<IconButton aria-label="Attach" icon={<Icon icon={Paperclip} />} shape="rectangle" />`;
 
-const CODE_FLOATING = `<IconButton aria-label="Attach" icon={<Paperclip />} floating />`;
+const CODE_FLOATING = `<IconButton aria-label="Attach" icon={<Icon icon={Paperclip} />} floating />`;
 
 export function IconButtonDocs({ nav }: { nav: DocsNav }) {
   return (
     <DocsPage toc={TOC} breadcrumb={["Components", "Icon Button"]} nav={nav}>
-      {({ spring }) => (
+      {({ spring, icon }) => (
         <>
           <header id="icon-button" className="scroll-mt-8">
             <h1 className="text-[32px] font-semibold tracking-tight">Icon Button</h1>
@@ -64,9 +66,9 @@ export function IconButtonDocs({ nav }: { nav: DocsNav }) {
               preview={
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   {TYPES.map((t) => (
-                    <IconButton key={t} aria-label={t} type={t} icon={<Paperclip />} {...spring} />
+                    <IconButton key={t} aria-label={t} type={t} icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
                   ))}
-                  <IconButton aria-label="Delete" type="primary" danger icon={<Paperclip />} {...spring} />
+                  <IconButton aria-label="Delete" type="primary" danger icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
                 </div>
               }
             />
@@ -77,10 +79,10 @@ export function IconButtonDocs({ nav }: { nav: DocsNav }) {
               code={CODE_SHAPES}
               preview={
                 <div className="flex flex-wrap items-center justify-center gap-3">
-                  <IconButton aria-label="Attach rounded" shape="rounded" icon={<Paperclip />} {...spring} />
-                  <IconButton aria-label="Attach rectangle" shape="rectangle" icon={<Paperclip />} {...spring} />
-                  <IconButton aria-label="Attach secondary" type="secondary" shape="rounded" icon={<Paperclip />} {...spring} />
-                  <IconButton aria-label="Attach secondary rect" type="secondary" shape="rectangle" icon={<Paperclip />} {...spring} />
+                  <IconButton aria-label="Attach rounded" shape="rounded" icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
+                  <IconButton aria-label="Attach rectangle" shape="rectangle" icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
+                  <IconButton aria-label="Attach secondary" type="secondary" shape="rounded" icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
+                  <IconButton aria-label="Attach secondary rect" type="secondary" shape="rectangle" icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
                 </div>
               }
             />
@@ -88,11 +90,11 @@ export function IconButtonDocs({ nav }: { nav: DocsNav }) {
 
           <Section id="sizes" title="Sizes" description="Square scale: sm 28px, md 32px, lg 40px. The icon scales automatically.">
             <PreviewTabs
-              code={`<IconButton aria-label="Attach" icon={<Paperclip />} size="sm" />`}
+              code={`<IconButton aria-label="Attach" icon={<Icon icon={Paperclip} />} size="sm" />`}
               preview={
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   {SIZES.map((sz) => (
-                    <IconButton key={sz} aria-label={sz} size={sz} type="secondary" icon={<Paperclip />} {...spring} />
+                    <IconButton key={sz} aria-label={sz} size={sz} type="secondary" icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
                   ))}
                 </div>
               }
@@ -104,9 +106,9 @@ export function IconButtonDocs({ nav }: { nav: DocsNav }) {
               code={CODE_FLOATING}
               preview={
                 <div className="flex flex-wrap items-center justify-center gap-4">
-                  <IconButton aria-label="Float primary" floating icon={<Paperclip />} {...spring} />
-                  <IconButton aria-label="Float secondary" type="secondary" floating icon={<Paperclip />} {...spring} />
-                  <IconButton aria-label="Float rect" type="secondary" shape="rectangle" floating icon={<Paperclip />} {...spring} />
+                  <IconButton aria-label="Float primary" floating icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
+                  <IconButton aria-label="Float secondary" type="secondary" floating icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
+                  <IconButton aria-label="Float rect" type="secondary" shape="rectangle" floating icon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring} />
                 </div>
               }
             />

@@ -154,3 +154,39 @@ export function Slider({
     </label>
   );
 }
+
+/* ---------------------------- Segmented ------------------------------ */
+export function Segmented<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: readonly T[];
+  onChange: (v: T) => void;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5 text-[13px]">
+      <span className="text-[var(--color-text-secondary)]">{label}</span>
+      <div className="flex flex-wrap gap-1 rounded-lg bg-[var(--color-state-press)] p-1">
+        {options.map((opt) => (
+          <button
+            key={opt}
+            type="button"
+            onClick={() => onChange(opt)}
+            className={cn(
+              "rounded-md px-2 py-1 text-[12px] font-medium capitalize transition-colors",
+              value === opt
+                ? "bg-[var(--color-bg-base)] text-[var(--color-text-primary)] shadow-sm"
+                : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]",
+            )}
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
