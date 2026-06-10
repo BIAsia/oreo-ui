@@ -19,6 +19,7 @@ export type ButtonProps = {
 export function Button({
   render,
   type,
+  size,
   danger,
   disabled,
   leadingIcon,
@@ -42,7 +43,7 @@ export function Button({
   return useRender({
     render: render ?? defaultRender,
     props: {
-      className: cn(button({ type, danger, disabled }), className),
+      className: cn(button({ type, size, danger, disabled }), className),
       disabled: Boolean(disabled),
       "data-disabled": disabled ? "" : undefined,
       ...rest,
