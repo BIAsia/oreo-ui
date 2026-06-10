@@ -2,9 +2,11 @@ import { useState, type CSSProperties } from "react";
 import { DocsLayout } from "./DocsLayout";
 import { CustomizePanel } from "./CustomizePanel";
 import type { TocItem } from "./OnThisPage";
+import type { IconWeight } from "@/components/icon";
 
 export type SpringProps = { bounce: number; duration: number; tapScale: number };
-export type DocsControls = { spring: SpringProps; radius: number; dark: boolean };
+export type IconControls = { weight: IconWeight };
+export type DocsControls = { spring: SpringProps; icon: IconControls; radius: number; dark: boolean };
 
 export type DocsNav = { active: string; onNavigate: (id: string) => void };
 
@@ -30,8 +32,9 @@ export function DocsPage({
   const [bounce, setBounce] = useState(0.4);
   const [duration, setDuration] = useState(0.3);
   const [tapScale, setTapScale] = useState(0.96);
+  const [weight, setWeight] = useState<IconWeight>("regular");
 
-  const controls: DocsControls = { spring: { bounce, duration, tapScale }, radius, dark };
+  const controls: DocsControls = { spring: { bounce, duration, tapScale }, icon: { weight }, radius, dark };
   const wrapStyle = { ["--radius-control" as string]: `${radius}px` } as CSSProperties;
 
   return (
@@ -51,6 +54,8 @@ export function DocsPage({
         setDuration={setDuration}
         tapScale={tapScale}
         setTapScale={setTapScale}
+        weight={weight}
+        setWeight={setWeight}
       />
     </div>
   );
