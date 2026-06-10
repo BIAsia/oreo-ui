@@ -2,7 +2,7 @@
 
 A small, copy-paste React component library that reproduces the **Oreo UI** design language on a modern headless stack. Built as a design-system reference: own the source, theme via tokens, animate with springs.
 
-**[Live demo →](https://oreo-ui-psi.vercel.app)**
+**[Live demo →](https://oreo-ui-preview.vercel.app)**
 
 ## Stack
 
