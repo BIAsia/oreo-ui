@@ -15,10 +15,10 @@ const TOC: TocItem[] = [
   { id: "api", label: "API Reference" },
 ];
 
-const TYPES = ["primary", "secondary", "ghost"] as const;
+const TYPES = ["primary", "secondary", "tertiary"] as const;
 
 const PROPS: PropRow[] = [
-  { prop: "type", type: `"primary" | "secondary" | "ghost"`, def: `"primary"`, desc: "Visual emphasis of the button." },
+  { prop: "type", type: `"primary" | "secondary" | "tertiary"`, def: `"primary"`, desc: "Visual emphasis of the button." },
   { prop: "danger", type: "boolean", def: "false", desc: "Recolors the button with the error palette." },
   { prop: "disabled", type: "boolean", def: "false", desc: "Disables interaction and dims the fill." },
   { prop: "leadingIcon", type: "ReactNode", desc: "Icon rendered before the label." },
@@ -38,7 +38,7 @@ import { Paperclip, ChevronDown } from "@/components/button/icons";
 
 const CODE_VARIANTS = `<Button type="primary">Button</Button>
 <Button type="secondary">Button</Button>
-<Button type="ghost">Button</Button>
+<Button type="tertiary">Button</Button>
 <Button type="primary" danger>Delete</Button>`;
 
 const CODE_STATES = `{/* disabled */}
@@ -100,7 +100,7 @@ export function ButtonDocs() {
                 <Button type="primary" danger {...spring}>
                   Delete
                 </Button>
-                <Button type="ghost" danger {...spring}>
+                <Button type="tertiary" danger {...spring}>
                   Remove
                 </Button>
               </div>

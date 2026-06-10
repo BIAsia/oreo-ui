@@ -32,21 +32,21 @@ export function Section({
 export function CodeBlock({ code, lang = "tsx" }: { code: string; lang?: string }) {
   const [copied, setCopied] = useState(false);
   return (
-    <div className="relative overflow-hidden rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-inverse)]">
+    <div className="relative overflow-hidden rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-code-bg)] text-[var(--color-code-fg)]">
       <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5">
-        <span className="text-[11px] uppercase tracking-wider text-[var(--color-text-on-inverse)]/50">{lang}</span>
+        <span className="text-[11px] uppercase tracking-wider text-[var(--color-code-fg)]/50">{lang}</span>
         <button
           onClick={() => {
             navigator.clipboard?.writeText(code);
             setCopied(true);
             setTimeout(() => setCopied(false), 1200);
           }}
-          className="rounded-md px-2 py-0.5 text-[11px] text-[var(--color-text-on-inverse)]/70 transition-colors hover:bg-white/10 hover:text-[var(--color-text-on-inverse)]"
+          className="rounded-md px-2 py-0.5 text-[11px] text-[var(--color-code-fg)]/70 transition-colors hover:bg-white/10 hover:text-[var(--color-code-fg)]"
         >
           {copied ? "Copied" : "Copy"}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-[12.5px] leading-[1.6] text-[var(--color-text-on-inverse)]">
+      <pre className="overflow-x-auto p-4 text-[12.5px] leading-[1.6]">
         <code>{code}</code>
       </pre>
     </div>

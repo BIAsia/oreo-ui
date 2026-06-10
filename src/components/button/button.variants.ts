@@ -34,7 +34,7 @@ export const button = tv({
         "hover:after:bg-[var(--color-state-hover)]",
         "active:after:bg-[var(--color-state-press)]",
       ],
-      ghost: [
+      tertiary: [
         "bg-transparent text-[var(--color-text-secondary)]",
         "hover:after:bg-[var(--color-state-hover)]",
         "active:after:bg-[var(--color-state-press)]",
@@ -59,7 +59,7 @@ export const button = tv({
       class: "text-[var(--color-status-error)] ring-[color-mix(in_srgb,var(--color-status-error)_30%,transparent)]",
     },
     {
-      type: "ghost",
+      type: "tertiary",
       danger: true,
       class: "text-[var(--color-status-error)]",
     },

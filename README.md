@@ -14,18 +14,26 @@ A small, copy-paste React component library that reproduces the **Oreo UI** desi
 
 ## What's inside
 
-- **Button** — `primary` / `secondary` / `ghost` variants, `danger` flag, leading/trailing icons, Material-style state-layer hover/press, and a tunable Motion spring on press.
+- **Button** — `primary` / `secondary` / `tertiary` variants, `danger` flag, leading/trailing icons, Material-style state-layer hover/press, and a tunable Motion spring on press.
 - **Docs app** — three-column layout (component nav · content · on-this-page scrollspy) with Preview/Code tabs, an API table, and a floating **"Make them yours"** panel that drives theme, radius, and the press spring live across every preview.
 
 Design tokens are extracted 1:1 from the Oreo UI Figma file; switching theme or radius only changes CSS variables — components are never touched.
 
 ## Develop
 
+Requires Node 18+ and pnpm.
+
 ```bash
 pnpm install
-pnpm dev      # http://localhost:5173
-pnpm build    # type-check + production build
+pnpm approve-builds   # approve esbuild's build script (pnpm blocks it by default)
+pnpm dev              # http://localhost:5173
+pnpm build            # type-check + production build
+pnpm preview          # serve the production build
 ```
+
+> **Why `approve-builds`?** pnpm v9+ blocks dependency build scripts unless approved.
+> esbuild (Vite's bundler) needs its postinstall to fetch a platform binary — run the
+> command once and select `esbuild`. If you skip it and `pnpm dev` fails to start, that's why.
 
 ## Structure
 
