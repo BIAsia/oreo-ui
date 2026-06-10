@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+ * Design tokens — extracted 1:1 from the Oreo UI Figma variables.
+ * Theme/skin changes happen HERE only; components never hardcode colors.
+ * -------------------------------------------------------------------------- */
+@theme {
+  /* radius */
+  --radius-control: 8px;
+  --radius-capsule: 999px;
+
+  /* spacing scale used by controls */
+  --space-x2: 4px;
+  --space-x3: 6px;
+  --space-x4: 8px;
+  --space-x6: 12px;
+
+  /* backgrounds */
+  --color-bg-base: #ffffff;
+  --color-bg-elevated: #f9f9f9;
+  --color-bg-inverse: #202020;
+
+  /* text */
+  --color-text-primary: #000000;
+  --color-text-secondary: #646464;
+  --color-text-on-inverse: #ffffff;
+  --color-text-disabled: #bbbbbb;
+
+  /* borders */
+  --color-border-default: #0000001f;
+  --color-border-subtle: #00000017;
+
+  /* status */
+  --color-status-error: #dc3e42;
+
+  /* interaction state layers (Material-style overlays) */
+  --color-state-hover: #00000005;
+  --color-state-press: #0000000d;
+  --color-state-hover-inverse: #ffffff0f;
+  --color-state-press-inverse: #ffffff1a;
+}
+
+/* Soft, low-emphasis elevation — derived from Oreo's Shadow/Default tokens
+ * (a hairline ambient + a wide, very light drop). Overridden per theme. */
+:root {
+  --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.04), 0 8px 24px -12px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark skin — only token values change, components stay untouched. */
+.theme-dark {
+  --color-bg-base: #1a1a1a;
+  --color-bg-elevated: #121212;
+  --color-bg-inverse: #f5f5f5;
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #a0a0a0;
+  --color-text-on-inverse: #1a1a1a;
+  --color-text-disabled: #5a5a5a;
+  --color-border-default: #ffffff24;
+  --color-border-subtle: #ffffff14;
+  --color-state-hover: #ffffff0a;
+  --color-state-press: #ffffff14;
+  --color-state-hover-inverse: #0000000f;
+  --color-state-press-inverse: #0000001a;
+  --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* dotted preview surface */
+.preview-grid {
+  background-image: radial-gradient(
+    var(--color-border-default) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+}
+
+/* ----------------------------------------------------------------------------
+ * Refined range slider — thin track, small token-colored thumb. Themeable.
+ * -------------------------------------------------------------------------- */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  background: transparent;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-border-default);
+}
+.slider::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-border-default);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5.5px;
+  height: 14px;
+  width: 14px;
+  border-radius: 999px;
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-default);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: transform 0.12s ease;
+}
+.slider::-moz-range-thumb {
+  height: 13px;
+  width: 13px;
+  border-radius: 999px;
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-default);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+.slider:hover::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+.slider:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 1px;
+}
+
+/* Minimal toggle switch */
+.toggle {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--color-border-default);
+  transition: background 0.15s ease;
+  flex-shrink: 0;
+}
+.toggle[data-on="true"] {
+  background: var(--color-bg-inverse);
+}
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--color-bg-base);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toggle[data-on="true"]::after {
+  transform: translateX(14px);
+}

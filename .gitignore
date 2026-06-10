@@ -1,0 +1,27 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# build output
+dist
+dist-ssr
+*.tsbuildinfo
+
+# local agent config
+.claude
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# env
+.env
+.env.*
+!.env.example
