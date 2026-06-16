@@ -1,7 +1,20 @@
-import { useState } from "react";
+import { useState, type ComponentType } from "react";
 import { ButtonDocs } from "@/pages/ButtonDocs";
 import { IconButtonDocs } from "@/pages/IconButtonDocs";
+import { ShortcutDocs } from "@/pages/ShortcutDocs";
+import { ChipDocs } from "@/pages/ChipDocs";
+import { TagDocs } from "@/pages/TagDocs";
+import { AvatarDocs } from "@/pages/AvatarDocs";
 import type { DocsNav } from "@/docs/DocsPage";
+
+const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
+  button: ButtonDocs,
+  "icon-button": IconButtonDocs,
+  shortcut: ShortcutDocs,
+  chip: ChipDocs,
+  tag: TagDocs,
+  avatar: AvatarDocs,
+};
 
 export default function App() {
   const [page, setPage] = useState("button");
@@ -14,5 +27,6 @@ export default function App() {
     },
   };
 
-  return page === "icon-button" ? <IconButtonDocs nav={nav} /> : <ButtonDocs nav={nav} />;
+  const Page = PAGES[page] ?? ButtonDocs;
+  return <Page key={page} nav={nav} />;
 }
