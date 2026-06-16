@@ -6,10 +6,12 @@
  * -------------------------------------------------------------------------- */
 @theme {
   /* radius */
+  --radius-control-tiny: 4px;
   --radius-control: 8px;
   --radius-capsule: 999px;
 
   /* spacing scale used by controls */
+  --space-x1: 2px;
   --space-x2: 4px;
   --space-x3: 6px;
   --space-x4: 8px;
@@ -32,6 +34,23 @@
 
   /* status */
   --color-status-error: #dc3e42;
+
+  /* palette — soft bg + readable text pairs (Oreo "Palette" variables).
+     Used by Tag and the Avatar "alphabet" type. Re-skinned in dark below. */
+  --color-palette-default-bg: #0000000d;
+  --color-palette-default-text: #646464;
+  --color-palette-mint-bg: #ddf9f2;
+  --color-palette-mint-text: #027864;
+  --color-palette-pink-bg: #fee9f5;
+  --color-palette-pink-text: #c2298a;
+  --color-palette-blue-bg: #def7f9;
+  --color-palette-blue-text: #107d98;
+  --color-palette-purple-bg: #f4f0fe;
+  --color-palette-purple-text: #6550b9;
+  --color-palette-orange-bg: #ffefd6;
+  --color-palette-orange-text: #cc4e00;
+  --color-palette-brown-bg: #fffab8;
+  --color-palette-brown-text: #7d5e54;
 
   /* code surface — intentionally NOT re-themed in dark, so code blocks
      stay dark in both light and dark mode */
@@ -69,6 +88,22 @@
   --color-state-press-inverse: #0000001a;
   --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  /* palette — darker, desaturated bg with brighter text for legibility */
+  --color-palette-default-bg: #ffffff14;
+  --color-palette-default-text: #a0a0a0;
+  --color-palette-mint-bg: #04342c;
+  --color-palette-mint-text: #5edbc4;
+  --color-palette-pink-bg: #3c1130;
+  --color-palette-pink-text: #f49ad2;
+  --color-palette-blue-bg: #07303a;
+  --color-palette-blue-text: #5fd2e3;
+  --color-palette-purple-bg: #221a47;
+  --color-palette-purple-text: #b3a5ef;
+  --color-palette-orange-bg: #3a1e00;
+  --color-palette-orange-text: #ff9e57;
+  --color-palette-brown-bg: #2e2a12;
+  --color-palette-brown-text: #d9c08f;
 }
 
 * {

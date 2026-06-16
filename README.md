@@ -17,9 +17,15 @@ A small, copy-paste React component library that reproduces the **Oreo UI** desi
 ## What's inside
 
 - **Button** — `primary` / `secondary` / `tertiary` variants, `danger` flag, leading/trailing icons, Material-style state-layer hover/press, and a tunable Motion spring on press.
+- **Icon Button** — square, icon-only action sharing Button's surface, with a `shape` switch (capsule / rounded square) and an optional `floating` elevation.
+- **Chip** — compact, tappable suggestion pill with leading icon, four states (default / hover / selected / disabled), a Motion press spring, and a scrollable `ChipGroup`.
+- **Tag** — small palette-driven label for metadata and filters: seven tones, optional `#` prefix, leading icon, and a trailing remove action.
+- **Shortcut** — keyboard key-caps (`⌘ ⇧ ⌥ ^`) rendered from tokens, with modifier glyph mapping and a `combine` mode for merged combos. Semantic `<kbd>`.
+- **Avatar** — circular avatar that infers its type from props (photo / gradient agent / brand logo / initials / empty), with four sizes and an overlapping `AvatarGroup` (`+N` overflow).
+- **Icon** — thin adapter over [Phosphor](https://phosphoricons.com) that drives size/color via tokens and `currentColor`.
 - **Docs app** — three-column layout (component nav · content · on-this-page scrollspy) with Preview/Code tabs, an API table, and a floating **"Make them yours"** panel that drives theme, radius, and the press spring live across every preview.
 
-Design tokens are extracted 1:1 from the Oreo UI Figma file; switching theme or radius only changes CSS variables — components are never touched.
+Design tokens are extracted 1:1 from the Oreo UI Figma file; switching theme or radius only changes CSS variables — components are never touched. The palette tones used by Tag and the Avatar "alphabet" type ship with both light and dark skins.
 
 ## Develop
 
@@ -42,11 +48,20 @@ pnpm preview          # serve the production build
 ```
 src/
 ├─ index.css                  # design tokens (CSS vars), light + dark skins
-├─ lib/                       # cn, tv helpers
-├─ components/button/         # button.tsx, button.variants.ts, icons
+├─ lib/                       # cn, tv helpers + palette (shared color tones)
+├─ components/
+│  ├─ button/                 # Button + IconButton (shared surface.ts)
+│  ├─ chip/                   # Chip + ChipGroup
+│  ├─ tag/                    # Tag
+│  ├─ shortcut/               # Shortcut (kbd key-caps)
+│  ├─ avatar/                 # Avatar + AvatarGroup (agents.ts gradients)
+│  └─ icon/                   # Phosphor adapter
 ├─ docs/                      # DocsLayout, Sidebar, OnThisPage, CustomizePanel, primitives
-└─ pages/ButtonDocs.tsx       # the Button documentation page
+├─ pages/                     # one *Docs.tsx page per component
+└─ App.tsx                    # page registry + nav state
 ```
+
+Each component folder is self-contained — `*.tsx` + `*.variants.ts` + `index.ts` — so you can copy a single folder into your project and own the code.
 
 ## Component pattern
 
