@@ -23,6 +23,10 @@ const NAV: Group[] = [
       { label: "Dialog", soon: true },
     ],
   },
+  {
+    title: "Patterns",
+    items: [{ label: "Onboarding Board", page: "onboarding-board" }],
+  },
 ];
 
 export function Sidebar({ nav }: { nav: DocsNav }) {
