@@ -5,6 +5,7 @@ import { ShortcutDocs } from "@/pages/ShortcutDocs";
 import { ChipDocs } from "@/pages/ChipDocs";
 import { TagDocs } from "@/pages/TagDocs";
 import { AvatarDocs } from "@/pages/AvatarDocs";
+import { BoardPage } from "@/pages/BoardPage";
 import type { DocsNav } from "@/docs/DocsPage";
 
 const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
@@ -14,6 +15,7 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   chip: ChipDocs,
   tag: TagDocs,
   avatar: AvatarDocs,
+  "onboarding-board": BoardPage,
 };
 
 export default function App() {
