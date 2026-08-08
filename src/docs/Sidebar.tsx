@@ -31,6 +31,8 @@ const NAV: Group[] = [
       { label: "Conversation", page: "conversation" },
       { label: "Response", page: "response" },
       { label: "Code Block", page: "code-block" },
+      { label: "Attachment", page: "attachment" },
+      { label: "Branch Picker", page: "branch-picker" },
     ],
   },
   {
@@ -42,6 +44,18 @@ const NAV: Group[] = [
       { label: "Plan", page: "plan" },
       { label: "Sources", page: "sources" },
       { label: "Confirmation", page: "confirmation" },
+      { label: "Web Search", page: "web-search" },
+      { label: "Code Diff", page: "code-diff" },
+      { label: "Terminal", page: "terminal" },
+      { label: "Subagents", page: "subagents" },
+    ],
+  },
+  {
+    // App chrome around the conversation.
+    title: "Shell",
+    items: [
+      { label: "Thread List", page: "thread-list" },
+      { label: "Assistant Modal", page: "assistant-modal" },
     ],
   },
   {

@@ -15,6 +15,14 @@ import { ReasoningDocs } from "@/pages/ReasoningDocs";
 import { PlanDocs } from "@/pages/PlanDocs";
 import { SourcesDocs } from "@/pages/SourcesDocs";
 import { ConfirmationDocs } from "@/pages/ConfirmationDocs";
+import { AttachmentDocs } from "@/pages/AttachmentDocs";
+import { BranchPickerDocs } from "@/pages/BranchPickerDocs";
+import { ThreadListDocs } from "@/pages/ThreadListDocs";
+import { AssistantModalDocs } from "@/pages/AssistantModalDocs";
+import { CodeDiffDocs } from "@/pages/CodeDiffDocs";
+import { TerminalDocs } from "@/pages/TerminalDocs";
+import { WebSearchDocs } from "@/pages/WebSearchDocs";
+import { SubagentsDocs } from "@/pages/SubagentsDocs";
 import type { DocsNav } from "@/docs/DocsPage";
 
 const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
@@ -33,6 +41,14 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   plan: PlanDocs,
   sources: SourcesDocs,
   confirmation: ConfirmationDocs,
+  attachment: AttachmentDocs,
+  "branch-picker": BranchPickerDocs,
+  "thread-list": ThreadListDocs,
+  "assistant-modal": AssistantModalDocs,
+  "code-diff": CodeDiffDocs,
+  terminal: TerminalDocs,
+  "web-search": WebSearchDocs,
+  subagents: SubagentsDocs,
   "onboarding-board": BoardPage,
 };
 
