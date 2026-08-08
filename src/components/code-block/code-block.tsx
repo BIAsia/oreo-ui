@@ -1,0 +1,103 @@
+import * as React from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Check, Copy } from "@phosphor-icons/react";
+import { cn } from "@/lib/cn";
+import { useCopy } from "@/lib/use-copy";
+import { Icon } from "@/components/icon";
+import { codeBlock, type CodeBlockVariants } from "./code-block.variants";
+
+export type CodeBlockProps = {
+  code: string;
+  /** Language label in the header, e.g. "tsx". */
+  language?: string;
+  /** Filename — replaces the language label when set. */
+  title?: string;
+  /** Hide the header for a bare code surface (inside Response lists, etc.). */
+  header?: boolean;
+  /** Extra header actions, rendered before the copy button. */
+  actions?: React.ReactNode;
+  /** Hide the copy button. */
+  copyable?: boolean;
+} & CodeBlockVariants &
+  Omit<React.ComponentPropsWithoutRef<"div">, "children">;
+
+/**
+ * Ghost icon action tuned for the dark code surface — the standard
+ * IconButton palettes assume the app background, so this stays local.
+ */
+export function CodeBlockAction({
+  className,
+  "aria-label": ariaLabel,
+  children,
+  ...rest
+}: React.ComponentPropsWithoutRef<typeof motion.button>) {
+  return (
+    <motion.button
+      type="button"
+      whileTap={{ scale: 0.92 }}
+      transition={{ type: "spring", bounce: 0.4, duration: 0.3 }}
+      aria-label={ariaLabel}
+      className={cn(
+        "grid size-7 shrink-0 place-items-center rounded-lg text-[var(--color-code-fg)]/60",
+        "transition-colors hover:bg-white/10 hover:text-[var(--color-code-fg)]",
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+/** Copy button with the copy → check zoom swap. Reused by docs and Response. */
+export function CopyCodeButton({ code }: { code: string }) {
+  const { copied, copy } = useCopy();
+  return (
+    <CodeBlockAction aria-label="Copy code" onClick={() => copy(code)}>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={copied ? "check" : "copy"}
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.5, opacity: 0 }}
+          transition={{ duration: 0.12 }}
+          className="grid place-items-center"
+        >
+          <Icon icon={copied ? Check : Copy} size="sm" weight={copied ? "bold" : "regular"} />
+        </motion.span>
+      </AnimatePresence>
+    </CodeBlockAction>
+  );
+}
+
+export function CodeBlock({
+  code,
+  language,
+  title,
+  header = true,
+  actions,
+  copyable = true,
+  wrap,
+  className,
+  ...rest
+}: CodeBlockProps) {
+  const slots = codeBlock({ wrap });
+  const label = title ?? language;
+
+  return (
+    <div className={cn(slots.root(), className)} {...rest}>
+      {header && (
+        <div className={slots.header()}>
+          <span className={cn(slots.label(), !title && "uppercase")}>{label ?? "code"}</span>
+          <div className="flex items-center gap-0.5">
+            {actions}
+            {copyable && <CopyCodeButton code={code} />}
+          </div>
+        </div>
+      )}
+      <pre className={slots.body()}>
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}

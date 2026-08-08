@@ -24,6 +24,27 @@ const NAV: Group[] = [
     ],
   },
   {
+    // Conversation output — the chat transcript itself (taxonomy after assistant-ui).
+    title: "Chat",
+    items: [
+      { label: "Message", soon: true },
+      { label: "Conversation", soon: true },
+      { label: "Response", soon: true },
+      { label: "Code Block", page: "code-block" },
+    ],
+  },
+  {
+    // Agentic semantics — what the assistant is doing, not just saying.
+    title: "Agent",
+    items: [
+      { label: "Tool Call", soon: true },
+      { label: "Reasoning", soon: true },
+      { label: "Plan", soon: true },
+      { label: "Sources", soon: true },
+      { label: "Confirmation", soon: true },
+    ],
+  },
+  {
     title: "Patterns",
     items: [{ label: "Onboarding Board", page: "onboarding-board" }],
   },
