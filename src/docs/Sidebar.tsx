@@ -28,7 +28,7 @@ const NAV: Group[] = [
     title: "Chat",
     items: [
       { label: "Message", page: "message" },
-      { label: "Conversation", soon: true },
+      { label: "Conversation", page: "conversation" },
       { label: "Response", page: "response" },
       { label: "Code Block", page: "code-block" },
     ],
