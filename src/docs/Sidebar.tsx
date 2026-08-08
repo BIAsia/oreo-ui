@@ -29,7 +29,7 @@ const NAV: Group[] = [
     items: [
       { label: "Message", soon: true },
       { label: "Conversation", soon: true },
-      { label: "Response", soon: true },
+      { label: "Response", page: "response" },
       { label: "Code Block", page: "code-block" },
     ],
   },

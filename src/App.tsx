@@ -7,6 +7,7 @@ import { TagDocs } from "@/pages/TagDocs";
 import { AvatarDocs } from "@/pages/AvatarDocs";
 import { BoardPage } from "@/pages/BoardPage";
 import { CodeBlockDocs } from "@/pages/CodeBlockDocs";
+import { ResponseDocs } from "@/pages/ResponseDocs";
 import type { DocsNav } from "@/docs/DocsPage";
 
 const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
@@ -17,6 +18,7 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   tag: TagDocs,
   avatar: AvatarDocs,
   "code-block": CodeBlockDocs,
+  response: ResponseDocs,
   "onboarding-board": BoardPage,
 };
 
