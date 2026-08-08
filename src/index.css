@@ -27,6 +27,7 @@
   --color-text-secondary: #646464;
   --color-text-on-inverse: #ffffff;
   --color-text-disabled: #bbbbbb;
+  --color-text-waiting: #d9d9d9;
 
   /* borders */
   --color-border-default: #0000001f;
@@ -69,6 +70,9 @@
 :root {
   --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.04), 0 8px 24px -12px rgba(0, 0, 0, 0.12),
     0 0 0 1px rgba(0, 0, 0, 0.05);
+  /* Oreo Shadow/Active — kept spread-free so the same value also works
+   * inside filter: drop-shadow() (Attachment file-type icons). */
+  --shadow-active: 0 6px 12px rgba(0, 0, 0, 0.06);
 }
 
 /* Dark skin — only token values change, components stay untouched. */
@@ -80,6 +84,7 @@
   --color-text-secondary: #a0a0a0;
   --color-text-on-inverse: #1a1a1a;
   --color-text-disabled: #5a5a5a;
+  --color-text-waiting: #4a4a4a;
   --color-border-default: #ffffff24;
   --color-border-subtle: #ffffff14;
   --color-state-hover: #ffffff0a;
@@ -88,6 +93,7 @@
   --color-state-press-inverse: #0000001a;
   --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-active: 0 6px 12px rgba(0, 0, 0, 0.3);
 
   /* palette — darker, desaturated bg with brighter text for legibility */
   --color-palette-default-bg: #ffffff14;
