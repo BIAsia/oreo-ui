@@ -37,11 +37,11 @@ const NAV: Group[] = [
     // Agentic semantics — what the assistant is doing, not just saying.
     title: "Agent",
     items: [
-      { label: "Tool Call", soon: true },
-      { label: "Reasoning", soon: true },
-      { label: "Plan", soon: true },
-      { label: "Sources", soon: true },
-      { label: "Confirmation", soon: true },
+      { label: "Tool Call", page: "tool-call" },
+      { label: "Reasoning", page: "reasoning" },
+      { label: "Plan", page: "plan" },
+      { label: "Sources", page: "sources" },
+      { label: "Confirmation", page: "confirmation" },
     ],
   },
   {

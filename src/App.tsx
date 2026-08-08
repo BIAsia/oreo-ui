@@ -10,6 +10,11 @@ import { CodeBlockDocs } from "@/pages/CodeBlockDocs";
 import { ResponseDocs } from "@/pages/ResponseDocs";
 import { MessageDocs } from "@/pages/MessageDocs";
 import { ConversationDocs } from "@/pages/ConversationDocs";
+import { ToolCallDocs } from "@/pages/ToolCallDocs";
+import { ReasoningDocs } from "@/pages/ReasoningDocs";
+import { PlanDocs } from "@/pages/PlanDocs";
+import { SourcesDocs } from "@/pages/SourcesDocs";
+import { ConfirmationDocs } from "@/pages/ConfirmationDocs";
 import type { DocsNav } from "@/docs/DocsPage";
 
 const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
@@ -23,6 +28,11 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   response: ResponseDocs,
   message: MessageDocs,
   conversation: ConversationDocs,
+  "tool-call": ToolCallDocs,
+  reasoning: ReasoningDocs,
+  plan: PlanDocs,
+  sources: SourcesDocs,
+  confirmation: ConfirmationDocs,
   "onboarding-board": BoardPage,
 };
 
