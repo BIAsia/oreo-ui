@@ -23,6 +23,7 @@ const PROPS: PropRow[] = [
   { prop: "header", type: "boolean", def: "true", desc: "Hide for a bare code surface." },
   { prop: "wrap", type: "boolean", def: "false", desc: "Soft-wrap long lines instead of scrolling." },
   { prop: "copyable", type: "boolean", def: "true", desc: "Show the copy button (copy → check swap)." },
+  { prop: "highlight", type: "boolean", def: "true", desc: "Lazy shiki syntax highlighting when language is set; plain text if the grammar can't load." },
   { prop: "actions", type: "ReactNode", desc: "Extra header actions before the copy button." },
 ];
 

@@ -14,11 +14,15 @@ export const codeBlock = tv({
       "flex h-9 items-center justify-between gap-2 border-b border-white/10 pl-3.5 pr-1.5",
     label:
       "truncate font-mono text-[11px] tracking-wider text-[var(--color-code-fg)]/50",
-    body: "overflow-x-auto p-3.5 font-mono text-[12.5px] leading-[1.65]",
+    body: [
+      "overflow-x-auto p-3.5 font-mono text-[12.5px] leading-[1.65]",
+      // Neutralize shiki's own <pre> chrome — surface and spacing live here.
+      "[&_pre]:m-0 [&_pre]:!bg-transparent [&_pre]:p-0 [&_code]:bg-transparent",
+    ],
   },
   variants: {
     wrap: {
-      true: { body: "whitespace-pre-wrap break-words" },
+      true: { body: "whitespace-pre-wrap break-words [&_pre]:whitespace-pre-wrap [&_pre]:break-words" },
       false: { body: "" },
     },
   },

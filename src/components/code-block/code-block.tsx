@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Check, Copy } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { useCopy } from "@/lib/use-copy";
+import { highlight } from "@/lib/highlight";
 import { Icon } from "@/components/icon";
 import { codeBlock, type CodeBlockVariants } from "./code-block.variants";
 
@@ -18,6 +19,8 @@ export type CodeBlockProps = {
   actions?: React.ReactNode;
   /** Hide the copy button. */
   copyable?: boolean;
+  /** Syntax highlighting (lazy shiki) — on when a language is set. */
+  highlight?: boolean;
 } & CodeBlockVariants &
   Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
@@ -77,12 +80,30 @@ export function CodeBlock({
   header = true,
   actions,
   copyable = true,
+  highlight: highlightEnabled = true,
   wrap,
   className,
   ...rest
 }: CodeBlockProps) {
   const slots = codeBlock({ wrap });
   const label = title ?? language;
+  // No explicit language? Infer from the filename extension.
+  const lang = language ?? (typeof title === "string" ? /\.(\w+)$/.exec(title)?.[1] : undefined);
+  const [html, setHtml] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (!lang || !highlightEnabled) {
+      setHtml(null);
+      return;
+    }
+    let alive = true;
+    highlight(code, lang).then((result) => {
+      if (alive) setHtml(result);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [code, lang, highlightEnabled]);
 
   return (
     <div className={cn(slots.root(), className)} {...rest}>
@@ -95,9 +116,14 @@ export function CodeBlock({
           </div>
         </div>
       )}
-      <pre className={slots.body()}>
-        <code>{code}</code>
-      </pre>
+      {html ? (
+        // Shiki output is trusted local generation from `code`, not remote HTML.
+        <div className={slots.body()} dangerouslySetInnerHTML={{ __html: html }} />
+      ) : (
+        <pre className={slots.body()}>
+          <code>{code}</code>
+        </pre>
+      )}
     </div>
   );
 }
