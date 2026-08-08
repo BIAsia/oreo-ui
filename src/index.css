@@ -106,6 +106,35 @@
   --color-palette-brown-text: #d9c08f;
 }
 
+/* Shimmer sweep for in-progress labels (Tool Call, Reasoning). Rendered as a
+ * text-clipped gradient overlay on a dimmed base label — see <ShimmerText>. */
+@keyframes oreo-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.oreo-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 42%,
+    var(--color-text-primary) 50%,
+    transparent 58%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: oreo-shimmer 2.2s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .oreo-shimmer {
+    animation: none;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
