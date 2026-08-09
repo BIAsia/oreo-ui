@@ -1,4 +1,4 @@
-import { useState, type ComponentType } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import { ButtonDocs } from "@/pages/ButtonDocs";
 import { IconButtonDocs } from "@/pages/IconButtonDocs";
 import { ShortcutDocs } from "@/pages/ShortcutDocs";
@@ -52,12 +52,38 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   "onboarding-board": BoardPage,
 };
 
+const DEFAULT_PAGE = "button";
+
+/** Every page lives at /<slug> so any component doc can be shared as a URL. */
+function pageFromPath() {
+  const slug = window.location.pathname.replace(/^\/+|\/+$/g, "");
+  return slug in PAGES ? slug : DEFAULT_PAGE;
+}
+
+function pageTitle(slug: string) {
+  return slug
+    .split("-")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export default function App() {
-  const [page, setPage] = useState("button");
+  const [page, setPage] = useState(pageFromPath);
+
+  useEffect(() => {
+    const onPop = () => setPage(pageFromPath());
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  useEffect(() => {
+    document.title = `Oreo UI · ${pageTitle(page)}`;
+  }, [page]);
 
   const nav: DocsNav = {
     active: page,
     onNavigate: (id) => {
+      if (id !== page) window.history.pushState(null, "", `/${id}`);
       setPage(id);
       window.scrollTo({ top: 0 });
     },

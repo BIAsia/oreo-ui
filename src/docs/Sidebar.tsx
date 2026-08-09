@@ -81,27 +81,40 @@ export function Sidebar({ nav }: { nav: DocsNav }) {
             <ul className="mt-2 space-y-0.5">
               {group.items.map((item) => {
                 const active = item.page != null && item.page === nav.active;
+                const itemClass = cn(
+                  "flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-[13px] transition-colors",
+                  active
+                    ? "bg-[var(--color-state-press)] font-medium text-[var(--color-text-primary)]"
+                    : "text-[var(--color-text-secondary)] hover:bg-[var(--color-state-hover)] hover:text-[var(--color-text-primary)]",
+                  item.soon && "pointer-events-none opacity-50",
+                );
                 return (
                   <li key={item.label}>
-                    <button
-                      type="button"
-                      disabled={item.soon}
-                      onClick={() => item.page && nav.onNavigate(item.page)}
-                      className={cn(
-                        "flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-[13px] transition-colors",
-                        active
-                          ? "bg-[var(--color-state-press)] font-medium text-[var(--color-text-primary)]"
-                          : "text-[var(--color-text-secondary)] hover:bg-[var(--color-state-hover)] hover:text-[var(--color-text-primary)]",
-                        item.soon && "pointer-events-none opacity-50",
-                      )}
-                    >
-                      {item.label}
-                      {item.soon && (
-                        <span className="rounded-full border border-[var(--color-border-default)] px-1.5 py-px text-[10px] font-normal">
-                          soon
-                        </span>
-                      )}
-                    </button>
+                    {item.page ? (
+                      // Real links so pages can be opened in new tabs and shared;
+                      // plain clicks stay client-side via pushState.
+                      <a
+                        href={`/${item.page}`}
+                        onClick={(e) => {
+                          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                          e.preventDefault();
+                          nav.onNavigate(item.page!);
+                        }}
+                        aria-current={active ? "page" : undefined}
+                        className={itemClass}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <button type="button" disabled className={itemClass}>
+                        {item.label}
+                        {item.soon && (
+                          <span className="rounded-full border border-[var(--color-border-default)] px-1.5 py-px text-[10px] font-normal">
+                            soon
+                          </span>
+                        )}
+                      </button>
+                    )}
                   </li>
                 );
               })}
