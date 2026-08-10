@@ -64,8 +64,10 @@ function CloseGlyph({ className }: { className?: string }) {
   );
 }
 
-/** Eight-bar dot spinner (Figma Spinner-Dots), stepped like a clock. */
-function SpinnerDots({ className }: { className?: string }) {
+/** Eight-bar dot spinner (Figma Spinner-Dots), stepped like a clock.
+ * Shared with Context Bar's loading rows — spin it with
+ * `animate-[spin_0.8s_steps(8)_infinite]`. */
+export function SpinnerDots({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 16 16" aria-hidden className={className}>
       {Array.from({ length: 8 }, (_, i) => (
