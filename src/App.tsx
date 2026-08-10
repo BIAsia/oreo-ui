@@ -23,6 +23,9 @@ import { CodeDiffDocs } from "@/pages/CodeDiffDocs";
 import { TerminalDocs } from "@/pages/TerminalDocs";
 import { WebSearchDocs } from "@/pages/WebSearchDocs";
 import { SubagentsDocs } from "@/pages/SubagentsDocs";
+import { MenuDocs } from "@/pages/MenuDocs";
+import { PromptBoxDocs } from "@/pages/PromptBoxDocs";
+import { ContextBarDocs } from "@/pages/ContextBarDocs";
 import type { DocsNav } from "@/docs/DocsPage";
 
 const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
@@ -32,6 +35,7 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   chip: ChipDocs,
   tag: TagDocs,
   avatar: AvatarDocs,
+  menu: MenuDocs,
   "code-block": CodeBlockDocs,
   response: ResponseDocs,
   message: MessageDocs,
@@ -49,6 +53,8 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   terminal: TerminalDocs,
   "web-search": WebSearchDocs,
   subagents: SubagentsDocs,
+  "prompt-box": PromptBoxDocs,
+  "context-bar": ContextBarDocs,
   "onboarding-board": BoardPage,
 };
 

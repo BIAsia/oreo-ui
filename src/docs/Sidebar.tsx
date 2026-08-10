@@ -19,6 +19,7 @@ const NAV: Group[] = [
       { label: "Tag", page: "tag" },
       { label: "Shortcut", page: "shortcut" },
       { label: "Avatar", page: "avatar" },
+      { label: "Menu", page: "menu" },
       { label: "Select", soon: true },
       { label: "Dialog", soon: true },
     ],
@@ -39,6 +40,8 @@ const NAV: Group[] = [
     // Agentic semantics — what the assistant is doing, not just saying.
     title: "Agent",
     items: [
+      { label: "Prompt Box", page: "prompt-box" },
+      { label: "Context Bar", page: "context-bar" },
       { label: "Tool Call", page: "tool-call" },
       { label: "Reasoning", page: "reasoning" },
       { label: "Plan", page: "plan" },
