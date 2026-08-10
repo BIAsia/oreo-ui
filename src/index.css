@@ -8,6 +8,7 @@
   /* radius */
   --radius-control-tiny: 4px;
   --radius-control: 8px;
+  --radius-card-medium: 16px;
   --radius-capsule: 999px;
 
   /* spacing scale used by controls */
@@ -16,15 +17,19 @@
   --space-x3: 6px;
   --space-x4: 8px;
   --space-x6: 12px;
+  --space-x8: 16px;
 
   /* backgrounds */
   --color-bg-base: #ffffff;
   --color-bg-elevated: #f9f9f9;
+  --color-bg-surface: #ffffff;
   --color-bg-inverse: #202020;
 
   /* text */
   --color-text-primary: #000000;
   --color-text-secondary: #646464;
+  --color-text-tertiary: #838383;
+  --color-text-placeholder: #8d8d8d;
   --color-text-on-inverse: #ffffff;
   --color-text-disabled: #bbbbbb;
   --color-text-waiting: #d9d9d9;
@@ -35,6 +40,8 @@
 
   /* status */
   --color-status-error: #dc3e42;
+  --color-status-progress: #3e63dd;
+  --color-status-progress-subtle: #3e63dd1f;
 
   /* palette — soft bg + readable text pairs (Oreo "Palette" variables).
      Used by Tag and the Avatar "alphabet" type. Re-skinned in dark below. */
@@ -73,20 +80,29 @@
   /* Oreo Shadow/Active — kept spread-free so the same value also works
    * inside filter: drop-shadow() (Attachment file-type icons). */
   --shadow-active: 0 6px 12px rgba(0, 0, 0, 0.06);
+  /* Oreo Shadow/Default — the resting card elevation (Prompt Box, Context Bar). */
+  --shadow-default: 0 4px 16px rgba(0, 0, 0, 0.04);
+  /* Oreo Shadow/Overlay — floating surfaces (Menu): hairline + wide soft drop. */
+  --shadow-overlay: 0 0 1px rgba(0, 0, 0, 0.24), 0 4px 48px rgba(0, 0, 0, 0.06);
 }
 
 /* Dark skin — only token values change, components stay untouched. */
 .theme-dark {
   --color-bg-base: #1a1a1a;
   --color-bg-elevated: #121212;
+  --color-bg-surface: #242424;
   --color-bg-inverse: #f5f5f5;
   --color-text-primary: #f5f5f5;
   --color-text-secondary: #a0a0a0;
+  --color-text-tertiary: #8a8a8a;
+  --color-text-placeholder: #6a6a6a;
   --color-text-on-inverse: #1a1a1a;
   --color-text-disabled: #5a5a5a;
   --color-text-waiting: #4a4a4a;
   --color-border-default: #ffffff24;
   --color-border-subtle: #ffffff14;
+  --color-status-progress: #7086e8;
+  --color-status-progress-subtle: #7086e82e;
   --color-state-hover: #ffffff0a;
   --color-state-press: #ffffff14;
   --color-state-hover-inverse: #0000000f;
@@ -94,6 +110,8 @@
   --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.06);
   --shadow-active: 0 6px 12px rgba(0, 0, 0, 0.3);
+  --shadow-default: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-overlay: 0 0 1px rgba(255, 255, 255, 0.28), 0 4px 48px rgba(0, 0, 0, 0.55);
 
   /* palette — darker, desaturated bg with brighter text for legibility */
   --color-palette-default-bg: #ffffff14;
