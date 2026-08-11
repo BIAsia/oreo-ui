@@ -58,8 +58,15 @@ src/
 │  └─ icon/                   # Phosphor adapter
 ├─ docs/                      # DocsLayout, Sidebar, OnThisPage, CustomizePanel, primitives
 ├─ pages/                     # one *Docs.tsx page per component
+├─ lib/site.ts                # route table: slug → title + description (drives <head> and sitemap)
 └─ App.tsx                    # page registry + nav state
 ```
+
+Adding a docs page means one entry in `src/lib/site.ts` (title + meta description) and one in
+`App.tsx` — the `<title>`, canonical URL, Open Graph tags and `sitemap.xml` all follow from it.
+The favicons, app icons and social card in `public/` are drawn from the Oreo mark by
+`node scripts/generate-brand-assets.mjs` (headless Chrome does the rasterizing); re-run it if the
+mark or the card copy changes.
 
 Each component folder is self-contained — `*.tsx` + `*.variants.ts` + `index.ts` — so you can copy a single folder into your project and own the code.
 
