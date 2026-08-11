@@ -41,6 +41,7 @@ const NAV: Group[] = [
     title: "Agent",
     items: [
       { label: "Prompt Box", page: "prompt-box" },
+      { label: "Keyword Tag", page: "keyword-tag" },
       { label: "Context Bar", page: "context-bar" },
       { label: "Tool Call", page: "tool-call" },
       { label: "Reasoning", page: "reasoning" },
