@@ -1,0 +1,42 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg x="1.333" y="1.611" width="9.85578" height="7.37557" viewBox="0 0 9.85578 7.37557" fill="none">
+<path id="kling-color-0-Vector" d="M3.00689 7.37501C3.28878 6.51326 3.66084 5.68366 4.11689 4.90001C5.878 1.8489 8.44745 0.0350128 9.85578 0.847791C6.688 -0.981098 2.55467 0.24668 0.623559 3.59112C0.393084 3.99014 0.200217 4.40972 0.0474482 4.84446C-0.0964407 5.25501 0.0985593 5.69668 0.475226 5.91446L3.00689 7.37557V7.37501Z" fill="url(#kling-color-0-paint0_radial_0_196)"/>
+<defs>
+<radialGradient id="kling-color-0-paint0_radial_0_196" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(2.87411 7.29835) rotate(-59.132) scale(8.09706 11.096)">
+<stop offset="0.095" stop-color="#FFF959"/>
+<stop offset="0.326" stop-color="#0DF35E"/>
+<stop offset="0.64" stop-color="#0BF2F9"/>
+<stop offset="1" stop-color="#04A6F0"/>
+</radialGradient>
+</defs>
+</svg>
+<svg x="4.811" y="6.981" width="9.85634" height="7.37526" viewBox="0 0 9.85634 7.37526" fill="none">
+<path id="kling-color-1-Vector" d="M6.84944 0C6.5674 0.861786 6.19515 1.69139 5.73889 2.475C3.97778 5.52611 1.40833 7.34056 0 6.52722C3.16833 8.35667 7.30167 7.12833 9.23278 3.78389C9.46318 3.38503 9.65605 2.96564 9.80889 2.53111C9.95278 2.12111 9.75778 1.67889 9.38111 1.46167L6.84944 0.00055578V0Z" fill="url(#kling-color-1-paint0_radial_0_169)"/>
+<defs>
+<radialGradient id="kling-color-1-paint0_radial_0_169" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(6.98181 0.076651) rotate(120.868) scale(8.09706 11.096)">
+<stop offset="0.095" stop-color="#FFF959"/>
+<stop offset="0.326" stop-color="#0DF35E"/>
+<stop offset="0.64" stop-color="#0BF2F9"/>
+<stop offset="1" stop-color="#04A6F0"/>
+</radialGradient>
+</defs>
+</svg>
+<svg x="5.45" y="2.266" width="6.63344" height="7.19071" viewBox="0 0 6.63344 7.19071" fill="none">
+<path id="kling-color-2-Vector" d="M5.1 7.19071C6.86111 4.1396 7.14778 1.00738 5.73889 0.194043C4.33167 -0.618735 1.76222 1.19626 0 4.24626C1.15222 2.25182 3.22722 1.29349 4.63556 2.10626C6.04333 2.9196 6.25111 5.19515 5.09944 7.19015L5.1 7.19071Z" fill="url(#kling-color-2-paint0_linear_0_171)"/>
+<defs>
+<linearGradient id="kling-color-2-paint0_linear_0_171" x1="4.53778" y1="0.0673758" x2="5.91778" y2="4.54682" gradientUnits="userSpaceOnUse">
+<stop stop-color="#003EFF"/>
+<stop offset="1" stop-color="#0BFFE7"/>
+</linearGradient>
+</defs>
+</svg>
+<svg x="3.917" y="6.51" width="6.63344" height="7.19042" viewBox="0 0 6.63344 7.19042" fill="none">
+<path id="kling-color-3-Vector" d="M1.53344 0C-0.227667 3.05111 -0.514334 6.18333 0.894555 6.99611C2.30233 7.80945 4.87178 5.995 6.63344 2.94389C5.48122 4.93889 3.40622 5.89722 1.99789 5.08389C0.590111 4.27111 0.382333 1.995 1.534 0.00055578L1.53344 0Z" fill="url(#kling-color-3-paint0_linear_0_163)"/>
+<defs>
+<linearGradient id="kling-color-3-paint0_linear_0_163" x1="2.09567" y1="7.12333" x2="0.715666" y2="2.64389" gradientUnits="userSpaceOnUse">
+<stop stop-color="#003EFF"/>
+<stop offset="1" stop-color="#0BFFE7"/>
+</linearGradient>
+</defs>
+</svg>
+</svg>

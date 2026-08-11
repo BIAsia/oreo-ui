@@ -6,4 +6,5 @@ export {
   type PromptBoxModelSelectProps,
   type KeywordTagProps,
 } from "./prompt-box";
-export { promptBox, keywordTag } from "./prompt-box.variants";
+export { promptBox } from "./prompt-box.variants";
+export { keywordTag } from "@/components/keyword-tag";

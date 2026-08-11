@@ -41,33 +41,3 @@ export const promptBox = tv({
   },
   defaultVariants: { inset: false },
 });
-
-/**
- * The inline Keyword Tag from the `_Prompt` input — a 24px capsule-ish chip
- * that sits at the head of the first text line (`surface` look), or a palette
- * tone for generative keywords ("Create Image").
- */
-export const keywordTag = tv({
-  base: [
-    "inline-flex h-6 min-w-6 items-center justify-center gap-[var(--space-x1)]",
-    "rounded-[var(--radius-control)] py-[var(--space-x1)] pr-[var(--space-x4)] pl-[var(--space-x2)]",
-    "text-[12px] leading-4 font-semibold whitespace-nowrap",
-    "[&_svg]:size-4 [&_img]:size-4",
-  ],
-  variants: {
-    color: {
-      surface: [
-        "bg-[var(--color-bg-surface)] text-[var(--color-text-primary)]",
-        "border-[0.5px] border-[var(--color-border-default)]",
-      ],
-      purple: "bg-[var(--color-palette-purple-bg)] text-[var(--color-palette-purple-text)]",
-      mint: "bg-[var(--color-palette-mint-bg)] text-[var(--color-palette-mint-text)]",
-      pink: "bg-[var(--color-palette-pink-bg)] text-[var(--color-palette-pink-text)]",
-      blue: "bg-[var(--color-palette-blue-bg)] text-[var(--color-palette-blue-text)]",
-      orange: "bg-[var(--color-palette-orange-bg)] text-[var(--color-palette-orange-text)]",
-    },
-  },
-  defaultVariants: { color: "surface" },
-});
-
-export type KeywordTagVariants = Parameters<typeof keywordTag>[0];
