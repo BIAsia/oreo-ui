@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { SlidersHorizontal, X } from "@phosphor-icons/react";
 import { Slider, Segmented } from "./primitives";
-import { Icon, type IconWeight } from "@/components/icon";
-
-const ICON_WEIGHTS: readonly IconWeight[] = ["regular", "bold", "fill", "duotone"];
+import { Icon, ICON_LIBRARIES, ICON_WEIGHTS, type IconLibrary, type IconWeight } from "@/components/icon";
 
 export type CustomizeState = {
   dark: boolean;
@@ -17,6 +14,8 @@ export type CustomizeState = {
   setDuration: (v: number) => void;
   tapScale: number;
   setTapScale: (v: number) => void;
+  library: IconLibrary;
+  setLibrary: (v: IconLibrary) => void;
   weight: IconWeight;
   setWeight: (v: IconWeight) => void;
 };
@@ -54,14 +53,14 @@ export function CustomizePanel(s: CustomizeState) {
           >
             <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] px-4 py-3">
               <span className="flex items-center gap-2 text-[13px] font-semibold">
-                <Icon icon={SlidersHorizontal} size="sm" /> Make them yours
+                <Icon name="sliders" size="sm" /> Make them yours
               </span>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Collapse"
                 className="grid size-6 place-items-center rounded-md text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-state-hover)] hover:text-[var(--color-text-primary)]"
               >
-                <Icon icon={X} className="size-3" />
+                <Icon name="x" className="size-3" />
               </button>
             </div>
 
@@ -87,7 +86,9 @@ export function CustomizePanel(s: CustomizeState) {
                 <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
                   Icon
                 </div>
-                <Segmented label="weight" value={s.weight} options={ICON_WEIGHTS} onChange={s.setWeight} />
+                <Segmented label="library" value={s.library} options={ICON_LIBRARIES} onChange={s.setLibrary} />
+                {/* Lucide is stroke-only, so its weight menu is shorter. */}
+                <Segmented label="weight" value={s.weight} options={ICON_WEIGHTS[s.library]} onChange={s.setWeight} />
               </div>
             </div>
           </motion.div>
@@ -103,7 +104,7 @@ export function CustomizePanel(s: CustomizeState) {
             style={{ boxShadow: "var(--shadow-panel)" }}
             className="flex items-center gap-2 rounded-full bg-[var(--color-bg-inverse)] px-4 py-2.5 text-[13px] font-medium text-[var(--color-text-on-inverse)]"
           >
-            <Icon icon={SlidersHorizontal} size="sm" /> Make them yours
+            <Icon name="sliders" size="sm" /> Make them yours
           </motion.button>
         )}
       </AnimatePresence>
