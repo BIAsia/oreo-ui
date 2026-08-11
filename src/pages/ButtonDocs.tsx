@@ -3,7 +3,6 @@ import { Section, PreviewTabs, PropsTable, CodeBlock, type PropRow } from "@/doc
 import type { TocItem } from "@/docs/OnThisPage";
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { Paperclip, CaretDown } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "button", label: "Introduction" },
@@ -33,11 +32,10 @@ const PROPS: PropRow[] = [
 
 const CODE_BASIC = `import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { Paperclip, CaretDown } from "@phosphor-icons/react";
 
 <Button
-  leadingIcon={<Icon icon={Paperclip} />}
-  trailingIcon={<Icon icon={CaretDown} />}
+  leadingIcon={<Icon name="paperclip" />}
+  trailingIcon={<Icon name="chevron-down" />}
 >
   Button
 </Button>`;
@@ -62,7 +60,7 @@ export function ButtonDocs({ nav }: { nav: DocsNav }) {
     <DocsPage toc={TOC} breadcrumb={["Components", "Button"]} nav={nav}>
       {({ spring, icon }) => {
         const Demo = ({ children }: { children?: React.ReactNode }) => (
-          <Button leadingIcon={<Icon icon={Paperclip} weight={icon.weight} />} trailingIcon={<Icon icon={CaretDown} weight={icon.weight} />} {...spring}>
+          <Button leadingIcon={<Icon name="paperclip" weight={icon.weight} />} trailingIcon={<Icon name="chevron-down" weight={icon.weight} />} {...spring}>
             {children ?? "Button"}
           </Button>
         );
@@ -113,7 +111,7 @@ export function ButtonDocs({ nav }: { nav: DocsNav }) {
                 preview={
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {SIZES.map((sz) => (
-                      <Button key={sz} size={sz} leadingIcon={<Icon icon={Paperclip} weight={icon.weight} />} {...spring}>
+                      <Button key={sz} size={sz} leadingIcon={<Icon name="paperclip" weight={icon.weight} />} {...spring}>
                         {sz === "sm" ? "Small" : sz === "md" ? "Medium" : "Large"}
                       </Button>
                     ))}

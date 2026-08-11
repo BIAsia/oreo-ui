@@ -4,7 +4,6 @@ import { Section, PreviewTabs, PropsTable, CodeBlock, type PropRow } from "@/doc
 import type { TocItem } from "@/docs/OnThisPage";
 import { Tag, PALETTE, type PaletteColor } from "@/components/tag";
 import { Icon } from "@/components/icon";
-import { Star } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "tag", label: "Introduction" },
@@ -96,11 +95,11 @@ export function TagDocs({ nav }: { nav: DocsNav }) {
 
           <Section id="icons" title="Icons & hash" description="Add a leading icon for context, or the dimmed # prefix for the keyword-tag look.">
             <PreviewTabs
-              code={`<Tag color="orange" icon={<Icon icon={Star} size="sm" />}>Featured</Tag>\n<Tag color="purple" hash>planning</Tag>`}
+              code={`<Tag color="orange" icon={<Icon name="star" size="sm" />}>Featured</Tag>\n<Tag color="purple" hash>planning</Tag>`}
               preview={
                 <div className="flex flex-wrap items-center justify-center gap-2">
-                  <Tag color="orange" icon={<Icon icon={Star} weight="fill" size="sm" />}>Featured</Tag>
-                  <Tag color="mint" icon={<Icon icon={Star} weight={icon.weight} size="sm" />}>Starred</Tag>
+                  <Tag color="orange" icon={<Icon name="star" weight="fill" size="sm" />}>Featured</Tag>
+                  <Tag color="mint" icon={<Icon name="star" weight={icon.weight} size="sm" />}>Starred</Tag>
                   <Tag color="purple" hash>planning</Tag>
                   <Tag color="blue" hash size="md">in-progress</Tag>
                 </div>

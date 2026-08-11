@@ -1,17 +1,6 @@
 import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
-import {
-  Camera,
-  FolderSimple,
-  GithubLogo,
-  Globe,
-  MagnifyingGlass,
-  Paperclip,
-  PaintBrush,
-  Plus,
-  Plugs,
-} from "@phosphor-icons/react";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/button";
 import {
@@ -101,8 +90,8 @@ const MODEL_CODE = `<Menu>
 </Menu>`;
 
 const ROWS_CODE = `<MenuPopup>
-  <MenuItem icon={<Icon icon={Globe} />}>Research</MenuItem>
-  <MenuSwitchItem icon={<Icon icon={MagnifyingGlass} />} defaultChecked>
+  <MenuItem icon={<Icon name="globe" />}>Research</MenuItem>
+  <MenuSwitchItem icon={<Icon name="search" />} defaultChecked>
     Web search
   </MenuSwitchItem>
   <MenuSeparator />
@@ -111,12 +100,12 @@ const ROWS_CODE = `<MenuPopup>
 </MenuPopup>`;
 
 const SUBMENU_CODE = `<MenuSubmenu>
-  <MenuSubmenuTrigger icon={<Icon icon={FolderSimple} />}>Add to project</MenuSubmenuTrigger>
+  <MenuSubmenuTrigger icon={<Icon name="folder" />}>Add to project</MenuSubmenuTrigger>
   <MenuPopup side="right" align="start" sideOffset={8}>
-    <MenuItem icon={<Icon icon={FolderSimple} />} selected>multi-agent-dev</MenuItem>
-    <MenuItem icon={<Icon icon={FolderSimple} />}>How to use</MenuItem>
+    <MenuItem icon={<Icon name="folder" />} selected>multi-agent-dev</MenuItem>
+    <MenuItem icon={<Icon name="folder" />}>How to use</MenuItem>
     <MenuSeparator />
-    <MenuItem icon={<Icon icon={Plus} />}>Create new project</MenuItem>
+    <MenuItem icon={<Icon name="plus" />}>Create new project</MenuItem>
   </MenuPopup>
 </MenuSubmenu>`;
 
@@ -179,8 +168,8 @@ export function MenuDocs({ nav }: { nav: DocsNav }) {
                     }
                   />
                   <MenuPopup>
-                    <MenuItem icon={<Icon icon={Globe} />}>Research</MenuItem>
-                    <MenuSwitchItem icon={<Icon icon={MagnifyingGlass} />} defaultChecked>
+                    <MenuItem icon={<Icon name="globe" />}>Research</MenuItem>
+                    <MenuSwitchItem icon={<Icon name="search" />} defaultChecked>
                       Web search
                     </MenuSwitchItem>
                     <MenuSeparator />
@@ -212,34 +201,34 @@ export function MenuDocs({ nav }: { nav: DocsNav }) {
                     }
                   />
                   <MenuPopup>
-                    <MenuItem icon={<Icon icon={Paperclip} />}>Add files or photos</MenuItem>
-                    <MenuItem icon={<Icon icon={Camera} />}>Take a screenshot</MenuItem>
+                    <MenuItem icon={<Icon name="paperclip" />}>Add files or photos</MenuItem>
+                    <MenuItem icon={<Icon name="camera" />}>Take a screenshot</MenuItem>
                     <MenuSubmenu>
-                      <MenuSubmenuTrigger icon={<Icon icon={FolderSimple} />}>Add to project</MenuSubmenuTrigger>
+                      <MenuSubmenuTrigger icon={<Icon name="folder" />}>Add to project</MenuSubmenuTrigger>
                       <MenuPopup side="right" align="start" sideOffset={8}>
-                        <MenuItem icon={<Icon icon={FolderSimple} />} selected>
+                        <MenuItem icon={<Icon name="folder" />} selected>
                           multi-agent-dev
                         </MenuItem>
-                        <MenuItem icon={<Icon icon={FolderSimple} />}>How to use</MenuItem>
+                        <MenuItem icon={<Icon name="folder" />}>How to use</MenuItem>
                         <MenuSeparator />
-                        <MenuItem icon={<Icon icon={Plus} />}>Create new project</MenuItem>
+                        <MenuItem icon={<Icon name="plus" />}>Create new project</MenuItem>
                       </MenuPopup>
                     </MenuSubmenu>
                     <MenuSubmenu>
-                      <MenuSubmenuTrigger icon={<Icon icon={PaintBrush} />}>Use style</MenuSubmenuTrigger>
+                      <MenuSubmenuTrigger icon={<Icon name="paintbrush" />}>Use style</MenuSubmenuTrigger>
                       <MenuPopup side="right" align="start" sideOffset={8}>
                         <MenuItem selected>Normal</MenuItem>
                         <MenuItem>Learning</MenuItem>
                         <MenuItem>Concise</MenuItem>
                         <MenuSeparator />
-                        <MenuItem icon={<Icon icon={Plus} />}>Create styles</MenuItem>
+                        <MenuItem icon={<Icon name="plus" />}>Create styles</MenuItem>
                       </MenuPopup>
                     </MenuSubmenu>
                     <MenuSubmenu>
-                      <MenuSubmenuTrigger icon={<Icon icon={Plugs} />}>Connectors</MenuSubmenuTrigger>
+                      <MenuSubmenuTrigger icon={<Icon name="plug" />}>Connectors</MenuSubmenuTrigger>
                       <MenuPopup side="right" align="start" sideOffset={8}>
-                        <MenuItem icon={<Icon icon={GithubLogo} />}>GitHub</MenuItem>
-                        <MenuItem icon={<Icon icon={Globe} />}>Web browser</MenuItem>
+                        <MenuItem icon={<Icon name="github-logo" />}>GitHub</MenuItem>
+                        <MenuItem icon={<Icon name="globe" />}>Web browser</MenuItem>
                       </MenuPopup>
                     </MenuSubmenu>
                   </MenuPopup>

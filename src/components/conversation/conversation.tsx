@@ -1,6 +1,5 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowDown } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
@@ -111,7 +110,7 @@ export function ConversationScrollButton({ className }: { className?: string }) 
               floating
               aria-label="Scroll to bottom"
               onClick={() => scrollToBottom()}
-              icon={<Icon icon={ArrowDown} />}
+              icon={<Icon name="arrow-down" />}
             />
           </motion.div>
         )}

@@ -9,7 +9,7 @@ import {
   ThreadListItem,
   ThreadListItemAction,
 } from "@/components/thread-list";
-import { PencilSimple, Trash } from "@phosphor-icons/react";
+import { Icon } from "@/components/icon";
 
 const TOC: TocItem[] = [
   { id: "thread-list", label: "Introduction" },
@@ -37,8 +37,8 @@ const CODE = `import { ThreadList, ThreadListSection, ThreadListNew, ThreadListI
     meta="2h"
     active
     actions={<>
-      <ThreadListItemAction aria-label="Rename"><PencilSimple /></ThreadListItemAction>
-      <ThreadListItemAction aria-label="Delete"><Trash /></ThreadListItemAction>
+      <ThreadListItemAction aria-label="Rename"><Icon name="pencil" /></ThreadListItemAction>
+      <ThreadListItemAction aria-label="Delete"><Icon name="trash" /></ThreadListItemAction>
     </>}
   />
 </ThreadList>`;
@@ -74,13 +74,13 @@ function Demo() {
                   actions={
                     <>
                       <ThreadListItemAction aria-label={`Rename ${t.title}`}>
-                        <PencilSimple />
+                        <Icon name="pencil" />
                       </ThreadListItemAction>
                       <ThreadListItemAction
                         aria-label={`Delete ${t.title}`}
                         onClick={() => setItems((p) => p.filter((x) => x.id !== t.id))}
                       >
-                        <Trash />
+                        <Icon name="trash" />
                       </ThreadListItemAction>
                     </>
                   }

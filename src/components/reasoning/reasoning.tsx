@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { motion } from "motion/react";
-import { CaretDown } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { ActivityLabel } from "@/components/activity-label";
+import { Icon } from "@/components/icon";
 import { reasoning } from "./reasoning.variants";
 
 const ReasoningContext = React.createContext<{ streaming: boolean } | null>(null);
@@ -54,7 +54,7 @@ export function Reasoning({
           }
           label={label}
         />
-        <CaretDown weight="bold" aria-hidden className={slots.chevron()} />
+        <Icon name="chevron-down" weight="bold" aria-hidden className={slots.chevron()} />
       </Collapsible.Trigger>
       <Collapsible.Panel className={slots.panel()}>
         <ReasoningContext.Provider value={{ streaming }}>

@@ -3,10 +3,9 @@ import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
 import type { SpringProps } from "@/docs/DocsPage";
-import type { IconWeight } from "@/components/icon";
+import type { IconName, IconWeight } from "@/components/icon";
 import { Chip, ChipGroup } from "@/components/chip";
 import { Icon } from "@/components/icon";
-import { Airplane, CalendarBlank, Bell, ListChecks, Globe, TextAlignLeft, ChartLine, Sparkle } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "chip", label: "Introduction" },
@@ -28,28 +27,27 @@ const PROPS: PropRow[] = [
 
 const CODE_STATES = `import { Chip } from "@/components/chip";
 import { Icon } from "@/components/icon";
-import { Airplane } from "@phosphor-icons/react";
 
-<Chip icon={<Icon icon={Airplane} />}>Plan a trip</Chip>
-<Chip icon={<Icon icon={Airplane} />} selected>Plan a trip</Chip>
-<Chip icon={<Icon icon={Airplane} />} disabled>Plan a trip</Chip>`;
+<Chip icon={<Icon name="plane" />}>Plan a trip</Chip>
+<Chip icon={<Icon name="plane" />} selected>Plan a trip</Chip>
+<Chip icon={<Icon name="plane" />} disabled>Plan a trip</Chip>`;
 
 const CODE_GROUP = `import { Chip, ChipGroup } from "@/components/chip";
 
 <ChipGroup>
-  <Chip icon={<Icon icon={Sparkle} />}>Make an App</Chip>
-  <Chip icon={<Icon icon={CalendarBlank} />}>Schedule my week</Chip>
-  <Chip icon={<Icon icon={Bell} />}>Set a reminder</Chip>
+  <Chip icon={<Icon name="sparkle" />}>Make an App</Chip>
+  <Chip icon={<Icon name="calendar" />}>Schedule my week</Chip>
+  <Chip icon={<Icon name="bell" />}>Set a reminder</Chip>
 </ChipGroup>`;
 
-const SUGGESTIONS = [
-  { label: "Plan a trip", icon: Airplane },
-  { label: "Schedule my week", icon: CalendarBlank },
-  { label: "Set a reminder", icon: Bell },
-  { label: "Make a to-do list", icon: ListChecks },
-  { label: "Search the web", icon: Globe },
-  { label: "Summarize this", icon: TextAlignLeft },
-  { label: "Analyze data", icon: ChartLine },
+const SUGGESTIONS: { label: string; icon: IconName }[] = [
+  { label: "Plan a trip", icon: "plane" },
+  { label: "Schedule my week", icon: "calendar" },
+  { label: "Set a reminder", icon: "bell" },
+  { label: "Make a to-do list", icon: "list-checks" },
+  { label: "Search the web", icon: "globe" },
+  { label: "Summarize this", icon: "align-left" },
+  { label: "Analyze data", icon: "chart-line" },
 ];
 
 function SelectionDemo({ spring, weight }: { spring: SpringProps; weight: IconWeight }) {
@@ -59,7 +57,7 @@ function SelectionDemo({ spring, weight }: { spring: SpringProps; weight: IconWe
       {SUGGESTIONS.slice(0, 5).map((s) => (
         <Chip
           key={s.label}
-          icon={<Icon icon={s.icon} weight={weight} />}
+          icon={<Icon name={s.icon} weight={weight} />}
           selected={active === s.label}
           onClick={() => setActive(s.label)}
           {...spring}
@@ -94,10 +92,10 @@ export function ChipDocs({ nav }: { nav: DocsNav }) {
               code={CODE_STATES}
               preview={
                 <div className="flex flex-wrap items-center justify-center gap-3">
-                  <Chip icon={<Icon icon={Airplane} weight={icon.weight} />} {...spring}>Plan a trip</Chip>
-                  <Chip icon={<Icon icon={Airplane} weight={icon.weight} />} selected {...spring}>Plan a trip</Chip>
-                  <Chip icon={<Icon icon={Airplane} weight={icon.weight} />} disabled {...spring}>Plan a trip</Chip>
-                  <Chip icon={<Icon icon={Airplane} weight={icon.weight} />} selected disabled {...spring}>Plan a trip</Chip>
+                  <Chip icon={<Icon name="plane" weight={icon.weight} />} {...spring}>Plan a trip</Chip>
+                  <Chip icon={<Icon name="plane" weight={icon.weight} />} selected {...spring}>Plan a trip</Chip>
+                  <Chip icon={<Icon name="plane" weight={icon.weight} />} disabled {...spring}>Plan a trip</Chip>
+                  <Chip icon={<Icon name="plane" weight={icon.weight} />} selected disabled {...spring}>Plan a trip</Chip>
                 </div>
               }
             />
@@ -116,7 +114,7 @@ export function ChipDocs({ nav }: { nav: DocsNav }) {
               preview={
                 <ChipGroup className="w-full max-w-xl">
                   {SUGGESTIONS.map((s) => (
-                    <Chip key={s.label} icon={<Icon icon={s.icon} weight={icon.weight} />} {...spring}>
+                    <Chip key={s.label} icon={<Icon name={s.icon} weight={icon.weight} />} {...spring}>
                       {s.label}
                     </Chip>
                   ))}

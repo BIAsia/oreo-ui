@@ -4,7 +4,6 @@ import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, Segmented, type
 import type { TocItem } from "@/docs/OnThisPage";
 import { CodeBlock, CodeBlockAction } from "@/components/code-block";
 import { Icon } from "@/components/icon";
-import { ArrowsOutSimple } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "code-block", label: "Introduction" },
@@ -93,7 +92,7 @@ export function CodeBlockDocs({ nav }: { nav: DocsNav }) {
                   className="w-full max-w-xl"
                   actions={
                     <CodeBlockAction aria-label="Expand">
-                      <Icon icon={ArrowsOutSimple} size="sm" />
+                      <Icon name="expand" size="sm" />
                     </CodeBlockAction>
                   }
                 />

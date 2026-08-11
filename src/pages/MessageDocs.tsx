@@ -11,7 +11,6 @@ import {
 import { Response } from "@/components/response";
 import { Avatar } from "@/components/avatar";
 import { Icon } from "@/components/icon";
-import { ArrowsClockwise, ThumbsDown, ThumbsUp } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "message", label: "Introduction" },
@@ -51,9 +50,9 @@ const CODE_ACTIONS = `<Message role="assistant">
   <MessageContent>…</MessageContent>
   <MessageActions>
     <MessageCopyAction text={answer} />
-    <MessageAction aria-label="Regenerate" icon={<Icon icon={ArrowsClockwise} />} />
-    <MessageAction aria-label="Good response" icon={<Icon icon={ThumbsUp} />} />
-    <MessageAction aria-label="Bad response" icon={<Icon icon={ThumbsDown} />} />
+    <MessageAction aria-label="Regenerate" icon={<Icon name="refresh" />} />
+    <MessageAction aria-label="Good response" icon={<Icon name="thumbs-up" />} />
+    <MessageAction aria-label="Bad response" icon={<Icon name="thumbs-down" />} />
   </MessageActions>
 </Message>`;
 
@@ -65,9 +64,9 @@ function AssistantTurn({ withAvatar = false }: { withAvatar?: boolean }) {
       </MessageContent>
       <MessageActions>
         <MessageCopyAction text={ANSWER} />
-        <MessageAction aria-label="Regenerate" icon={<Icon icon={ArrowsClockwise} />} />
-        <MessageAction aria-label="Good response" icon={<Icon icon={ThumbsUp} />} />
-        <MessageAction aria-label="Bad response" icon={<Icon icon={ThumbsDown} />} />
+        <MessageAction aria-label="Regenerate" icon={<Icon name="refresh" />} />
+        <MessageAction aria-label="Good response" icon={<Icon name="thumbs-up" />} />
+        <MessageAction aria-label="Bad response" icon={<Icon name="thumbs-down" />} />
       </MessageActions>
     </Message>
   );

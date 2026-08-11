@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion } from "motion/react";
-import { Check, CircleNotch } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 
@@ -41,7 +40,7 @@ export function Terminal({ command, running = false, exitCode = 0, children, cla
         </span>
         <span className="flex shrink-0 items-center gap-1 text-[11px] tracking-tight text-[var(--color-code-fg)]/40 tabular-nums">
           {running ? (
-            <Icon icon={CircleNotch} size="sm" weight="bold" className="animate-spin motion-reduce:animate-none" />
+            <Icon name="spinner" size="sm" weight="bold" className="animate-spin motion-reduce:animate-none" />
           ) : failed ? (
             <span className="text-[var(--color-status-error)]">exit {exitCode}</span>
           ) : (
@@ -51,7 +50,7 @@ export function Terminal({ command, running = false, exitCode = 0, children, cla
               transition={{ duration: 0.2 }}
               className="flex items-center gap-1"
             >
-              <Icon icon={Check} size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
+              <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
               exit 0
             </motion.span>
           )}

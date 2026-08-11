@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Menu as BaseMenu } from "@base-ui-components/react/menu";
-import { Check, CaretRight } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { Shortcut } from "@/components/shortcut";
@@ -84,7 +83,7 @@ export function MenuItem({ icon, selected, shortcut, trailing, className, childr
       <span className={slots.itemTrailing()}>
         {trailing ??
           (selected ? (
-            <Icon icon={Check} size="sm" weight="bold" className="text-[var(--color-text-primary)]" />
+            <Icon name="check" size="sm" weight="bold" className="text-[var(--color-text-primary)]" />
           ) : shortcut ? (
             <Shortcut keys={shortcut} size="sm" className="text-[var(--color-text-secondary)]" />
           ) : null)}
@@ -153,7 +152,7 @@ export function MenuSubmenuTrigger({ icon, className, children, ...rest }: MenuS
       {icon != null && <span className={slots.itemIcon()}>{icon}</span>}
       <span className={slots.itemLabel()}>{children}</span>
       <span className={slots.itemTrailing()}>
-        <Icon icon={CaretRight} size="sm" />
+        <Icon name="chevron-right" size="sm" />
       </span>
     </BaseMenu.SubmenuTrigger>
   );

@@ -4,7 +4,6 @@ import type { TocItem } from "@/docs/OnThisPage";
 import { Avatar, AvatarGroup, AGENTS, type AvatarColor } from "@/components/avatar";
 import { Icon } from "@/components/icon";
 import { OreoLogo } from "@/docs/OreoLogo";
-import { GithubLogo, AppleLogo } from "@phosphor-icons/react";
 
 const TOC: TocItem[] = [
   { id: "avatar", label: "Introduction" },
@@ -69,7 +68,7 @@ export function AvatarDocs({ nav }: { nav: DocsNav }) {
                   <Avatar />
                   <Avatar src={PORTRAITS[0]} name="Ada" />
                   <Avatar logo={<OreoLogo className="h-1/2 w-auto" />} name="Oreo" />
-                  <Avatar logo={<Icon icon={GithubLogo} size="lg" />} name="GitHub" />
+                  <Avatar logo={<Icon name="github-logo" size="lg" />} name="GitHub" />
                   <Avatar name="Oreo UI" color="purple" />
                   <Avatar agent="nova" />
                 </div>
@@ -112,7 +111,7 @@ export function AvatarDocs({ nav }: { nav: DocsNav }) {
                     <Avatar key={s} name="Oreo" color="blue" size={s} />
                   ))}
                   <Avatar src={PORTRAITS[1]} name="User" size="lg" />
-                  <Avatar logo={<Icon icon={AppleLogo} weight="fill" size="lg" />} name="Apple" size="lg" />
+                  <Avatar logo={<Icon name="apple-logo" weight="fill" size="lg" />} name="Apple" size="lg" />
                 </div>
               }
             />

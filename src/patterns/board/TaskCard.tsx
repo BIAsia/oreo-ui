@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Trash, DotsSixVertical } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Tag } from "@/components/tag";
 import { Avatar } from "@/components/avatar";
@@ -87,7 +86,7 @@ export function CardBody({ task, editable }: { task: Task; editable?: Editable }
     <div className="flex flex-col gap-2">
       <div className="flex items-start gap-1">
         <Icon
-          icon={DotsSixVertical}
+          name="grip-vertical"
           size="sm"
           className="mt-0.5 shrink-0 text-[var(--color-text-disabled)]"
           aria-label="Drag handle"
@@ -132,7 +131,7 @@ export function CardBody({ task, editable }: { task: Task; editable?: Editable }
               type="tertiary"
               size="sm"
               danger
-              icon={<Icon icon={Trash} size="sm" />}
+              icon={<Icon name="trash" size="sm" />}
               onPointerDown={(e) => e.stopPropagation()}
               onClick={editable.onRemove}
               className="opacity-0 transition-opacity group-hover/card:opacity-100"

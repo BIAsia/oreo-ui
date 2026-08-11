@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion } from "motion/react";
-import { MagnifyingGlass } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { ActivityLabel } from "@/components/activity-label";
@@ -27,7 +26,7 @@ export function WebSearch({ query, searching = false, summary, children, classNa
   return (
     <div className={cn("flex w-full flex-col gap-2.5", className)}>
       <span className="inline-flex w-fit max-w-full items-center gap-1.5 rounded-[var(--radius-capsule)] bg-[var(--color-state-hover)] px-3.5 py-2 text-[12px] text-[var(--color-text-primary)]">
-        <Icon icon={MagnifyingGlass} size="sm" className="shrink-0 text-[var(--color-text-disabled)]" />
+        <Icon name="search" size="sm" className="shrink-0 text-[var(--color-text-disabled)]" />
         <span className="truncate">{query}</span>
       </span>
       <div className="text-[12px] text-[var(--color-text-secondary)]">

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Check, Copy } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { useCopy } from "@/lib/use-copy";
 import { highlight } from "@/lib/highlight";
@@ -66,7 +65,7 @@ export function CopyCodeButton({ code }: { code: string }) {
           transition={{ duration: 0.12 }}
           className="grid place-items-center"
         >
-          <Icon icon={copied ? Check : Copy} size="sm" weight={copied ? "bold" : "regular"} />
+          <Icon name={copied ? "check" : "copy"} size="sm" weight={copied ? "bold" : "regular"} />
         </motion.span>
       </AnimatePresence>
     </CodeBlockAction>

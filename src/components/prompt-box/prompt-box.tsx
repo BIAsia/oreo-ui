@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion } from "motion/react";
-import { Paperclip, At, ArrowUp, CaretDown, Microphone } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
@@ -61,7 +60,7 @@ export function PromptBoxModelSelect({
         )}
         <span className="whitespace-nowrap">{label}</span>
       </span>
-      <Icon icon={CaretDown} weight="bold" className="size-[10px] text-[var(--color-text-secondary)]" />
+      <Icon name="chevron-down" weight="bold" className="size-[10px] text-[var(--color-text-secondary)]" />
     </button>
   );
 
@@ -229,7 +228,7 @@ export function PromptBox({
     <IconButton
       aria-label="Add attachment"
       type="secondary"
-      icon={<Icon icon={Paperclip} />}
+      icon={<Icon name="paperclip" />}
       onClick={onAttach}
       className={hairline}
       {...spring}
@@ -239,7 +238,7 @@ export function PromptBox({
     <IconButton
       aria-label="Mention"
       type="secondary"
-      icon={<Icon icon={At} />}
+      icon={<Icon name="at" />}
       onClick={onMention}
       className={hairline}
       {...spring}
@@ -250,7 +249,7 @@ export function PromptBox({
     <IconButton
       aria-label="Send"
       type="primary"
-      icon={<Icon icon={ArrowUp} weight="bold" />}
+      icon={<Icon name="arrow-up" weight="bold" />}
       onClick={submit}
       {...spring}
     />
@@ -258,7 +257,7 @@ export function PromptBox({
     <IconButton
       aria-label="Send"
       type="secondary"
-      icon={<Icon icon={ArrowUp} weight="bold" />}
+      icon={<Icon name="arrow-up" weight="bold" />}
       disabled
       className="bg-[var(--color-bg-elevated)] ring-[0.5px] ring-[var(--color-border-default)]"
     />
@@ -328,7 +327,7 @@ export function PromptBox({
     <IconButton
       aria-label={voiceStatus === "inputting" ? "Stop voice input" : "Start voice input"}
       type="tertiary"
-      icon={<Icon icon={Microphone} />}
+      icon={<Icon name="mic" />}
       onClick={onVoiceToggle}
       className={voiceStatus === "inputting" ? "text-[var(--color-status-progress)]" : "text-[var(--color-text-primary)]"}
       {...spring}

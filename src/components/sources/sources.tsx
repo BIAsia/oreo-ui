@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
-import { CaretDown } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
+import { Icon } from "@/components/icon";
 import { sources } from "./sources.variants";
 
 const SourcesContext = React.createContext<ReturnType<typeof sources> | null>(null);
@@ -39,7 +39,7 @@ export function Sources({
       <Collapsible.Trigger className={slots.trigger()}>
         <span>{label}</span>
         <span className={slots.count()}>{resolvedCount}</span>
-        <CaretDown weight="bold" aria-hidden className={slots.chevron()} />
+        <Icon name="chevron-down" weight="bold" aria-hidden className={slots.chevron()} />
       </Collapsible.Trigger>
       <Collapsible.Panel className={slots.panel()}>
         <SourcesContext.Provider value={slots}>

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
@@ -32,7 +31,7 @@ export function BranchPicker({ current, total, onPrevious, onNext, className }: 
           direction.current = -1;
           onPrevious?.();
         }}
-        icon={<Icon icon={CaretLeft} weight="bold" />}
+        icon={<Icon name="chevron-left" weight="bold" />}
       />
       <span className="flex items-center gap-0.5 font-mono text-[11px] tracking-tight tabular-nums" aria-live="polite">
         <span className="grid overflow-hidden">
@@ -60,7 +59,7 @@ export function BranchPicker({ current, total, onPrevious, onNext, className }: 
           direction.current = 1;
           onNext?.();
         }}
-        icon={<Icon icon={CaretRight} weight="bold" />}
+        icon={<Icon name="chevron-right" weight="bold" />}
       />
     </div>
   );

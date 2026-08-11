@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CaretDown, ChatCircle } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
+import { Icon } from "@/components/icon";
 
 export type AssistantModalProps = {
   open?: boolean;
@@ -84,10 +84,10 @@ export function AssistantModal({
         )}
       >
         <span aria-hidden className={cn(iconSwap, open ? "scale-25 opacity-0 blur-[4px]" : "scale-100 opacity-100 blur-none")}>
-          {icon ?? <ChatCircle weight="fill" className="size-6" />}
+          {icon ?? <Icon name="chat" weight="fill" className="size-6" />}
         </span>
         <span aria-hidden className={cn(iconSwap, open ? "scale-100 opacity-100 blur-none" : "scale-25 opacity-0 blur-[4px]")}>
-          <CaretDown weight="bold" className="size-5" />
+          <Icon name="chevron-down" weight="bold" className="size-5" />
         </span>
       </motion.button>
     </div>

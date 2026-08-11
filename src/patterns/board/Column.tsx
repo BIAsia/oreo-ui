@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { Plus } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { TaskCard } from "./TaskCard";
@@ -62,7 +61,7 @@ export function Column({
             "hover:bg-[var(--color-state-hover)]",
           )}
         >
-          <Icon icon={Plus} size="sm" className="shrink-0" />
+          <Icon name="plus" size="sm" className="shrink-0" />
           <input
             value={draft}
             onChange={(e) => setDraft(e.target.value)}

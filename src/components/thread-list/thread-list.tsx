@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Plus } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { threadList } from "./thread-list.variants";
@@ -24,7 +23,7 @@ export function ThreadListNew({
   const slots = threadList();
   return (
     <button type="button" className={cn(slots.item({ active: false }), className)} {...rest}>
-      <Icon icon={Plus} size="sm" weight="bold" className="shrink-0" />
+      <Icon name="plus" size="sm" weight="bold" className="shrink-0" />
       <span className={slots.title()}>{children}</span>
     </button>
   );

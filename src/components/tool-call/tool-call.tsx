@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { AnimatePresence, motion } from "motion/react";
-import { CaretRight, Check, WarningCircle } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { ActivityLabel } from "@/components/activity-label";
@@ -47,7 +46,7 @@ export function ToolCall({
       className={cn(slots.root(), className)}
     >
       <Collapsible.Trigger className={slots.trigger()}>
-        <CaretRight weight="bold" aria-hidden className={slots.chevron()} />
+        <Icon name="chevron-right" weight="bold" aria-hidden className={slots.chevron()} />
         <ActivityLabel active={running} activeLabel={activeLabel ?? name} label={name} />
         {badge != null && <span className={slots.badge()}>{badge}</span>}
         <span className={slots.status()}>
@@ -59,7 +58,7 @@ export function ToolCall({
                 transition={{ duration: 0.2 }}
                 className="grid place-items-center"
               >
-                <Icon icon={Check} size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
+                <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
               </motion.span>
             )}
             {state === "error" && (
@@ -69,7 +68,7 @@ export function ToolCall({
                 transition={{ duration: 0.2 }}
                 className="grid place-items-center"
               >
-                <Icon icon={WarningCircle} size="sm" weight="bold" className="text-[var(--color-status-error)]" />
+                <Icon name="warning-circle" size="sm" weight="bold" className="text-[var(--color-status-error)]" />
               </motion.span>
             )}
           </AnimatePresence>

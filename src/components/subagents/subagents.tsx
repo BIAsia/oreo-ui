@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion } from "motion/react";
-import { Check, CircleNotch, WarningCircle } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 
@@ -17,9 +16,9 @@ export type SubagentProps = {
 };
 
 const STATUS_ICON: Record<SubagentStatus, React.ReactNode> = {
-  running: <Icon icon={CircleNotch} size="sm" weight="bold" className="animate-spin text-[var(--color-text-secondary)] motion-reduce:animate-none" />,
-  done: <Icon icon={Check} size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />,
-  error: <Icon icon={WarningCircle} size="sm" weight="bold" className="text-[var(--color-status-error)]" />,
+  running: <Icon name="spinner" size="sm" weight="bold" className="animate-spin text-[var(--color-text-secondary)] motion-reduce:animate-none" />,
+  done: <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />,
+  error: <Icon name="warning-circle" size="sm" weight="bold" className="text-[var(--color-status-error)]" />,
 };
 
 /** One delegated agent: status, name, meta, and an eased progress bar. */

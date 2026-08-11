@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
-import { Sparkle } from "@phosphor-icons/react";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/button";
 import { Chip, ChipGroup } from "@/components/chip";
@@ -266,8 +265,8 @@ const VOICE_CODE = `// Type A — the wave button replaces send; tap to talk, ta
 
 const ADDONS_CODE = `<div className="flex w-full flex-col gap-[var(--space-x4)]">
   <ChipGroup>
-    <Chip icon={<Icon icon={Sparkle} />}>Summarize this page</Chip>
-    <Chip icon={<Icon icon={Sparkle} />}>Debug my code</Chip>
+    <Chip icon={<Icon name="sparkle" />}>Summarize this page</Chip>
+    <Chip icon={<Icon name="sparkle" />}>Debug my code</Chip>
   </ChipGroup>
   <PromptBox … />
 </div>`;
@@ -392,10 +391,10 @@ export function PromptBoxDocs({ nav }: { nav: DocsNav }) {
               preview={
                 <div className="flex w-full flex-col items-start gap-[var(--space-x4)]">
                   <ChipGroup>
-                    <Chip icon={<Icon icon={Sparkle} />} {...spring}>
+                    <Chip icon={<Icon name="sparkle" />} {...spring}>
                       Summarize this page
                     </Chip>
-                    <Chip icon={<Icon icon={Sparkle} />} {...spring}>
+                    <Chip icon={<Icon name="sparkle" />} {...spring}>
                       Debug my code
                     </Chip>
                   </ChipGroup>

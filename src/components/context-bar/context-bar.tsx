@@ -1,15 +1,5 @@
 import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
-import {
-  ArrowBendDownRight,
-  CaretDown,
-  Check,
-  CircleDashed,
-  DotsSixVertical,
-  DotsThree,
-  FolderSimple,
-  Trash,
-} from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { SpinnerDots } from "@/components/attachment";
@@ -73,12 +63,12 @@ function StepDots({ className }: { className?: string }) {
 }
 
 const STATUS_GLYPHS: Record<Exclude<Status, "avatar">, React.ReactNode> = {
-  default: <Icon icon={FolderSimple} size="sm" />,
+  default: <Icon name="folder" size="sm" />,
   progress: <StepDots className="size-4" />,
   loading: <SpinnerDots className="size-4 animate-[spin_0.8s_steps(8)_infinite] motion-reduce:animate-none" />,
-  waiting: <Icon icon={CircleDashed} size="sm" />,
-  done: <Icon icon={Check} size="sm" />,
-  queue: <Icon icon={DotsSixVertical} size="sm" />,
+  waiting: <Icon name="circle-dashed" size="sm" />,
+  done: <Icon name="check" size="sm" />,
+  queue: <Icon name="grip-vertical" size="sm" />,
 };
 
 /* -------------------------------- Label row -------------------------------- */
@@ -127,14 +117,14 @@ export function ContextBarLabel({
     (onSteer || onRemove || onMore ? (
       <>
         {onSteer && (
-          <ContextBarTextButton icon={<Icon icon={ArrowBendDownRight} size="sm" />} onClick={onSteer}>
+          <ContextBarTextButton icon={<Icon name="corner-down-right" size="sm" />} onClick={onSteer}>
             Steer
           </ContextBarTextButton>
         )}
         {(onRemove || onMore) && (
           <span className={rowSlots.trailingIcons()}>
-            {onRemove && <ContextBarIconButton aria-label="Remove" icon={<Icon icon={Trash} size="sm" />} onClick={onRemove} />}
-            {onMore && <ContextBarIconButton aria-label="More" icon={<Icon icon={DotsThree} size="sm" weight="bold" />} onClick={onMore} />}
+            {onRemove && <ContextBarIconButton aria-label="Remove" icon={<Icon name="trash" size="sm" />} onClick={onRemove} />}
+            {onMore && <ContextBarIconButton aria-label="More" icon={<Icon name="ellipsis" size="sm" weight="bold" />} onClick={onMore} />}
           </span>
         )}
       </>
@@ -178,7 +168,7 @@ export function ContextBarTasks({ summary, defaultOpen, open, onOpenChange, clas
       >
         <span className="grid size-5 shrink-0 place-items-center">
           <Icon
-            icon={CaretDown}
+            name="chevron-down"
             size="sm"
             className={cn(
               "-rotate-90 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",

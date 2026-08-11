@@ -2,7 +2,6 @@ import { useState } from "react";
 import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
-import { X } from "@phosphor-icons/react";
 import { Icon } from "@/components/icon";
 import { Avatar, AvatarGroup } from "@/components/avatar";
 import { PromptBox, PromptBoxModelSelect } from "@/components/prompt-box";
@@ -85,7 +84,7 @@ const UPGRADE_CODE = `<ContextBar position="header">
     trailing={
       <>
         <ContextBarTextButton onClick={…}>Upgrade plan</ContextBarTextButton>
-        <ContextBarIconButton aria-label="Dismiss" icon={<Icon icon={X} size="sm" />} onClick={…} />
+        <ContextBarIconButton aria-label="Dismiss" icon={<Icon name="x" size="sm" />} onClick={…} />
       </>
     }
   >
@@ -142,7 +141,7 @@ function UpgradeDemo() {
               trailing={
                 <>
                   <ContextBarTextButton>Upgrade plan</ContextBarTextButton>
-                  <ContextBarIconButton aria-label="Dismiss" icon={<Icon icon={X} size="sm" />} onClick={() => setVisible(false)} />
+                  <ContextBarIconButton aria-label="Dismiss" icon={<Icon name="x" size="sm" />} onClick={() => setVisible(false)} />
                 </>
               }
             >

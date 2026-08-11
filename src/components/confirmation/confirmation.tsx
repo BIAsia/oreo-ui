@@ -1,6 +1,5 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Check, Prohibit } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/button";
@@ -74,12 +73,12 @@ export function Confirmation({
             >
               {state === "approved" ? (
                 <>
-                  <Icon icon={Check} size="sm" weight="bold" />
+                  <Icon name="check" size="sm" weight="bold" />
                   <span>{approvedLabel}</span>
                 </>
               ) : (
                 <>
-                  <Icon icon={Prohibit} size="sm" weight="bold" />
+                  <Icon name="prohibit" size="sm" weight="bold" />
                   <span>{deniedLabel}</span>
                 </>
               )}

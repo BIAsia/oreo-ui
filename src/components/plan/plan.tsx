@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion } from "motion/react";
-import { Check, CircleNotch } from "@phosphor-icons/react";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { plan } from "./plan.variants";
@@ -25,10 +24,10 @@ export function PlanStep({ status = "pending", className, children }: PlanStepPr
             transition={{ duration: 0.2 }}
             className="grid place-items-center"
           >
-            <Icon icon={Check} size="sm" weight="bold" className="text-[var(--color-text-disabled)]" />
+            <Icon name="check" size="sm" weight="bold" className="text-[var(--color-text-disabled)]" />
           </motion.span>
         ) : status === "active" ? (
-          <Icon icon={CircleNotch} size="sm" weight="bold" className="animate-spin motion-reduce:animate-none" />
+          <Icon name="spinner" size="sm" weight="bold" className="animate-spin motion-reduce:animate-none" />
         ) : (
           <span aria-hidden className="size-1.5 rounded-full bg-[var(--color-border-default)]" />
         )}

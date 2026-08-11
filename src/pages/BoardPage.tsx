@@ -3,7 +3,6 @@ import { Sidebar } from "@/docs/Sidebar";
 import { Board } from "@/patterns/board";
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { ArrowCounterClockwise, Moon, Sun } from "@phosphor-icons/react";
 import type { DocsNav } from "@/docs/DocsPage";
 
 /**
@@ -38,7 +37,7 @@ export function BoardPage({ nav }: { nav: DocsNav }) {
               <Button
                 type="tertiary"
                 size="sm"
-                leadingIcon={<Icon icon={ArrowCounterClockwise} size="sm" />}
+                leadingIcon={<Icon name="reset" size="sm" />}
                 onClick={reset}
               >
                 Reset
@@ -46,7 +45,7 @@ export function BoardPage({ nav }: { nav: DocsNav }) {
               <Button
                 type="secondary"
                 size="sm"
-                leadingIcon={<Icon icon={dark ? Sun : Moon} size="sm" />}
+                leadingIcon={<Icon name={dark ? "sun" : "moon"} size="sm" />}
                 onClick={() => setDark((d) => !d)}
               >
                 {dark ? "Light" : "Dark"}
