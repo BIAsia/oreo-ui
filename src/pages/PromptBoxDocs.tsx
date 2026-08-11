@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, type PropRow } from "@/docs/primitives";
@@ -10,6 +10,7 @@ import { Chip, ChipGroup } from "@/components/chip";
 import { Attachment, AttachmentBar, type AttachmentType } from "@/components/attachment";
 import { MenuItem, MenuPopup, MenuSeparator, MenuSubmenu, MenuSubmenuTrigger } from "@/components/menu";
 import { PromptBox, PromptBoxModelSelect, KeywordTag } from "@/components/prompt-box";
+import { PlusGlyph } from "@/components/keyword-tag";
 import type { SpringProps } from "@/docs/DocsPage";
 import openaiLogo from "@/components/prompt-box/assets/openai.svg";
 import claudeLogo from "@/components/prompt-box/assets/claude-color.svg";
@@ -167,6 +168,27 @@ function AttachmentsDemo({ spring, labeled = false, size = "md" }: { spring: Spr
   );
 }
 
+/** A PromptBox whose keyword tag is live: hover for the ×, remove collapses
+ * the first-line indent back; Reset restores it. */
+function TagsDemo({ spring, render }: { spring: SpringProps; render: (remove: () => void) => ReactNode }) {
+  const [visible, setVisible] = useState(true);
+  return (
+    <div className="flex w-full flex-col items-start gap-[var(--space-x4)]">
+      <PromptBox
+        defaultValue={`Building a To-Do application requires a balance between simplicity for quick entries and stay organized. Here is a comprehensive blueprint for the app's architecture and logic.`}
+        tags={visible ? render(() => setVisible(false)) : undefined}
+        modelSelect={<ClaudeSelect />}
+        {...spring}
+      />
+      {!visible && (
+        <Button type="secondary" size="sm" onClick={() => setVisible(true)}>
+          Reset
+        </Button>
+      )}
+    </div>
+  );
+}
+
 function VoiceWaveDemo({ spring }: { spring: SpringProps }) {
   const [status, setStatus] = useState<"idle" | "inputting">("idle");
   return (
@@ -219,13 +241,17 @@ const ATTACH_CODE = `<PromptBox
 
 const TAGS_CODE = `<PromptBox
   defaultValue="…"
-  tags={<KeywordTag icon={<img src={figmaLogo} alt="" />}>Figma</KeywordTag>}
+  tags={
+    <KeywordTag icon={<img src={figmaLogo} alt="" />} onRemove={remove}>
+      Figma
+    </KeywordTag>
+  }
 />
 
 <PromptBox
   defaultValue="…"
   tags={
-    <KeywordTag color="purple" icon={<Icon icon={Sparkle} weight="fill" />}>
+    <KeywordTag color="purple" icon={<PlusGlyph />} onRemove={remove}>
       Create Image
     </KeywordTag>
   }
@@ -301,27 +327,27 @@ export function PromptBoxDocs({ nav }: { nav: DocsNav }) {
           <Section
             id="keyword-tags"
             title="Keyword tags"
-            description="Inline chips at the head of the first line — a source context (“Figma”) or a generative keyword (“Create Image”). The text wraps around them."
+            description="Inline chips at the head of the first line — a source context (“Figma”) or a generative keyword (“Create Image”). The text wraps around them; hover one for its ×."
           >
             <PreviewTabs
               code={TAGS_CODE}
               preview={
                 <div className="flex w-full flex-col items-start gap-6">
-                  <PromptBox
-                    defaultValue={`Building a To-Do application requires a balance between simplicity for quick entries and stay organized. Here is a comprehensive blueprint for the app's architecture and logic.`}
-                    tags={<KeywordTag icon={<img src={figmaLogo} alt="" />}>Figma</KeywordTag>}
-                    modelSelect={<ClaudeSelect />}
-                    {...spring}
+                  <TagsDemo
+                    spring={spring}
+                    render={(remove) => (
+                      <KeywordTag icon={<img src={figmaLogo} alt="" />} onRemove={remove}>
+                        Figma
+                      </KeywordTag>
+                    )}
                   />
-                  <PromptBox
-                    defaultValue={`Building a To-Do application requires a balance between simplicity for quick entries and stay organized. Here is a comprehensive blueprint for the app's architecture and logic.`}
-                    tags={
-                      <KeywordTag color="purple" icon={<Icon icon={Sparkle} weight="fill" />}>
+                  <TagsDemo
+                    spring={spring}
+                    render={(remove) => (
+                      <KeywordTag color="purple" icon={<PlusGlyph />} onRemove={remove}>
                         Create Image
                       </KeywordTag>
-                    }
-                    modelSelect={<ClaudeSelect />}
-                    {...spring}
+                    )}
                   />
                 </div>
               }
