@@ -25,6 +25,7 @@ import { WebSearchDocs } from "@/pages/WebSearchDocs";
 import { SubagentsDocs } from "@/pages/SubagentsDocs";
 import { MenuDocs } from "@/pages/MenuDocs";
 import { PromptBoxDocs } from "@/pages/PromptBoxDocs";
+import { KeywordTagDocs } from "@/pages/KeywordTagDocs";
 import { ContextBarDocs } from "@/pages/ContextBarDocs";
 import type { DocsNav } from "@/docs/DocsPage";
 import { DEFAULT_PAGE, isPageSlug, metaForRoute, type PageSlug } from "@/lib/site";
@@ -56,6 +57,7 @@ const PAGES: Record<PageSlug, ComponentType<{ nav: DocsNav }>> = {
   "web-search": WebSearchDocs,
   subagents: SubagentsDocs,
   "prompt-box": PromptBoxDocs,
+  "keyword-tag": KeywordTagDocs,
   "context-bar": ContextBarDocs,
   "onboarding-board": BoardPage,
 };

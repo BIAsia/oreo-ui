@@ -143,6 +143,11 @@ export const PAGE_META = {
     description:
       "A multi-state input for agent conversations: the card adapts its controls to empty, filled and running states, and hosts attachments and tags.",
   },
+  "keyword-tag": {
+    title: "Keyword Tag",
+    description:
+      "A compact tag for models, integrations, referenced content and agent actions — optional leading icon and a hover remove action, built for dense composers.",
+  },
   "context-bar": {
     title: "Context Bar",
     description:

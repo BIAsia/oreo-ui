@@ -7,28 +7,16 @@ import { IconButton } from "@/components/button";
 import { Shortcut } from "@/components/shortcut";
 import { ShimmerText } from "@/components/activity-label";
 import { Menu, MenuTrigger, MenuPopup } from "@/components/menu";
-import { promptBox, keywordTag, type KeywordTagVariants } from "./prompt-box.variants";
+import { promptBox } from "./prompt-box.variants";
 
 const slots = promptBox();
 const tapSpring = { type: "spring", bounce: 0.4, duration: 0.3 } as const;
 
 /* ----------------------------- Keyword Tag ------------------------------ */
 
-export type KeywordTagProps = {
-  /** Leading 16px glyph — a brand `<img>` or an `<Icon>`. */
-  icon?: React.ReactNode;
-} & KeywordTagVariants &
-  React.ComponentPropsWithoutRef<"span">;
-
-/** Inline keyword chip for the input's first line ("Figma", "Create Image"). */
-export function KeywordTag({ icon, color, className, children, ...rest }: KeywordTagProps) {
-  return (
-    <span className={cn(keywordTag({ color }), className)} {...rest}>
-      {icon}
-      <span>{children}</span>
-    </span>
-  );
-}
+// The inline keyword chip grew into its own component — re-exported here so
+// composer-side imports keep working.
+export { KeywordTag, type KeywordTagProps } from "@/components/keyword-tag";
 
 /* -------------------------- Model Select trigger ------------------------- */
 
