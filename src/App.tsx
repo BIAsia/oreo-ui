@@ -27,8 +27,10 @@ import { MenuDocs } from "@/pages/MenuDocs";
 import { PromptBoxDocs } from "@/pages/PromptBoxDocs";
 import { ContextBarDocs } from "@/pages/ContextBarDocs";
 import type { DocsNav } from "@/docs/DocsPage";
+import { DEFAULT_PAGE, isPageSlug, metaForRoute, type PageSlug } from "@/lib/site";
+import { applyRouteMeta } from "@/lib/head";
 
-const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
+const PAGES: Record<PageSlug, ComponentType<{ nav: DocsNav }>> = {
   button: ButtonDocs,
   "icon-button": IconButtonDocs,
   shortcut: ShortcutDocs,
@@ -58,43 +60,45 @@ const PAGES: Record<string, ComponentType<{ nav: DocsNav }>> = {
   "onboarding-board": BoardPage,
 };
 
-const DEFAULT_PAGE = "button";
+type Route = { page: PageSlug; home: boolean };
 
-/** Every page lives at /<slug> so any component doc can be shared as a URL. */
-function pageFromPath() {
+/**
+ * Every page lives at /<slug> so any component doc can be shared as a URL.
+ * "/" is the landing route (it renders the default page but keeps the site
+ * title); an unknown slug is normalized back to "/" so we never serve the same
+ * content under an unbounded set of soft-404 URLs.
+ */
+function routeFromPath(): Route {
   const slug = window.location.pathname.replace(/^\/+|\/+$/g, "");
-  return slug in PAGES ? slug : DEFAULT_PAGE;
-}
-
-function pageTitle(slug: string) {
-  return slug
-    .split("-")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
+  if (isPageSlug(slug)) return { page: slug, home: false };
+  if (slug) window.history.replaceState(null, "", "/");
+  return { page: DEFAULT_PAGE, home: true };
 }
 
 export default function App() {
-  const [page, setPage] = useState(pageFromPath);
+  const [route, setRoute] = useState(routeFromPath);
+  const { page, home } = route;
 
   useEffect(() => {
-    const onPop = () => setPage(pageFromPath());
+    const onPop = () => setRoute(routeFromPath());
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, []);
 
   useEffect(() => {
-    document.title = `Oreo UI · ${pageTitle(page)}`;
-  }, [page]);
+    applyRouteMeta(metaForRoute(page, home));
+  }, [page, home]);
 
   const nav: DocsNav = {
     active: page,
     onNavigate: (id) => {
-      if (id !== page) window.history.pushState(null, "", `/${id}`);
-      setPage(id);
+      if (!isPageSlug(id)) return;
+      if (id !== page || home) window.history.pushState(null, "", `/${id}`);
+      setRoute({ page: id, home: false });
       window.scrollTo({ top: 0 });
     },
   };
 
-  const Page = PAGES[page] ?? ButtonDocs;
+  const Page = PAGES[page];
   return <Page key={page} nav={nav} />;
 }
