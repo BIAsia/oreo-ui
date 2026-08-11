@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
 import { Sparkle } from "@phosphor-icons/react";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/button";
 import { Chip, ChipGroup } from "@/components/chip";
-import { Attachment, AttachmentBar } from "@/components/attachment";
+import { Attachment, AttachmentBar, type AttachmentType } from "@/components/attachment";
 import { MenuItem, MenuPopup, MenuSeparator, MenuSubmenu, MenuSubmenuTrigger } from "@/components/menu";
 import { PromptBox, PromptBoxModelSelect, KeywordTag } from "@/components/prompt-box";
 import type { SpringProps } from "@/docs/DocsPage";
@@ -103,6 +105,68 @@ function ClaudeSelect({ menu = false }: { menu?: boolean }) {
   );
 }
 
+const ATTACH_FILES = [
+  { id: 1, type: "image" as AttachmentType, label: "Image.jpg" },
+  { id: 2, type: "video" as AttachmentType, label: "Video.mp4" },
+  { id: 3, type: "doc" as AttachmentType, label: "Draft.pdf" },
+  { id: 4, type: "text" as AttachmentType, label: "ReadMe.txt" },
+];
+
+function srcFor(type: AttachmentType) {
+  return type === "image" ? IMG_THUMB : type === "video" ? VIDEO_THUMB : undefined;
+}
+
+/** A PromptBox with a live attachment bar: hover a chip for the ×, click to
+ * spring it out; when the last one goes the whole row collapses away. */
+function AttachmentsDemo({ spring, labeled = false, size = "md" }: { spring: SpringProps; labeled?: boolean; size?: "md" | "sm" }) {
+  const [files, setFiles] = useState(ATTACH_FILES);
+  const chipSpring = { type: "spring", bounce: 0.3, duration: 0.35 } as const;
+  return (
+    <div className="flex w-full flex-col items-start gap-[var(--space-x4)]">
+      <PromptBox
+        defaultValue={FILLED}
+        attachments={
+          <AnimatePresence>
+            {files.length > 0 && (
+              <motion.div key="bar" exit={{ opacity: 0, height: 0 }} transition={chipSpring} className="w-full overflow-hidden">
+                <AttachmentBar>
+                  <AnimatePresence>
+                    {files.map((f) => (
+                      <motion.div
+                        key={f.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={chipSpring}
+                      >
+                        <Attachment
+                          size={size}
+                          type={f.type}
+                          src={srcFor(f.type)}
+                          label={labeled ? f.label : undefined}
+                          onRemove={() => setFiles((p) => p.filter((x) => x.id !== f.id))}
+                        />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </AttachmentBar>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        }
+        modelSelect={<ClaudeSelect />}
+        {...spring}
+      />
+      {files.length === 0 && (
+        <Button type="secondary" size="sm" onClick={() => setFiles(ATTACH_FILES)}>
+          Reset
+        </Button>
+      )}
+    </div>
+  );
+}
+
 function VoiceWaveDemo({ spring }: { spring: SpringProps }) {
   const [status, setStatus] = useState<"idle" | "inputting">("idle");
   return (
@@ -140,8 +204,15 @@ const ATTACH_CODE = `<PromptBox
   defaultValue="…"
   attachments={
     <AttachmentBar>
-      <Attachment type="image" src={url} />
-      <Attachment type="doc" label="Draft.pdf" />
+      {files.map((f) => (
+        <Attachment
+          key={f.id}
+          type={f.type}
+          src={f.src}
+          label={f.label}
+          onRemove={() => remove(f.id)}
+        />
+      ))}
     </AttachmentBar>
   }
 />`;
@@ -213,51 +284,15 @@ export function PromptBoxDocs({ nav }: { nav: DocsNav }) {
           <Section
             id="attachments"
             title="Attachments"
-            description="An Attachment Bar docks above the text: preview squares for tight rows, labeled chips when the filename matters, small labels for dense surfaces."
+            description="An Attachment Bar docks above the text: preview squares for tight rows, labeled chips when the filename matters, small labels for dense surfaces. Hover a chip for its × — removing the last one collapses the row."
           >
             <PreviewTabs
               code={ATTACH_CODE}
               preview={
                 <div className="flex w-full flex-col items-start gap-6">
-                  <PromptBox
-                    defaultValue={FILLED}
-                    attachments={
-                      <AttachmentBar>
-                        <Attachment type="image" src={IMG_THUMB} />
-                        <Attachment type="doc" />
-                        <Attachment type="text" />
-                        <Attachment type="video" src={VIDEO_THUMB} />
-                      </AttachmentBar>
-                    }
-                    modelSelect={<ClaudeSelect />}
-                    {...spring}
-                  />
-                  <PromptBox
-                    defaultValue={FILLED}
-                    attachments={
-                      <AttachmentBar>
-                        <Attachment type="image" src={IMG_THUMB} label="Image.jpg" />
-                        <Attachment type="video" src={VIDEO_THUMB} label="Video.mp4" />
-                        <Attachment type="doc" label="Draft.pdf" />
-                        <Attachment type="text" label="ReadMe.txt" />
-                      </AttachmentBar>
-                    }
-                    modelSelect={<ClaudeSelect />}
-                    {...spring}
-                  />
-                  <PromptBox
-                    defaultValue={FILLED}
-                    attachments={
-                      <AttachmentBar>
-                        <Attachment size="sm" type="image" src={IMG_THUMB} label="Image.jpg" />
-                        <Attachment size="sm" type="video" src={VIDEO_THUMB} label="Video.mp4" />
-                        <Attachment size="sm" type="doc" label="Draft.pdf" />
-                        <Attachment size="sm" type="text" label="ReadMe.txt" />
-                      </AttachmentBar>
-                    }
-                    modelSelect={<ClaudeSelect />}
-                    {...spring}
-                  />
+                  <AttachmentsDemo spring={spring} />
+                  <AttachmentsDemo spring={spring} labeled />
+                  <AttachmentsDemo spring={spring} labeled size="sm" />
                 </div>
               }
             />
