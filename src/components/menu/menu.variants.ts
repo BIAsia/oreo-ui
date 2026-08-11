@@ -14,10 +14,13 @@ export const menu = tv({
     popup: [
       "min-w-[180px] rounded-[var(--radius-card-medium)] bg-[var(--color-bg-surface)] p-[6px]",
       "shadow-[var(--shadow-overlay)] outline-none",
-      // grow/fade from the anchor; Base UI sets --transform-origin on the popup
-      "origin-[var(--transform-origin)] transition-[transform,opacity] duration-150 ease-out",
+      // Grow/fade from the anchor; Base UI sets --transform-origin on the popup.
+      // Transition `scale`, not `transform` — Tailwind v4 compiles `scale-95` to
+      // the standalone `scale` property, so a `transform` transition never fires.
+      "origin-[var(--transform-origin)] transition-[scale,opacity] duration-150 ease-out",
       "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
-      "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
+      // Leaving is quicker than arriving, so dismissal feels responsive.
+      "data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:duration-100",
       "motion-reduce:transition-none",
     ],
     item: [
