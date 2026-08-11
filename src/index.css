@@ -176,7 +176,10 @@
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, sans-serif;
+  /* "Inter Variable" is the family name shipped by @fontsource-variable/inter
+     (self-hosted, imported in main.tsx); plain "Inter" catches a locally
+     installed copy before we fall back to the system UI face. */
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
   background: var(--color-bg-elevated);
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
