@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
 
@@ -41,7 +42,7 @@ export function BranchPicker({ current, total, onPrevious, onNext, className }: 
               initial={{ y: direction.current * 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: direction.current * -10, opacity: 0 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.15, ease: easeOut }}
             >
               {current}
             </motion.span>

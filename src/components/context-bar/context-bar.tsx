@@ -171,7 +171,7 @@ export function ContextBarTasks({ summary, defaultOpen, open, onOpenChange, clas
             name="chevron-down"
             size="sm"
             className={cn(
-              "-rotate-90 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
+              "-rotate-90 transition-transform duration-200 ease-drawer motion-reduce:transition-none",
               "group-data-[panel-open]/tasks:rotate-0",
             )}
           />
@@ -183,7 +183,7 @@ export function ContextBarTasks({ summary, defaultOpen, open, onOpenChange, clas
       <Collapsible.Panel
         className={cn(
           "h-[var(--collapsible-panel-height)] w-full overflow-hidden",
-          "transition-[height] duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
+          "transition-[height] duration-200 ease-drawer motion-reduce:transition-none",
           "data-[ending-style]:h-0 data-[starting-style]:h-0",
         )}
       >

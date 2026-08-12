@@ -19,12 +19,12 @@ export const reasoning = tv({
     elapsed: "font-mono text-[11px] tracking-tight text-[var(--color-text-disabled)] tabular-nums",
     chevron: [
       "size-3.5 shrink-0 opacity-60",
-      "transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
+      "transition-transform duration-200 ease-drawer motion-reduce:transition-none",
       "group-data-[panel-open]/trigger:rotate-180",
     ],
     panel: [
       "h-[var(--collapsible-panel-height)] overflow-hidden",
-      "transition-[height] duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
+      "transition-[height] duration-200 ease-drawer motion-reduce:transition-none",
       "data-[ending-style]:h-0 data-[starting-style]:h-0",
     ],
     list: "flex flex-col gap-4 pt-3 pb-1",

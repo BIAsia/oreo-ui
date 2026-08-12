@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { pressSpring } from "@/lib/motion";
 import { keywordTag, type KeywordTagVariants } from "./keyword-tag.variants";
 
 export type KeywordTagProps = {
@@ -26,7 +27,6 @@ function CloseGlyph({ className }: { className?: string }) {
   );
 }
 
-const tapSpring = { type: "spring", bounce: 0.4, duration: 0.3 } as const;
 
 /**
  * Inline keyword chip for composers and context rows ("Figma", "Create
@@ -57,7 +57,7 @@ export function KeywordTag({ icon, src, color, onRemove, className, children, ..
               type="button"
               aria-label={removeLabel}
               whileTap={{ scale: 0.88 }}
-              transition={tapSpring}
+              transition={pressSpring}
               onClick={(event) => {
                 event.stopPropagation();
                 onRemove();

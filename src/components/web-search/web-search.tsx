@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { ActivityLabel } from "@/components/activity-label";
 
@@ -47,7 +48,7 @@ export function WebSearchResult({ domain, title, className, ...rest }: WebSearch
     <motion.span
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: easeOut }}
       className="block"
     >
       <a

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut, pressSpring } from "@/lib/motion";
 import { useCopy } from "@/lib/use-copy";
 import { highlight } from "@/lib/highlight";
 import { Icon } from "@/components/icon";
@@ -37,7 +38,7 @@ export function CodeBlockAction({
     <motion.button
       type="button"
       whileTap={{ scale: 0.92 }}
-      transition={{ type: "spring", bounce: 0.4, duration: 0.3 }}
+      transition={pressSpring}
       aria-label={ariaLabel}
       className={cn(
         "grid size-7 shrink-0 place-items-center rounded-lg text-[var(--color-code-fg)]/60",
@@ -59,10 +60,10 @@ export function CopyCodeButton({ code }: { code: string }) {
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={copied ? "check" : "copy"}
-          initial={{ scale: 0.5, opacity: 0 }}
+          initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.5, opacity: 0 }}
-          transition={{ duration: 0.12 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          transition={{ duration: 0.12, ease: easeOut }}
           className="grid place-items-center"
         >
           <Icon name={copied ? "check" : "copy"} size="sm" weight={copied ? "bold" : "regular"} />

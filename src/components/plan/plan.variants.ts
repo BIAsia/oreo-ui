@@ -14,7 +14,10 @@ export const plan = tv({
     title: "text-[13.5px] font-medium text-[var(--color-text-primary)]",
     fraction: "font-mono text-[11px] tracking-tight text-[var(--color-text-disabled)] tabular-nums",
     track: "h-[3px] w-full overflow-hidden rounded-full bg-[var(--color-state-press)]",
-    bar: "block h-full rounded-full bg-[var(--color-bg-inverse)] transition-[width] duration-500 motion-reduce:transition-none",
+    // Progress advances via scaleX, not width: transform stays on the compositor
+    // and never triggers layout. Eased, because the bar jumps between discrete
+    // fractions as steps land — that's a state change, not constant motion.
+    bar: "block h-full w-full origin-left rounded-full bg-[var(--color-bg-inverse)] transition-transform duration-500 ease-out motion-reduce:transition-none",
     list: "flex flex-col gap-2.5",
     step: "flex items-center gap-2.5 text-[13.5px]",
     stepIcon: "flex size-4 shrink-0 items-center justify-center",

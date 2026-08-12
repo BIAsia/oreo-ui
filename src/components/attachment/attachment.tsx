@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { pressSpring } from "@/lib/motion";
 import { ShimmerText } from "@/components/activity-label";
 import { attachment } from "./attachment.variants";
 import docIcon from "./assets/doc.svg";
@@ -86,7 +87,6 @@ export function SpinnerDots({ className }: { className?: string }) {
   );
 }
 
-const tapSpring = { type: "spring", bounce: 0.4, duration: 0.3 } as const;
 
 export function Attachment({
   label,
@@ -147,7 +147,7 @@ export function Attachment({
             type="button"
             aria-label={removeLabel}
             whileTap={{ scale: 0.88 }}
-            transition={tapSpring}
+            transition={pressSpring}
             onClick={onRemove}
             className={slots.badge()}
           >
@@ -167,7 +167,7 @@ export function Attachment({
             type="button"
             aria-label={removeLabel}
             whileTap={{ scale: 0.88 }}
-            transition={tapSpring}
+            transition={pressSpring}
             onClick={onRemove}
             className={slots.ghost()}
           >

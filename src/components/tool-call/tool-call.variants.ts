@@ -18,7 +18,7 @@ export const toolCall = tv({
     ],
     chevron: [
       "size-3.5 shrink-0 opacity-60",
-      "transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
+      "transition-transform duration-200 ease-drawer motion-reduce:transition-none",
       "group-data-[panel-open]/trigger:rotate-90",
     ],
     badge: [
@@ -29,7 +29,7 @@ export const toolCall = tv({
     status: "ms-auto flex w-4 shrink-0 items-center justify-end",
     panel: [
       "h-[var(--collapsible-panel-height)] overflow-hidden",
-      "transition-[height] duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
+      "transition-[height] duration-200 ease-drawer motion-reduce:transition-none",
       "data-[ending-style]:h-0 data-[starting-style]:h-0",
     ],
     body: "mt-2 overflow-hidden rounded-xl bg-[var(--color-state-hover)] text-[12.5px] ring-1 ring-inset ring-[var(--color-border-subtle)]",

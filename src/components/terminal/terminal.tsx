@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 
 export type TerminalProps = {
@@ -45,9 +46,9 @@ export function Terminal({ command, running = false, exitCode = 0, children, cla
             <span className="text-[var(--color-status-error)]">exit {exitCode}</span>
           ) : (
             <motion.span
-              initial={{ scale: 0.5, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: easeOut }}
               className="flex items-center gap-1"
             >
               <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
@@ -59,7 +60,10 @@ export function Terminal({ command, running = false, exitCode = 0, children, cla
       <div className="flex flex-col gap-1 overflow-x-auto px-3.5 pt-1 pb-3.5 whitespace-pre text-[var(--color-code-fg)]/55 [&>*:last-child]:text-[var(--color-code-fg)]/90">
         {children}
         {running && (
-          <span aria-hidden className="inline-block h-3 w-1.5 animate-pulse rounded-[1px] bg-[var(--color-code-fg)]/70 motion-reduce:animate-none" />
+          <span
+            aria-hidden
+            className="inline-block h-3 w-1.5 animate-[oreo-caret_1s_steps(1)_infinite] rounded-[1px] bg-[var(--color-code-fg)]/70 motion-reduce:animate-none"
+          />
         )}
       </div>
     </div>
@@ -72,7 +76,7 @@ export function TerminalLine({ className, ...rest }: React.ComponentPropsWithout
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.25, ease: easeOut }}
       className={cn("min-h-4", className)}
       {...rest}
     />

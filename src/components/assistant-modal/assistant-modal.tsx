@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { pressSpring } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 
 export type AssistantModalProps = {
@@ -23,7 +24,7 @@ export type AssistantModalProps = {
 };
 
 const iconSwap =
-  "absolute transition-[scale,opacity,filter] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none";
+  "absolute transition-[scale,opacity,filter] duration-200 ease-out motion-reduce:transition-none";
 
 /**
  * Oreo UI Assistant Modal — the floating chat launcher.
@@ -74,7 +75,7 @@ export function AssistantModal({
         aria-label={open ? "Close assistant" : label}
         aria-expanded={open}
         whileTap={{ scale: 0.92 }}
-        transition={{ type: "spring", bounce: 0.4, duration: 0.3 }}
+        transition={pressSpring}
         onClick={() => setOpen(!open)}
         className={cn(
           "relative grid size-12 place-items-center rounded-full",

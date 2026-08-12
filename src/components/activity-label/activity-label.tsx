@@ -29,7 +29,7 @@ export type SwapLabelProps = {
 
 const layerBase =
   "col-start-1 row-start-1 flex w-max items-center gap-1.5 leading-none " +
-  "transition-[opacity,filter] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none";
+  "transition-[opacity,filter] duration-300 ease-out motion-reduce:transition-none";
 
 /**
  * Cross-fades between two labels while animating the container to the width
@@ -54,7 +54,7 @@ export function SwapLabel({ active, children, className }: SwapLabelProps) {
     <span
       style={width === null ? undefined : { width }}
       className={cn(
-        "grid overflow-x-clip transition-[width] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none",
+        "grid overflow-x-clip transition-[width] duration-300 ease-out motion-reduce:transition-none",
         className,
       )}
     >

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 
 export type SubagentStatus = "running" | "done" | "error";
@@ -23,12 +24,12 @@ const STATUS_ICON: Record<SubagentStatus, React.ReactNode> = {
 
 /** One delegated agent: status, name, meta, and an eased progress bar. */
 export function Subagent({ name, meta, status = "running", progress, className }: SubagentProps) {
-  const width = progress ?? (status === "running" ? 0 : 100);
+  const fill = (progress ?? (status === "running" ? 0 : 100)) / 100;
   return (
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: easeOut }}
       className={cn(
         "flex flex-col gap-2 rounded-xl px-3.5 py-2.5",
         "bg-[var(--color-bg-base)] ring-1 ring-inset ring-[var(--color-border-subtle)]",
@@ -45,12 +46,13 @@ export function Subagent({ name, meta, status = "running", progress, className }
       <span className="h-[3px] w-full overflow-hidden rounded-full bg-[var(--color-state-press)]">
         <span
           className={cn(
-            "block h-full rounded-full transition-[width] duration-700 motion-reduce:transition-none",
+            // scaleX rather than width: transform stays off the layout path.
+            "block h-full w-full origin-left rounded-full transition-transform duration-700 ease-out motion-reduce:transition-none",
             status === "done" && "bg-[var(--color-palette-mint-text)]/70",
             status === "running" && "bg-[var(--color-bg-inverse)]/70",
             status === "error" && "bg-[var(--color-status-error)]/70",
           )}
-          style={{ width: `${width}%` }}
+          style={{ transform: `scaleX(${fill})` }}
         />
       </span>
     </motion.div>

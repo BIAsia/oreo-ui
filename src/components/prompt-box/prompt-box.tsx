@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { pressSpring } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
 import { Shortcut } from "@/components/shortcut";
@@ -9,7 +10,6 @@ import { Menu, MenuTrigger, MenuPopup } from "@/components/menu";
 import { promptBox } from "./prompt-box.variants";
 
 const slots = promptBox();
-const tapSpring = { type: "spring", bounce: 0.4, duration: 0.3 } as const;
 
 /* ----------------------------- Keyword Tag ------------------------------ */
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { ActivityLabel } from "@/components/activity-label";
 import { Icon } from "@/components/icon";
 import { reasoning } from "./reasoning.variants";
@@ -81,7 +82,7 @@ export function ReasoningStep({ title, active = false, className, children }: Re
     <motion.li
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: easeOut }}
       className={cn(slots.step(), className)}
     >
       <span aria-hidden className={slots.dot()} />

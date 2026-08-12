@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { plan } from "./plan.variants";
 
@@ -19,9 +20,9 @@ export function PlanStep({ status = "pending", className, children }: PlanStepPr
       <span className={slots.stepIcon()}>
         {status === "done" ? (
           <motion.span
-            initial={{ scale: 0.5, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.2, ease: easeOut }}
             className="grid place-items-center"
           >
             <Icon name="check" size="sm" weight="bold" className="text-[var(--color-text-disabled)]" />
@@ -51,7 +52,7 @@ export function Plan({ title = "Plan", className, children }: PlanProps) {
   const completed = steps.filter(
     (child) => React.isValidElement<PlanStepProps>(child) && child.props.status === "done",
   ).length;
-  const progress = total === 0 ? 0 : (completed / total) * 100;
+  const progress = total === 0 ? 0 : completed / total;
 
   return (
     <div className={cn(slots.root(), className)}>
@@ -62,7 +63,7 @@ export function Plan({ title = "Plan", className, children }: PlanProps) {
         </span>
       </div>
       <div className={slots.track()} role="progressbar" aria-valuenow={completed} aria-valuemin={0} aria-valuemax={total}>
-        <span className={slots.bar()} style={{ width: `${progress}%` }} />
+        <span className={slots.bar()} style={{ transform: `scaleX(${progress})` }} />
       </div>
       <ul className={slots.list()}>{children}</ul>
     </div>

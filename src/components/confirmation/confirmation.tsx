@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/button";
 import { confirmation } from "./confirmation.variants";
@@ -53,7 +54,7 @@ export function Confirmation({
             <motion.div
               key="actions"
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.15, ease: easeOut }}
               className="flex items-center gap-2"
             >
               <Button type="secondary" size="sm" onClick={onDeny}>
@@ -68,7 +69,7 @@ export function Confirmation({
               key="resolution"
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: easeOut }}
               className={slots.resolution()}
             >
               {state === "approved" ? (

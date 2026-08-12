@@ -2,6 +2,7 @@ import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { easeOut } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { ActivityLabel } from "@/components/activity-label";
 import { toolCall, type ToolCallVariants } from "./tool-call.variants";
@@ -50,12 +51,14 @@ export function ToolCall({
         <ActivityLabel active={running} activeLabel={activeLabel ?? name} label={name} />
         {badge != null && <span className={slots.badge()}>{badge}</span>}
         <span className={slots.status()}>
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {state === "complete" && (
               <motion.span
-                initial={{ scale: 0.5, opacity: 0 }}
+                key="complete"
+                initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.2 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.2, ease: easeOut }}
                 className="grid place-items-center"
               >
                 <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
@@ -63,9 +66,11 @@ export function ToolCall({
             )}
             {state === "error" && (
               <motion.span
-                initial={{ scale: 0.5, opacity: 0 }}
+                key="error"
+                initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.2 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.2, ease: easeOut }}
                 className="grid place-items-center"
               >
                 <Icon name="warning-circle" size="sm" weight="bold" className="text-[var(--color-status-error)]" />
