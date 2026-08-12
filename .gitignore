@@ -7,8 +7,9 @@ dist
 dist-ssr
 *.tsbuildinfo
 
-# local agent config
-.claude
+# local agent config, except the shared skills
+.claude/*
+!.claude/skills
 
 # local research notes
 research
