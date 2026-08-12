@@ -2,7 +2,7 @@ import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { ActivityLabel } from "@/components/activity-label";
 import { Icon } from "@/components/icon";
 import { reasoning } from "./reasoning.variants";
@@ -78,10 +78,13 @@ export function ReasoningStep({ title, active = false, className, children }: Re
   const ctx = React.useContext(ReasoningContext);
   if (!ctx) throw new Error("<ReasoningStep> must be used inside <Reasoning>");
   const slots = reasoning({ active });
+  // Full transform string, not Motion's `y` shorthand: steps stream in while the
+  // main thread is busy, and the shorthand animates there instead of the GPU.
+  const hidden = useHidden({ transform: "translateY(4px)" });
   return (
     <motion.li
-      initial={{ opacity: 0, y: 4 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={hidden}
+      animate={{ opacity: 1, transform: "translateY(0px)" }}
       transition={{ duration: 0.3, ease: easeOut }}
       className={cn(slots.step(), className)}
     >

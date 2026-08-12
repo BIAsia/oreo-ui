@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
+import { useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
 
@@ -94,14 +95,15 @@ export function ConversationContent({ className, ...rest }: React.ComponentProps
 /** Floats over the bottom edge whenever the user has scrolled away. */
 export function ConversationScrollButton({ className }: { className?: string }) {
   const { atBottom, scrollToBottom } = useConversation("ConversationScrollButton");
+  const hidden = useHidden({ transform: "translateY(8px) scale(0.9)" });
   return (
     <div className={cn("pointer-events-none sticky bottom-3 z-10 flex justify-center", className)}>
       <AnimatePresence>
         {!atBottom && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 8 }}
+            initial={hidden}
+            animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
+            exit={hidden}
             transition={{ type: "spring", bounce: 0.3, duration: 0.35 }}
             className="pointer-events-auto"
           >

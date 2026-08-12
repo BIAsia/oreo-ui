@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { pressSpring } from "@/lib/motion";
+import { pressSpring, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 
 export type AssistantModalProps = {
@@ -50,15 +50,17 @@ export function AssistantModal({
     setUncontrolled(next);
     onOpenChange?.(next);
   };
+  // The panel springs up out of the launcher's corner.
+  const hidden = useHidden({ transform: "translateY(12px) scale(0.92)" });
 
   return (
     <div className={cn(inline ? "absolute" : "fixed", "bottom-4 end-4 z-50", className)}>
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 12 }}
+            initial={hidden}
+            animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
+            exit={hidden}
             transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
             className={cn(
               "absolute bottom-full end-0 mb-3 flex h-[520px] w-[380px] max-w-[calc(100vw-2rem)] origin-bottom-right flex-col overflow-clip rounded-3xl",

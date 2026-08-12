@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { plan } from "./plan.variants";
 
@@ -15,13 +15,14 @@ export type PlanStepProps = {
 
 export function PlanStep({ status = "pending", className, children }: PlanStepProps) {
   const slots = plan({ status });
+  const hidden = useHidden({ transform: "scale(0.9)" });
   return (
     <li className={cn(slots.step(), className)}>
       <span className={slots.stepIcon()}>
         {status === "done" ? (
           <motion.span
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={hidden}
+            animate={{ opacity: 1, transform: "scale(1)" }}
             transition={{ duration: 0.2, ease: easeOut }}
             className="grid place-items-center"
           >

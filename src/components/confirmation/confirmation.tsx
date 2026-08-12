@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/button";
 import { confirmation } from "./confirmation.variants";
@@ -41,6 +41,10 @@ export function Confirmation({
   className,
 }: ConfirmationProps) {
   const slots = confirmation({ state });
+  // The actions leave upward, the resolution arrives from below — one continuous
+  // movement through the same slot.
+  const leaving = useHidden({ transform: "translateY(-4px)" });
+  const arriving = useHidden({ transform: "translateY(4px)" });
   return (
     <div className={cn(slots.root(), className)}>
       <div className={slots.body()}>
@@ -53,7 +57,7 @@ export function Confirmation({
           {state === "pending" ? (
             <motion.div
               key="actions"
-              exit={{ opacity: 0, y: -4 }}
+              exit={leaving}
               transition={{ duration: 0.15, ease: easeOut }}
               className="flex items-center gap-2"
             >
@@ -67,8 +71,8 @@ export function Confirmation({
           ) : (
             <motion.div
               key="resolution"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={arriving}
+              animate={{ opacity: 1, transform: "translateY(0px)" }}
               transition={{ duration: 0.2, ease: easeOut }}
               className={slots.resolution()}
             >

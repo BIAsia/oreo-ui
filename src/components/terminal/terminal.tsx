@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 
 export type TerminalProps = {
@@ -20,11 +20,12 @@ export type TerminalProps = {
  * Oreo UI Terminal — a shell run in the transcript.
  *
  * Same ink surface as CodeBlock: prompt + command up top with a live status
- * (spinner ↔ exit code), dimmed output below, and a pulsing caret while the
+ * (spinner ↔ exit code), dimmed output below, and a blinking caret while the
  * process runs.
  */
 export function Terminal({ command, running = false, exitCode = 0, children, className }: TerminalProps) {
   const failed = !running && exitCode !== 0;
+  const hidden = useHidden({ transform: "scale(0.9)" });
   return (
     <div
       className={cn(
@@ -46,8 +47,8 @@ export function Terminal({ command, running = false, exitCode = 0, children, cla
             <span className="text-[var(--color-status-error)]">exit {exitCode}</span>
           ) : (
             <motion.span
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
+              initial={hidden}
+              animate={{ opacity: 1, transform: "scale(1)" }}
               transition={{ duration: 0.2, ease: easeOut }}
               className="flex items-center gap-1"
             >

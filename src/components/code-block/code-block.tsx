@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut, pressSpring } from "@/lib/motion";
+import { easeOut, pressSpring, useHidden } from "@/lib/motion";
 import { useCopy } from "@/lib/use-copy";
 import { highlight } from "@/lib/highlight";
 import { Icon } from "@/components/icon";
@@ -55,14 +55,15 @@ export function CodeBlockAction({
 /** Copy button with the copy → check zoom swap. Reused by docs and Response. */
 export function CopyCodeButton({ code }: { code: string }) {
   const { copied, copy } = useCopy();
+  const hidden = useHidden({ transform: "scale(0.9)" });
   return (
     <CodeBlockAction aria-label="Copy code" onClick={() => copy(code)}>
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={copied ? "check" : "copy"}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
+          initial={hidden}
+          animate={{ opacity: 1, transform: "scale(1)" }}
+          exit={hidden}
           transition={{ duration: 0.12, ease: easeOut }}
           className="grid place-items-center"
         >

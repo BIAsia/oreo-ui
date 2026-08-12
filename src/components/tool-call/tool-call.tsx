@@ -2,7 +2,7 @@ import * as React from "react";
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { ActivityLabel } from "@/components/activity-label";
 import { toolCall, type ToolCallVariants } from "./tool-call.variants";
@@ -38,6 +38,7 @@ export function ToolCall({
 }: ToolCallProps) {
   const slots = toolCall({ state });
   const running = state === "running";
+  const hidden = useHidden({ transform: "scale(0.9)" });
 
   return (
     <Collapsible.Root
@@ -51,29 +52,24 @@ export function ToolCall({
         <ActivityLabel active={running} activeLabel={activeLabel ?? name} label={name} />
         {badge != null && <span className={slots.badge()}>{badge}</span>}
         <span className={slots.status()}>
-          <AnimatePresence initial={false}>
-            {state === "complete" && (
+          {/* One keyed element, not two siblings: the status box is a fixed 16px,
+              so an exiting check and an entering warning would squeeze each other
+              if both were in flow. `mode="wait"` lets the old one leave first. */}
+          <AnimatePresence initial={false} mode="wait">
+            {!running && (
               <motion.span
-                key="complete"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
+                key={state}
+                initial={hidden}
+                animate={{ opacity: 1, transform: "scale(1)" }}
+                exit={hidden}
                 transition={{ duration: 0.2, ease: easeOut }}
                 className="grid place-items-center"
               >
-                <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
-              </motion.span>
-            )}
-            {state === "error" && (
-              <motion.span
-                key="error"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.2, ease: easeOut }}
-                className="grid place-items-center"
-              >
-                <Icon name="warning-circle" size="sm" weight="bold" className="text-[var(--color-status-error)]" />
+                {state === "complete" ? (
+                  <Icon name="check" size="sm" weight="bold" className="text-[var(--color-palette-mint-text)]" />
+                ) : (
+                  <Icon name="warning-circle" size="sm" weight="bold" className="text-[var(--color-status-error)]" />
+                )}
               </motion.span>
             )}
           </AnimatePresence>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/button";
 
@@ -20,6 +20,10 @@ export type BranchPickerProps = {
  */
 export function BranchPicker({ current, total, onPrevious, onNext, className }: BranchPickerProps) {
   const direction = React.useRef(1);
+  // The counter slides in from the side you're paging toward and leaves the
+  // other way; with reduced motion it just crossfades in place.
+  const arriving = useHidden({ transform: `translateY(${direction.current * 10}px)` });
+  const leaving = useHidden({ transform: `translateY(${direction.current * -10}px)` });
   return (
     <div className={cn("flex items-center gap-0.5 text-[var(--color-text-secondary)]", className)}>
       <IconButton
@@ -39,9 +43,9 @@ export function BranchPicker({ current, total, onPrevious, onNext, className }: 
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={current}
-              initial={{ y: direction.current * 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: direction.current * -10, opacity: 0 }}
+              initial={arriving}
+              animate={{ opacity: 1, transform: "translateY(0px)" }}
+              exit={leaving}
               transition={{ duration: 0.15, ease: easeOut }}
             >
               {current}

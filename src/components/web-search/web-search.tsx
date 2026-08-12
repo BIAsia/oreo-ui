@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useHidden } from "@/lib/motion";
 import { Icon } from "@/components/icon";
 import { ActivityLabel } from "@/components/activity-label";
 
@@ -44,10 +44,12 @@ export type WebSearchResultProps = {
 } & Omit<React.ComponentPropsWithoutRef<"a">, "title">;
 
 export function WebSearchResult({ domain, title, className, ...rest }: WebSearchResultProps) {
+  // Results stream in as the search resolves — full transform string, not `y`.
+  const hidden = useHidden({ transform: "translateY(4px)" });
   return (
     <motion.span
-      initial={{ opacity: 0, y: 4 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={hidden}
+      animate={{ opacity: 1, transform: "translateY(0px)" }}
       transition={{ duration: 0.3, ease: easeOut }}
       className="block"
     >
