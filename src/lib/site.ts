@@ -81,7 +81,7 @@ export const PAGE_META = {
   reasoning: {
     title: "Reasoning",
     description:
-      "The thinking disclosure: a shimmered caption with a live timer while thoughts stream in as a dotted timeline, morphing into a resting summary.",
+      "One line of agent activity: a glyph that becomes a chevron, a label that shimmers while the work runs, and a disclosure holding what was thought or touched — bare in the transcript or on its own card.",
   },
   plan: {
     title: "Plan",

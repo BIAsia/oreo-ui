@@ -1,92 +1,214 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { DocsPage, type DocsNav } from "@/docs/DocsPage";
 import { Section, PreviewTabs, PropsTable, CodeBlock as Snippet, type PropRow } from "@/docs/primitives";
 import type { TocItem } from "@/docs/OnThisPage";
-import { Reasoning, ReasoningStep } from "@/components/reasoning";
+import { Reasoning, ReasoningFile, ReasoningGroup } from "@/components/reasoning";
 import { Button } from "@/components/button";
+import { Icon } from "@/components/icon";
+import { useElapsed } from "@/lib/use-elapsed";
 
 const TOC: TocItem[] = [
   { id: "reasoning", label: "Introduction" },
   { id: "installation", label: "Installation" },
-  { id: "streaming", label: "Streaming" },
-  { id: "resting", label: "Resting" },
+  { id: "status", label: "Status" },
+  { id: "container", label: "Container" },
+  { id: "group", label: "Group" },
   { id: "api", label: "API Reference" },
 ];
 
 const PROPS: PropRow[] = [
-  { prop: "streaming", type: "boolean", def: "false", desc: "Shimmers the caption and pulses the newest step dot." },
-  { prop: "activeLabel", type: "ReactNode", def: `"Thinking"`, desc: "In-progress caption." },
-  { prop: "label", type: "ReactNode", def: `"Thought process"`, desc: "Resting summary — e.g. \"Thought for 8s\"." },
-  { prop: "elapsed", type: "string", desc: "Timer text next to the in-progress caption." },
+  { prop: "status", type: `"running" | "finished"`, def: `"finished"`, desc: "Shimmers the label and spins the trailing indicator." },
+  { prop: "icon", type: "IconName", def: `"brain"`, desc: "Resting glyph — swaps to a chevron on hover and while open." },
+  { prop: "label", type: "ReactNode", def: `"Thought process"`, desc: "Resting summary — “Thought for 6s”." },
+  { prop: "activeLabel", type: "ReactNode", desc: "In-progress caption. Defaults to label." },
+  { prop: "file", type: "ReactNode", desc: "What was worked on, rendered after the label in primary ink." },
+  { prop: "additions / deletions", type: "number", desc: "Diff counts, in the success and error tones." },
+  { prop: "elapsed", type: "ReactNode", desc: "Container only — trailing time once the run finishes." },
+  { prop: "actions", type: "ReactNode", desc: "Container only — revealed on hover in place of the elapsed time." },
+  { prop: "container", type: "boolean", def: "false", desc: "Put the row on its own card." },
+  { prop: "collapseOnComplete", type: "boolean", def: "false", desc: "Close the disclosure when the work finishes." },
   { prop: "open / defaultOpen", type: "boolean", desc: "Controlled / uncontrolled disclosure." },
-  { prop: "ReasoningStep", type: "{ title, active? }", desc: "One thought in the timeline; body as children." },
+  { prop: "ReasoningGroup", type: "{ stream?, revealed?, stepInterval?, startDelay?, onComplete? }", desc: "Stacks rows; reveals them one at a time when streaming." },
+  { prop: "ReasoningFile", type: "span", desc: "An underlined file path inside reasoning prose." },
 ];
 
-const STEPS = [
-  { title: "Reading the stack trace", body: "The null deref happens in the reducer, not the component — the action payload is already missing `id`." },
-  { title: "Tracing the dispatch site", body: "Only one caller omits `id`: the optimistic update in `useCreateItem`." },
-  { title: "Choosing a fix", body: "Validate at the dispatch boundary rather than defending in the reducer — one owner for the invariant." },
+const THOUGHT = (
+  <>
+    <p>
+      The user wants to build a To-Do application. This is a multi-step project that would benefit
+      from planning. Let me first generate design inspiration and explore the codebase, then build
+      the app.
+    </p>
+    <p>
+      Let me start by entering plan mode to understand what they want, or I could ask clarifying
+      questions. Actually, the user said “here is a comprehensive blueprint” but didn’t provide the
+      actual blueprint details. Let me re-read…
+    </p>
+  </>
+);
+
+const FILES = [
+  "DesktopOnboardingReferenceApp.swift",
+  "OnboardingViewModel.swift",
+  "OnboardingWindow.swift",
+  "SoundCuePlayer.swift",
 ] as const;
 
-const CODE_STREAMING = `import { Reasoning, ReasoningStep } from "@/components/reasoning";
+const EDITED = (
+  <>
+    {FILES.map((name) => (
+      <p key={name}>
+        Created <ReasoningFile>{name}</ReasoningFile> +60 -0
+      </p>
+    ))}
+  </>
+);
 
-<Reasoning streaming={streaming} elapsed={\`\${seconds}s\`} label={\`Thought for \${total}s\`} defaultOpen>
-  {steps.map((step, i) => (
-    <ReasoningStep key={i} title={step.title} active={streaming && i === steps.length - 1}>
-      {step.body}
-    </ReasoningStep>
-  ))}
-</Reasoning>`;
+/* -------------------------------------------------------------------------- */
 
-function StreamingDemo() {
-  const [visible, setVisible] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const timers = useRef<number[]>([]);
+const CODE_STATUS = `import { Reasoning } from "@/components/reasoning";
 
-  const play = () => {
-    timers.current.forEach((t) => window.clearInterval(t));
-    setVisible(0);
-    setSeconds(0);
-    const stepTimer = window.setInterval(() => {
-      setVisible((v) => {
-        if (v >= STEPS.length) {
-          timers.current.forEach((t) => window.clearInterval(t));
-          return v;
-        }
-        return v + 1;
-      });
-    }, 1400);
-    const clock = window.setInterval(() => setSeconds((s) => s + 1), 1000);
-    timers.current = [stepTimer, clock];
-  };
+<Reasoning status="running" activeLabel="Thinking" label={\`Thought for \${total}s\`}>
+  {thoughts}
+</Reasoning>
+
+<Reasoning
+  status="running"
+  icon="pencil"
+  activeLabel="Editing file"
+  label="Edited file"
+  file="OnboardingViewModel.swift"
+  additions={106}
+  deletions={0}
+/>`;
+
+function StatusDemo() {
+  const [running, setRunning] = useState(true);
+  const { seconds } = useElapsed(running);
 
   useEffect(() => {
-    play();
-    return () => timers.current.forEach((t) => window.clearInterval(t));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const timer = window.setTimeout(() => setRunning(false), 6000);
+    return () => window.clearTimeout(timer);
+  }, [running]);
 
-  const streaming = visible < STEPS.length;
+  const total = running ? Math.floor(seconds) : 6;
   return (
     <div className="flex w-full max-w-xl flex-col items-start gap-3">
-      <Reasoning
-        streaming={streaming}
-        elapsed={`${seconds}s`}
-        label={`Thought for ${seconds}s`}
-        defaultOpen
-      >
-        {STEPS.slice(0, Math.max(visible, 1)).map((step, i) => (
-          <ReasoningStep key={step.title} title={step.title} active={streaming && i === visible - 1}>
-            {step.body}
-          </ReasoningStep>
-        ))}
-      </Reasoning>
-      <Button type="secondary" size="sm" onClick={play} disabled={streaming}>
+      <div className="flex w-full flex-col gap-2">
+        <Reasoning
+          status={running ? "running" : "finished"}
+          activeLabel="Thinking"
+          label={`Thought for ${total}s`}
+          defaultOpen
+        >
+          {THOUGHT}
+        </Reasoning>
+        <Reasoning
+          status={running ? "running" : "finished"}
+          icon="pencil"
+          activeLabel="Editing file"
+          label="Edited file"
+          file="OnboardingViewModel.swift"
+          additions={106}
+          deletions={0}
+        />
+      </div>
+      <Button type="secondary" size="sm" onClick={() => setRunning(true)} disabled={running}>
         Replay
       </Button>
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+
+const CODE_CONTAINER = `<Reasoning
+  container
+  status="finished"
+  label="Edited 14 files"
+  additions={106}
+  deletions={0}
+  elapsed="1.2s"
+  actions={
+    <>
+      <Button type="tertiary" size="sm" leadingIcon={<Icon name="reset" size="sm" />}>Undo</Button>
+      <Button type="secondary" size="sm">Review</Button>
+    </>
+  }
+>
+  {summary}
+</Reasoning>`;
+
+function ContainerDemo() {
+  return (
+    <div className="flex w-full max-w-xl flex-col gap-3">
+      <Reasoning container status="running" activeLabel="Thinking" label="Thinking" />
+      <Reasoning container label="Thought for 6s" elapsed="1.2s">
+        {THOUGHT}
+      </Reasoning>
+      <Reasoning
+        container
+        label="Edited 14 files"
+        additions={106}
+        deletions={0}
+        elapsed="1.2s"
+        defaultOpen
+        actions={
+          <>
+            <Button type="tertiary" size="sm" leadingIcon={<Icon name="reset" size="sm" />}>
+              Undo
+            </Button>
+            <Button type="secondary" size="sm">
+              Review
+            </Button>
+          </>
+        }
+      >
+        {EDITED}
+      </Reasoning>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+
+const CODE_GROUP = `<ReasoningGroup stream stepInterval={850} startDelay={320} onComplete={answer}>
+  <Reasoning status="running" activeLabel="Thinking" label="Thought for 6s" defaultOpen>…</Reasoning>
+  <Reasoning icon="pencil" label="Edited files" additions={106} deletions={0} defaultOpen>…</Reasoning>
+</ReasoningGroup>`;
+
+function GroupDemo() {
+  const [run, setRun] = useState(0);
+  const [done, setDone] = useState(false);
+
+  return (
+    <div className="flex w-full max-w-xl flex-col items-start gap-3">
+      <div className="w-full">
+        <ReasoningGroup key={run} stream onComplete={() => setDone(true)}>
+          <Reasoning label="Thought for 6s" defaultOpen>
+            {THOUGHT}
+          </Reasoning>
+          <Reasoning icon="pencil" label="Edited files" additions={106} deletions={0} defaultOpen>
+            {EDITED}
+          </Reasoning>
+        </ReasoningGroup>
+      </div>
+      <Button
+        type="secondary"
+        size="sm"
+        onClick={() => {
+          setDone(false);
+          setRun((n) => n + 1);
+        }}
+        disabled={!done}
+      >
+        Replay
+      </Button>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 
 export function ReasoningDocs({ nav }: { nav: DocsNav }) {
   return (
@@ -96,39 +218,43 @@ export function ReasoningDocs({ nav }: { nav: DocsNav }) {
           <header id="reasoning" className="scroll-mt-8">
             <h1 className="text-[32px] font-semibold tracking-tight">Reasoning</h1>
             <p className="mt-3 max-w-prose text-[15px] leading-7 text-[var(--color-text-secondary)]">
-              The thinking disclosure. A shimmered “Thinking” caption with a live timer while thoughts
-              stream in as a dotted timeline, width-morphing into a resting summary when done. Closed by
-              default in real transcripts — reasoning is a peek, not the main content.
+              One line of agent activity. A leading glyph, a label that shimmers while the work runs,
+              and a disclosure holding what was thought or touched. The same row narrates thinking
+              (“Thought for 6s”) and doing (“Edited files +106 -0”) — closed by default in real
+              transcripts, because reasoning is a peek, not the main content.
             </p>
           </header>
 
-          <Section id="installation" title="Installation" description="Copy the source into your project — you own the code.">
+          <Section
+            id="installation"
+            title="Installation"
+            description="Copy the source into your project — you own the code."
+          >
             <Snippet lang="bash" code={`npx oreo-ui add reasoning\n# or copy src/components/reasoning/* by hand`} />
           </Section>
 
           <Section
-            id="streaming"
-            title="Streaming"
-            description="Steps fade in as they arrive; the newest dot pulses. When streaming ends, the caption swaps to the summary."
+            id="status"
+            title="Status"
+            description="Two statuses cover the lifecycle: a shimmering label while the model thinks, and a quiet summary once it finishes. The glyph swaps to a chevron on hover, so the row only advertises the disclosure when you reach for it."
           >
-            <PreviewTabs code={CODE_STREAMING} preview={<StreamingDemo />} />
+            <PreviewTabs code={CODE_STATUS} preview={<StatusDemo />} />
           </Section>
 
-          <Section id="resting" title="Resting" description="After the fact: a quiet summary line that opens on demand.">
-            <PreviewTabs
-              code={`<Reasoning label="Thought for 6s">…</Reasoning>`}
-              preview={
-                <div className="w-full max-w-xl">
-                  <Reasoning label="Thought for 6s">
-                    {STEPS.map((step) => (
-                      <ReasoningStep key={step.title} title={step.title}>
-                        {step.body}
-                      </ReasoningStep>
-                    ))}
-                  </Reasoning>
-                </div>
-              }
-            />
+          <Section
+            id="container"
+            title="Container"
+            description="An optional card gives reasoning its own surface, trailing a spinner while it runs and the elapsed time once it's done. Hover swaps that time for the row's actions. Use it in transcripts that frame each activity as a block."
+          >
+            <PreviewTabs code={CODE_CONTAINER} preview={<ContainerDemo />} />
+          </Section>
+
+          <Section
+            id="group"
+            title="Group"
+            description="Reasoning stacks with adjacent activity entries into a single group, keeping a multi-step turn compact. Streaming reveals a row at a time — each grows its own height behind a soft bottom edge, so the log grows the way the work does instead of jumping."
+          >
+            <PreviewTabs code={CODE_GROUP} preview={<GroupDemo />} />
           </Section>
 
           <Section id="api" title="API Reference">

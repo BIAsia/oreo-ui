@@ -8,6 +8,7 @@
   /* radius */
   --radius-control-tiny: 4px;
   --radius-control: 8px;
+  --radius-card-small: 12px;
   --radius-card-medium: 16px;
   --radius-capsule: 999px;
 
@@ -40,6 +41,7 @@
 
   /* status */
   --color-status-error: #dc3e42;
+  --color-status-success: #12a594;
   --color-status-progress: #3e63dd;
   --color-status-progress-subtle: #3e63dd1f;
 

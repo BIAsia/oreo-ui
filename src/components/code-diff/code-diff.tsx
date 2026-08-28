@@ -41,7 +41,10 @@ export function CodeDiff({ title, lines, className }: CodeDiffProps) {
       <div className="flex items-center justify-between gap-2 px-3.5 pt-2.5 pb-2">
         <span className="truncate text-[var(--color-text-primary)]">{title}</span>
         <span className="shrink-0 text-[11px] tracking-tight tabular-nums">
-          <span className="text-[var(--color-palette-mint-text)]">+{additions}</span>{" "}
+          {/* The counts use the status token, not the mint palette pair the
+              rows are tinted with — a `+106` has to read the same green here as
+              it does on a Reasoning row. */}
+          <span className="text-[var(--color-status-success)]">+{additions}</span>{" "}
           <span className="text-[var(--color-status-error)]">−{deletions}</span>
         </span>
       </div>

@@ -17,6 +17,7 @@ export const ICON_NAMES = [
   "arrow-up",
   "at",
   "bell",
+  "brain",
   "calendar",
   "camera",
   "chart-line",
