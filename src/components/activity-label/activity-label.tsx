@@ -29,7 +29,14 @@ export type SwapLabelProps = {
 
 const layerBase =
   "col-start-1 row-start-1 flex w-max items-center gap-1.5 leading-none " +
-  "transition-[opacity,filter] duration-300 ease-out motion-reduce:transition-none";
+  "transition-[opacity,filter,translate] duration-300 ease-out motion-reduce:transition-none " +
+  "motion-reduce:translate-y-0";
+
+/* The two layers pass each other rather than dissolving in place: the earlier
+   label leaves upward, the later one arrives from below. A pure cross-fade
+   reads as a glitch when the two strings are similar ("Thinking" → "Thought
+   for 6s"); the 4px of travel says one replaced the other. */
+const layerOffset = ["-translate-y-1", "translate-y-1"] as const;
 
 /**
  * Cross-fades between two labels while animating the container to the width
@@ -65,7 +72,9 @@ export function SwapLabel({ active, children, className }: SwapLabelProps) {
           aria-hidden={active !== index}
           className={cn(
             layerBase,
-            active === index ? "opacity-100 blur-none" : "pointer-events-none opacity-0 blur-[2px]",
+            active === index
+              ? "translate-y-0 opacity-100 blur-none"
+              : `pointer-events-none opacity-0 blur-[2px] ${layerOffset[index]}`,
           )}
         >
           {layer}

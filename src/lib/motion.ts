@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useReducedMotion } from "motion/react";
 
 /**
@@ -36,4 +37,69 @@ export const pressSpring = { type: "spring", bounce: 0.4, duration: 0.3 } as con
 export function useHidden<T extends Record<string, unknown>>(movement: T) {
   const reduce = useReducedMotion();
   return reduce ? { opacity: 0 } : { opacity: 0, ...movement };
+}
+
+/* ----------------------------------------------------------------------------
+ * Streamed reveal — how one row of agent output arrives.
+ * -------------------------------------------------------------------------- */
+
+/**
+ * A row that animates its own height reads as a hard clip: the last line of
+ * text is sliced by the overflow edge as the box grows. `--reveal-fade` drives
+ * a bottom mask that starts soft and resolves to nothing, so the text emerges
+ * through a fade instead of a cut. It is animated *slightly* slower than the
+ * height so the softness outlives the growth.
+ */
+const REVEAL_MASK =
+  "linear-gradient(to bottom, #000 calc(100% - var(--reveal-fade, 0px)), transparent calc(100% + 1px))";
+
+const revealHidden = {
+  opacity: 0,
+  height: 0,
+  transform: "translateY(4px)",
+  filter: "blur(6px)",
+  "--reveal-fade": "22px",
+} as const;
+
+const revealShown = {
+  opacity: 1,
+  height: "auto",
+  transform: "translateY(0px)",
+  filter: "blur(0px)",
+  "--reveal-fade": "0px",
+} as const;
+
+const revealTransition = {
+  height: { duration: 0.38, ease: easeOut },
+  opacity: { duration: 0.42, ease: easeOut },
+  transform: { duration: 0.42, ease: easeOut },
+  filter: { duration: 0.42, ease: easeOut },
+  "--reveal-fade": { duration: 0.44, ease: easeOut },
+} as const;
+
+/**
+ * Spread onto a `motion.*` element that appears as part of a stream — a
+ * reasoning row, a step, a log line. Grows its own height with a blur, a lift
+ * and a softened bottom edge.
+ *
+ *   const reveal = useRevealUnit();
+ *   <motion.li {...reveal}>…</motion.li>
+ *
+ * The clip and the mask are both dropped once the entrance finishes: the height
+ * is `auto` by then so neither has a job left, and a permanent clip would eat
+ * the shadow of anything card-shaped inside. Under reduced motion only the fade
+ * survives.
+ */
+export function useRevealUnit() {
+  const reduce = useReducedMotion();
+  const [masked, setMasked] = useState(!reduce);
+  return {
+    initial: reduce ? { opacity: 0 } : revealHidden,
+    animate: reduce ? { opacity: 1 } : revealShown,
+    transition: revealTransition,
+    style: masked
+      ? ({ overflow: "hidden", WebkitMaskImage: REVEAL_MASK, maskImage: REVEAL_MASK } as const)
+      : undefined,
+    onAnimationComplete: () => setMasked(false),
+  };
 }
