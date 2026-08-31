@@ -6,7 +6,7 @@ import { settingsCard } from "./settings.variants";
 /** Page title + optional intro (inline links inherit an underlined style). */
 export function SettingsPageHeader({ title, description }: { title: string; description?: React.ReactNode }) {
   return (
-    <header>
+    <header className="pl-4">
       <h1 className="text-[22px] font-semibold tracking-tight">{title}</h1>
       {description && (
         <p className="mt-2 max-w-[60ch] text-[13px] leading-5 text-[var(--color-text-secondary)] [&_a]:font-medium [&_a]:text-[var(--color-text-primary)] [&_a]:underline [&_a]:underline-offset-2">
@@ -37,16 +37,16 @@ export function SettingsSection({
 }) {
   return (
     <section className={className}>
-      <div className="flex items-center justify-between gap-4">
-        <h2 className="text-[16px] font-semibold tracking-tight">{title}</h2>
+      <div className="flex items-center justify-between gap-4 pl-4">
+        <h2 className="text-[12px] font-medium text-[var(--color-text-placeholder)]">{title}</h2>
         {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
       </div>
       {description && (
-        <p className="mt-1.5 max-w-[60ch] text-[13px] leading-5 text-[var(--color-text-secondary)] [&_a]:font-medium [&_a]:text-[var(--color-text-primary)] [&_a]:underline [&_a]:underline-offset-2">
+        <p className="mt-1.5 max-w-[60ch] pl-4 text-[13px] leading-5 text-[var(--color-text-secondary)] [&_a]:font-medium [&_a]:text-[var(--color-text-primary)] [&_a]:underline [&_a]:underline-offset-2">
           {description}
         </p>
       )}
-      <div className="mt-4 space-y-4">{children}</div>
+      <div className="mt-3 space-y-4">{children}</div>
     </section>
   );
 }

@@ -62,7 +62,7 @@ function GeneralPage() {
           />
         </SettingsCard>
       </SettingsSection>
-      <SettingsSection title="General" className="mt-10">
+      <SettingsSection title="Others" className="mt-8">
         <SettingsCard>
           <SettingsRow
             title="Language"
@@ -185,7 +185,7 @@ function AppearancePage({ frame }: { frame: DemoFrame }) {
           />
         </SettingsCard>
       </SettingsSection>
-      <SettingsSection title="Navigation & panels" className="mt-10">
+      <SettingsSection title="Navigation & panels" className="mt-8">
         <SettingsCard>
           <SettingsRow
             title="Show icons in the sidebar"
@@ -270,7 +270,7 @@ function PersonalizationPage() {
       <SettingsSection
         title="Memory"
         description="Configure how local memories are collected, retained and consolidated on this computer."
-        className="mt-10"
+        className="mt-8"
       >
         <SettingsCard>
           <SettingsRow
@@ -294,7 +294,7 @@ function PersonalizationPage() {
           />
         </SettingsCard>
       </SettingsSection>
-      <div className="mt-10 space-y-4">
+      <div className="mt-8 space-y-4">
         <SettingsCallout tone="warning">
           Personality settings are not supported by every model. Oreo's tone can also be customized in custom
           instructions.
@@ -429,7 +429,7 @@ function UsagePage() {
       <SettingsSection
         title="Credits balance"
         description="Buy credits or turn on auto-reload to keep working past a limit."
-        className="mt-10"
+        className="mt-8"
       >
         <SettingsCard>
           <SettingsStatRow
@@ -456,7 +456,7 @@ function UsagePage() {
           />
         </SettingsCard>
       </SettingsSection>
-      <SettingsSection title="Usage limits" className="mt-10">
+      <SettingsSection title="Usage limits" className="mt-8">
         <SettingsCard>
           <SettingsMeterRow title="Weekly limit" caption="Resets Sep 7, 10:38 AM" fraction={0.95} label="95% left" />
           <SettingsMeterRow title="5-hour limit" caption="Resets 10:21 PM" fraction={1} label="100% left" />

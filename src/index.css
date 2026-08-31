@@ -8,6 +8,7 @@
   /* radius */
   --radius-control-tiny: 4px;
   --radius-control: 8px;
+  --radius-control-large: 10px;
   --radius-card-small: 12px;
   --radius-card-medium: 16px;
   --radius-capsule: 999px;

@@ -21,12 +21,12 @@ export const settingsShell = tv({
       "relative min-w-0 flex-1 overflow-y-auto bg-[var(--settings-content-bg)]",
       "transition-[background-color,border-color] duration-200 ease-out",
     ],
-    column: "mx-auto w-full max-w-[760px] px-8 py-9",
+    column: "mx-auto w-full max-w-[760px] px-8 pb-10 pt-12",
   },
   variants: {
     scheme: {
-      "sunken-nav": { nav: "border-r border-[var(--settings-hairline)]" },
-      "sunken-content": { nav: "border-r border-[var(--settings-hairline)]" },
+      "sunken-nav": { nav: "border-r-[0.5px] border-[var(--settings-hairline)]" },
+      "sunken-content": { nav: "border-r-[0.5px] border-[var(--settings-hairline)]" },
       "card-panel": {
         content: [
           "my-3 mr-3 rounded-[var(--radius-card-medium)]",
@@ -41,10 +41,13 @@ export const settingsShell = tv({
 
 /** The section container under a heading — the axis-C surface. */
 export const settingsCard = tv({
-  base: "border border-transparent transition-[background-color,border-color] duration-200 ease-out",
+  base: "border-[0.5px] border-transparent transition-[background-color,border-color,box-shadow] duration-200 ease-out",
   variants: {
     card: {
-      outline: "rounded-[var(--radius-card-medium)] border-[var(--color-border-default)] px-4",
+      outline: [
+        "rounded-[var(--radius-card-medium)] border-[var(--color-border-default)] px-4",
+        "bg-[var(--settings-card-bg)] shadow-[var(--shadow-default)]",
+      ],
       surface: "rounded-[var(--radius-card-medium)] bg-[var(--settings-raised-bg)] px-4",
       divider: "",
     },

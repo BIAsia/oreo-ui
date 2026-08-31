@@ -83,7 +83,7 @@ export function SettingsPage({ nav }: { nav: DocsNav }) {
             </div>
           </header>
 
-          <div className="h-[clamp(560px,calc(100dvh-280px),820px)] overflow-hidden rounded-2xl border border-[var(--color-border-subtle)] shadow-[var(--shadow-default)]">
+          <div className="h-[clamp(560px,calc(100dvh-280px),820px)] overflow-hidden rounded-2xl border-[0.5px] border-[var(--color-border-subtle)] shadow-[var(--shadow-default)]">
             <SettingsShell
               appearance={appearance}
               groups={DEMO_NAV}

@@ -16,7 +16,7 @@ function RowShell({ children, className }: { children: React.ReactNode; classNam
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-6 border-b border-[var(--settings-hairline)] py-4 last:border-b-0",
+        "flex items-center justify-between gap-6 border-b-[0.5px] border-[var(--settings-hairline)] py-4 last:border-b-0",
         className,
       )}
     >
@@ -36,9 +36,11 @@ function RowLabel({
 }) {
   return (
     <div className="min-w-0">
-      <div className={cn("leading-5", strong ? "text-[15px] font-semibold" : "text-[14px] font-medium")}>{title}</div>
+      <div className={cn(strong ? "text-[15px] font-semibold leading-5" : "text-[13px] font-medium leading-[18px]")}>
+        {title}
+      </div>
       {description && (
-        <div className="mt-1 max-w-[52ch] text-[13px] leading-5 text-[var(--color-text-secondary)]">{description}</div>
+        <div className="max-w-[52ch] text-[13px] leading-5 text-[var(--color-text-secondary)]">{description}</div>
       )}
     </div>
   );
@@ -77,7 +79,7 @@ export function SettingsLinkRow({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="group flex items-center justify-between gap-6 border-b border-[var(--settings-hairline)] py-4 last:border-b-0"
+      className="group flex items-center justify-between gap-6 border-b-[0.5px] border-[var(--settings-hairline)] py-4 last:border-b-0"
     >
       <RowLabel title={title} description={description} />
       <Icon
@@ -170,7 +172,7 @@ export function SettingsEntityRow({
   selectedLabel?: string;
 }) {
   return (
-    <div className="flex items-center gap-4 border-b border-[var(--settings-hairline)] py-4 last:border-b-0">
+    <div className="flex items-center gap-4 border-b-[0.5px] border-[var(--settings-hairline)] py-4 last:border-b-0">
       {media && <div className="shrink-0">{media}</div>}
       <RowLabel title={title} description={description} />
       <div className="ml-auto flex shrink-0 items-center">
@@ -231,7 +233,7 @@ export function SettingsEditor({
       onChange={onChange ? (e) => onChange(e.target.value) : undefined}
       placeholder={placeholder}
       rows={rows}
-      className="w-full resize-y rounded-[var(--radius-card-small)] border border-[var(--color-border-default)] bg-transparent px-3.5 py-3 text-[13px] leading-6 text-[var(--color-text-primary)] outline-none transition-colors duration-150 placeholder:text-[var(--color-text-placeholder)] focus:border-[var(--color-text-tertiary)]"
+      className="w-full resize-y rounded-[var(--radius-card-small)] border-[0.5px] border-[var(--color-border-default)] bg-transparent px-3.5 py-3 text-[13px] leading-6 text-[var(--color-text-primary)] outline-none transition-colors duration-150 placeholder:text-[var(--color-text-placeholder)] focus:border-[var(--color-text-tertiary)]"
     />
   );
 }

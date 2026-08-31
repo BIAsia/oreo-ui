@@ -24,7 +24,7 @@ export function SettingsSelect({
     <Menu>
       <MenuTrigger
         aria-label={ariaLabel}
-        className="flex h-8 items-center gap-1.5 rounded-[var(--radius-control)] border border-[var(--color-border-default)] px-3 text-[13px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-state-hover)] data-[popup-open]:bg-[var(--color-state-press)]"
+        className="flex h-8 items-center gap-1.5 rounded-[var(--radius-control)] border-[0.5px] border-[var(--color-border-default)] px-3 text-[13px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-state-hover)] data-[popup-open]:bg-[var(--color-state-press)]"
       >
         {value}
         <Icon name="chevron-down" size="sm" className="text-[var(--color-text-tertiary)]" />

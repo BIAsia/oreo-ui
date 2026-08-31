@@ -16,6 +16,7 @@
   --settings-nav-bg: var(--color-bg-elevated);
   --settings-content-bg: var(--color-bg-base);
   --settings-raised-bg: var(--color-bg-elevated);
+  --settings-card-bg: var(--color-bg-base);
   --settings-field-bg: var(--color-bg-base);
   --settings-hairline: var(--color-border-subtle);
 }
@@ -45,5 +46,6 @@
  * surface tone instead of down to elevated. */
 .theme-dark .oreo-settings:not([data-scheme="sunken-content"]) {
   --settings-raised-bg: var(--color-bg-surface);
+  --settings-card-bg: var(--color-bg-surface);
   --settings-field-bg: var(--color-bg-surface);
 }
