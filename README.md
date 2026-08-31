@@ -22,6 +22,8 @@ A small, copy-paste React component library that reproduces the **Oreo UI** desi
 - **Tag** — small palette-driven label for metadata and filters: seven tones, optional `#` prefix, leading icon, and a trailing remove action.
 - **Shortcut** — keyboard key-caps (`⌘ ⇧ ⌥ ^`) rendered from tokens, with modifier glyph mapping and a `combine` mode for merged combos. Semantic `<kbd>`.
 - **Avatar** — circular avatar that infers its type from props (photo / gradient agent / brand logo / initials / empty), with four sizes and an overlapping `AvatarGroup` (`+N` overflow).
+- **Switch** — the boolean control for settings rows: Base UI state on the Oreo track/thumb surface, with a slight overshoot on the thumb.
+- **Settings pattern** — a configurable settings-page framework (`/settings`): three appearance axes (background hierarchy · card style · nav icons) expressed through a local `--settings-*` variable layer, a full row vocabulary (setting / link-out / stat / meter / entity picker / editor / callout), a filtering nav rail that collapses into a drawer, and a six-page showcase with a floating axis switcher.
 - **Icon** — thin adapter over [Phosphor](https://phosphoricons.com) that drives size/color via tokens and `currentColor`.
 - **Docs app** — three-column layout (component nav · content · on-this-page scrollspy) with Preview/Code tabs, an API table, and a floating **"Make them yours"** panel that drives theme, radius, and the press spring live across every preview.
 
@@ -55,7 +57,11 @@ src/
 │  ├─ tag/                    # Tag
 │  ├─ shortcut/               # Shortcut (kbd key-caps)
 │  ├─ avatar/                 # Avatar + AvatarGroup (agents.ts gradients)
+│  ├─ switch/                 # Switch (Base UI Switch on Oreo tokens)
 │  └─ icon/                   # Phosphor adapter
+├─ patterns/
+│  ├─ board/                  # Onboarding Board pattern
+│  └─ settings/               # Settings framework (3 appearance axes + row vocabulary + demo/)
 ├─ docs/                      # DocsLayout, Sidebar, OnThisPage, CustomizePanel, primitives
 ├─ pages/                     # one *Docs.tsx page per component
 ├─ lib/site.ts                # route table: slug → title + description (drives <head> and sitemap)
