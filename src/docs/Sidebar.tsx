@@ -31,6 +31,7 @@ const NAV: Group[] = [
       { label: "Message", page: "message" },
       { label: "Conversation", page: "conversation" },
       { label: "Response", page: "response" },
+      { label: "Streaming Text", page: "streaming-text" },
       { label: "Code Block", page: "code-block" },
       { label: "Attachment", page: "attachment" },
       { label: "Branch Picker", page: "branch-picker" },

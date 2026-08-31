@@ -63,6 +63,11 @@ export const PAGE_META = {
     description:
       "Assistant output as markdown, tuned for chat: tighter rhythm, smaller headings, GFM tables and lists, and fenced code routed into Code Block.",
   },
+  "streaming-text": {
+    title: "Streaming Text",
+    description:
+      "Plain text arriving token by token — diffs the growing string, animates only the appended tokens, with plain, fade and gradient-tail entrance variants.",
+  },
   message: {
     title: "Message",
     description:
