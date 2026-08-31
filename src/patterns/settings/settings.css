@@ -1,0 +1,49 @@
+/* ----------------------------------------------------------------------------
+ * Settings scheme layer — maps the pattern's local surface variables onto the
+ * global tokens. Components below only ever read `--settings-*`, so adding a
+ * background hierarchy is one block here and zero component changes.
+ *
+ *   --settings-canvas      what the whole frame sits on
+ *   --settings-nav-bg      the nav rail
+ *   --settings-content-bg  the content panel
+ *   --settings-raised-bg   a card surface that must contrast with content
+ *   --settings-field-bg    an input surface that must contrast with the nav
+ * -------------------------------------------------------------------------- */
+
+.oreo-settings {
+  /* sunken-nav (default): gray rail, white content — ChatGPT desktop. */
+  --settings-canvas: var(--color-bg-base);
+  --settings-nav-bg: var(--color-bg-elevated);
+  --settings-content-bg: var(--color-bg-base);
+  --settings-raised-bg: var(--color-bg-elevated);
+  --settings-field-bg: var(--color-bg-base);
+  --settings-hairline: var(--color-border-subtle);
+}
+
+/* White rail, gray content — macOS System Settings, Linear. */
+.oreo-settings[data-scheme="sunken-content"] {
+  --settings-nav-bg: var(--color-bg-base);
+  --settings-content-bg: var(--color-bg-elevated);
+  --settings-raised-bg: var(--color-bg-base);
+  --settings-field-bg: var(--color-bg-elevated);
+}
+
+/* Content floats as a card on a gray canvas; the rail sits on the canvas. */
+.oreo-settings[data-scheme="card-panel"] {
+  --settings-canvas: var(--color-bg-elevated);
+  --settings-nav-bg: transparent;
+}
+
+/* No resting rail — the nav lives in an overlay drawer. */
+.oreo-settings[data-scheme="drawer"] {
+  --settings-nav-bg: var(--color-bg-base);
+  --settings-field-bg: var(--color-bg-elevated);
+}
+
+/* Dark skins invert the ladder (elevated is *darker* than base), so wherever
+ * content sits on the base surface, raised cards and fields step UP to the
+ * surface tone instead of down to elevated. */
+.theme-dark .oreo-settings:not([data-scheme="sunken-content"]) {
+  --settings-raised-bg: var(--color-bg-surface);
+  --settings-field-bg: var(--color-bg-surface);
+}

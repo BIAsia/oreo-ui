@@ -158,6 +158,11 @@ export const PAGE_META = {
     description:
       "A starter checklist pattern: drag cards between columns, edit titles and notes inline, and add tasks — all persisted to the browser.",
   },
+  settings: {
+    title: "Settings",
+    description:
+      "A configurable settings-page framework: three background hierarchies, three card styles and switchable nav icons cover most mainstream settings pages from one set of parts.",
+  },
 } as const satisfies Record<string, PageMeta>;
 
 export type PageSlug = keyof typeof PAGE_META;

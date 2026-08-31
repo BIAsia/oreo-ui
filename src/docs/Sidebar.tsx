@@ -64,7 +64,10 @@ const NAV: Group[] = [
   },
   {
     title: "Patterns",
-    items: [{ label: "Onboarding Board", page: "onboarding-board" }],
+    items: [
+      { label: "Onboarding Board", page: "onboarding-board" },
+      { label: "Settings", page: "settings" },
+    ],
   },
 ];
 

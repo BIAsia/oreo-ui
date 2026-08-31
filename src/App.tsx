@@ -6,6 +6,7 @@ import { ChipDocs } from "@/pages/ChipDocs";
 import { TagDocs } from "@/pages/TagDocs";
 import { AvatarDocs } from "@/pages/AvatarDocs";
 import { BoardPage } from "@/pages/BoardPage";
+import { SettingsPage } from "@/pages/SettingsPage";
 import { CodeBlockDocs } from "@/pages/CodeBlockDocs";
 import { ResponseDocs } from "@/pages/ResponseDocs";
 import { MessageDocs } from "@/pages/MessageDocs";
@@ -60,6 +61,7 @@ const PAGES: Record<PageSlug, ComponentType<{ nav: DocsNav }>> = {
   "keyword-tag": KeywordTagDocs,
   "context-bar": ContextBarDocs,
   "onboarding-board": BoardPage,
+  settings: SettingsPage,
 };
 
 type Route = { page: PageSlug; home: boolean };
