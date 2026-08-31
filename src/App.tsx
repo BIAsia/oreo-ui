@@ -9,6 +9,7 @@ import { BoardPage } from "@/pages/BoardPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 import { CodeBlockDocs } from "@/pages/CodeBlockDocs";
 import { ResponseDocs } from "@/pages/ResponseDocs";
+import { StreamingTextDocs } from "@/pages/StreamingTextDocs";
 import { MessageDocs } from "@/pages/MessageDocs";
 import { ConversationDocs } from "@/pages/ConversationDocs";
 import { ToolCallDocs } from "@/pages/ToolCallDocs";
@@ -42,6 +43,7 @@ const PAGES: Record<PageSlug, ComponentType<{ nav: DocsNav }>> = {
   menu: MenuDocs,
   "code-block": CodeBlockDocs,
   response: ResponseDocs,
+  "streaming-text": StreamingTextDocs,
   message: MessageDocs,
   conversation: ConversationDocs,
   "tool-call": ToolCallDocs,

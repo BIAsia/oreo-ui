@@ -169,6 +169,51 @@
   }
 }
 
+/* Streaming Text entrances — applied per appended token, then removed once the
+ * token settles into plain text (see <StreamingText>). Fade is a plain
+ * opacity ease-out — deliberately no transform: this is body text being read,
+ * and per-word movement would make it wobble mid-read. The gradient tail
+ * slides a text-sized gradient mask across each token (the oreo-shimmer
+ * trick, but masking instead of text-clipping so the token keeps whatever
+ * color it inherits). Animating mask-position paints every frame — accepted:
+ * a soft alpha ramp has no transform/clip-path equivalent, the paint area is
+ * one word, and settled spans are folded away. 640ms is deliberate — the
+ * sweep must outlast the token cadence so consecutive tokens overlap into one
+ * soft fading edge instead of popping in one by one. */
+@keyframes oreo-stream-fade {
+  from {
+    opacity: 0;
+  }
+}
+.oreo-stream-fade {
+  animation: oreo-stream-fade 250ms var(--ease-out) both;
+}
+@keyframes oreo-stream-gradient {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+.oreo-stream-gradient {
+  -webkit-mask-image: linear-gradient(90deg, #000 33.33%, transparent 66.67%);
+  mask-image: linear-gradient(90deg, #000 33.33%, transparent 66.67%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  animation: oreo-stream-gradient 640ms var(--ease-out) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .oreo-stream-fade,
+  .oreo-stream-gradient {
+    /* `both` fill would otherwise hold the hidden from-state; none = resting
+     * state, so tokens simply appear. */
+    animation: none;
+  }
+}
+
 /* Terminal caret. A real caret snaps between on and off — `steps(1)` keeps the
  * blink hard instead of the sine fade `animate-pulse` would give it. */
 @keyframes oreo-caret {
