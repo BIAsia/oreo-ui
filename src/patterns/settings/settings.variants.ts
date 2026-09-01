@@ -45,10 +45,10 @@ export const settingsCard = tv({
   variants: {
     card: {
       outline: [
-        "rounded-[var(--radius-card-medium)] border-[var(--color-border-default)] px-4",
+        "[--squircle-radius:var(--radius-card-medium)] border-[var(--color-border-default)] px-4",
         "bg-[var(--settings-card-bg)] shadow-[var(--shadow-default)]",
       ],
-      surface: "rounded-[var(--radius-card-medium)] bg-[var(--settings-raised-bg)] px-4",
+      surface: "[--squircle-radius:var(--radius-card-medium)] bg-[var(--settings-raised-bg)] px-4",
       divider: "",
     },
   },

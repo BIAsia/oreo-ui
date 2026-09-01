@@ -40,7 +40,9 @@ function RowLabel({
         {title}
       </div>
       {description && (
-        <div className="max-w-[52ch] text-[13px] leading-5 text-[var(--color-text-secondary)]">{description}</div>
+        <div className="max-w-[52ch] text-[13px] leading-5 tracking-[0.01em] text-[var(--color-text-secondary)]">
+          {description}
+        </div>
       )}
     </div>
   );
@@ -185,7 +187,7 @@ export function SettingsEntityRow({
               animate={{ opacity: 1, transform: "scale(1)" }}
               exit={{ opacity: 0, transform: "scale(0.95)" }}
               transition={{ duration: 0.15, ease: easeOut }}
-              className="oreo-squircle inline-flex h-8 items-center rounded-[var(--radius-control)] bg-[var(--color-state-hover)] px-3 text-[13px] font-medium text-[var(--color-text-tertiary)]"
+              className="oreo-squircle [--squircle-radius:var(--radius-control)] inline-flex h-8 items-center bg-[var(--color-state-hover)] px-3 text-[13px] font-medium text-[var(--color-text-tertiary)]"
             >
               {selectedLabel}
             </motion.span>
@@ -234,7 +236,7 @@ export function SettingsEditor({
       onChange={onChange ? (e) => onChange(e.target.value) : undefined}
       placeholder={placeholder}
       rows={rows}
-      className="oreo-squircle w-full resize-y rounded-[var(--radius-card-small)] border-[0.5px] border-[var(--color-border-default)] bg-transparent px-3.5 py-3 text-[13px] leading-6 text-[var(--color-text-primary)] outline-none transition-colors duration-150 placeholder:text-[var(--color-text-placeholder)] focus:border-[var(--color-text-tertiary)]"
+      className="oreo-squircle [--squircle-radius:var(--radius-card-small)] w-full resize-y border-[0.5px] border-[var(--color-border-default)] bg-transparent px-3.5 py-3 text-[13px] leading-6 tracking-[0.01em] text-[var(--color-text-primary)] outline-none transition-colors duration-150 placeholder:text-[var(--color-text-placeholder)] focus:border-[var(--color-text-tertiary)]"
     />
   );
 }
@@ -253,9 +255,9 @@ export function SettingsCallout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={cn("oreo-squircle flex items-start gap-2.5 rounded-[var(--radius-card-small)] px-3.5 py-3", CALLOUT_TONES[tone])}>
+    <div className={cn("oreo-squircle [--squircle-radius:var(--radius-card-small)] flex items-start gap-2.5 px-3.5 py-3", CALLOUT_TONES[tone])}>
       <Icon name="warning-circle" size="sm" weight="light" className="mt-0.5 shrink-0" />
-      <p className="text-[13px] leading-5">{children}</p>
+      <p className="text-[13px] leading-5 tracking-[0.01em]">{children}</p>
     </div>
   );
 }

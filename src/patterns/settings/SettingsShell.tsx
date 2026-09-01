@@ -76,7 +76,7 @@ export function SettingsShell({ appearance, groups, active, onNavigate, contentK
             type="tertiary"
             size="sm"
             shape="rectangle"
-            className="oreo-squircle"
+            className="oreo-squircle [--squircle-radius:var(--radius-control)]"
             aria-label="Open settings navigation"
             aria-expanded={drawerOpen}
             icon={<Icon name="list" weight="light" />}
@@ -101,7 +101,7 @@ export function SettingsShell({ appearance, groups, active, onNavigate, contentK
             <React.Fragment key="drawer">
               <motion.div
                 key="scrim"
-                className="absolute inset-0 z-20 bg-black/25"
+                className="absolute inset-0 z-20 bg-[var(--color-overlay-subtle)]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeOut" } }}

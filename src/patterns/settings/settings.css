@@ -41,21 +41,20 @@
   --settings-field-bg: var(--color-bg-elevated);
 }
 
-/* Dark skins invert the ladder (elevated is *darker* than base), so wherever
- * content sits on the base surface, raised cards and fields step UP to the
- * surface tone instead of down to elevated. */
-.theme-dark .oreo-settings:not([data-scheme="sunken-content"]) {
-  --settings-raised-bg: var(--color-bg-surface);
-  --settings-card-bg: var(--color-bg-surface);
-  --settings-field-bg: var(--color-bg-surface);
-}
-
 /* iOS-style smooth corners (Figma cornerSmoothing 0.6) on the pattern's
- * rounded surfaces — cards, nav items, fields, row controls. Capsule shapes
- * (Switch, Meter) stay `round`. Browsers without `corner-shape` keep plain
- * rounded corners; nothing else changes. */
-@supports (corner-shape: squircle) {
+ * rounded surfaces — cards, nav items, fields, row controls. Elements declare
+ * their token via --squircle-radius instead of border-radius so both paths
+ * stay in sync. Where `corner-shape` is supported the corner becomes
+ * superellipse(1.5) and the radius scales ×1.25 — the measured pair that
+ * visually matches Figma/iOS 60% smoothing (a superellipse hugs tighter, so
+ * the raw radius would read smaller). Elsewhere the token radius applies
+ * as-is. Capsule shapes (Switch, Meter) stay `round`. */
+.oreo-squircle {
+  border-radius: var(--squircle-radius, 0);
+}
+@supports (corner-shape: superellipse(1.5)) {
   .oreo-squircle {
-    corner-shape: squircle;
+    corner-shape: superellipse(1.5);
+    border-radius: calc(var(--squircle-radius, 0) * 1.25);
   }
 }

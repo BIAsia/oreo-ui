@@ -24,7 +24,7 @@ export function SettingsSelect({
     <Menu>
       <MenuTrigger
         aria-label={ariaLabel}
-        className="oreo-squircle flex h-8 items-center gap-1.5 rounded-[var(--radius-control)] border-[0.5px] border-[var(--color-border-default)] px-3 text-[13px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-state-hover)] data-[popup-open]:bg-[var(--color-state-press)]"
+        className="oreo-squircle [--squircle-radius:var(--radius-control)] flex h-8 items-center gap-1.5 border-[0.5px] border-[var(--color-border-default)] px-3 text-[13px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-state-hover)] data-[popup-open]:bg-[var(--color-state-press)]"
       >
         {value}
         <Icon name="chevron-down" size="sm" weight="light" className="text-[var(--color-text-tertiary)]" />
@@ -63,7 +63,7 @@ export function SettingsSegmented<T extends string>({
             aria-checked={active}
             onClick={() => onChange(option)}
             className={cn(
-              "oreo-squircle h-7 rounded-[var(--radius-control)] px-3 text-[13px] font-medium transition-colors",
+              "oreo-squircle [--squircle-radius:var(--radius-control)] h-7 px-3 text-[13px] font-medium transition-colors",
               active
                 ? "bg-[var(--color-state-press)] text-[var(--color-text-primary)]"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-state-hover)] hover:text-[var(--color-text-primary)]",
