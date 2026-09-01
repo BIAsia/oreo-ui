@@ -80,6 +80,10 @@
   --color-state-press: #0000000d;
   --color-state-hover-inverse: #ffffff0f;
   --color-state-press-inverse: #ffffff1a;
+
+  /* scrims behind drawers and modal surfaces (Oreo Overlay variables) */
+  --color-overlay-subtle: #00000045;
+  --color-overlay-strong: #0000009c;
 }
 
 /* Soft, low-emphasis elevation — derived from Oreo's Shadow/Default tokens
@@ -98,46 +102,47 @@
 
 /* Dark skin — only token values change, components stay untouched. */
 .theme-dark {
-  --color-bg-base: #1a1a1a;
-  --color-bg-elevated: #121212;
-  --color-bg-surface: #242424;
-  --color-bg-inverse: #f5f5f5;
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #a0a0a0;
-  --color-text-tertiary: #8a8a8a;
-  --color-text-placeholder: #6a6a6a;
-  --color-text-on-inverse: #1a1a1a;
-  --color-text-disabled: #5a5a5a;
-  --color-text-waiting: #4a4a4a;
-  --color-border-default: #ffffff24;
-  --color-border-subtle: #ffffff14;
-  --color-status-progress: #7086e8;
-  --color-status-progress-subtle: #7086e82e;
-  --color-state-hover: #ffffff0a;
-  --color-state-press: #ffffff14;
-  --color-state-hover-inverse: #0000000f;
-  --color-state-press-inverse: #0000001a;
+  --color-bg-base: #111111;
+  --color-bg-elevated: #191919;
+  --color-bg-surface: #222222;
+  --color-bg-inverse: #fcfcfc;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b4b4b4;
+  --color-text-tertiary: #7b7b7b;
+  --color-text-placeholder: #6e6e6e;
+  --color-text-on-inverse: #000000;
+  --color-text-disabled: #606060;
+  --color-text-waiting: #3a3a3a;
+  --color-border-default: #ffffff26;
+  --color-border-subtle: #ffffff1c;
+  --color-state-hover: #ffffff0f;
+  --color-state-press: #ffffff1a;
+  --color-state-hover-inverse: #00000005;
+  --color-state-press-inverse: #0000000d;
+  --color-overlay-subtle: #ffffff54;
+  --color-overlay-strong: #ffffffb0;
   --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.06);
   --shadow-active: 0 6px 12px rgba(0, 0, 0, 0.3);
   --shadow-default: 0 4px 16px rgba(0, 0, 0, 0.35);
   --shadow-overlay: 0 0 1px rgba(255, 255, 255, 0.28), 0 4px 48px rgba(0, 0, 0, 0.55);
 
-  /* palette — darker, desaturated bg with brighter text for legibility */
+  /* palette — dark mode goes vivid: saturated bg with pale text (per the
+     updated Figma Palette variables) */
   --color-palette-default-bg: #ffffff14;
   --color-palette-default-text: #a0a0a0;
-  --color-palette-mint-bg: #04342c;
-  --color-palette-mint-text: #5edbc4;
-  --color-palette-pink-bg: #3c1130;
-  --color-palette-pink-text: #f49ad2;
-  --color-palette-blue-bg: #07303a;
-  --color-palette-blue-text: #5fd2e3;
-  --color-palette-purple-bg: #221a47;
-  --color-palette-purple-text: #b3a5ef;
-  --color-palette-orange-bg: #3a1e00;
-  --color-palette-orange-text: #ff9e57;
-  --color-palette-brown-bg: #2e2a12;
-  --color-palette-brown-text: #d9c08f;
+  --color-palette-mint-bg: #03dba5;
+  --color-palette-mint-text: #115949;
+  --color-palette-pink-bg: #fd177f;
+  --color-palette-pink-text: #fee9f5;
+  --color-palette-blue-bg: #0088f1;
+  --color-palette-blue-text: #def7f9;
+  --color-palette-purple-bg: #4b21f6;
+  --color-palette-purple-text: #f4f0fe;
+  --color-palette-orange-bg: #ff6202;
+  --color-palette-orange-text: #ffefd6;
+  --color-palette-brown-bg: #7d5e54;
+  --color-palette-brown-text: #ffe629;
 }
 
 /* Shimmer sweep for in-progress labels (Tool Call, Reasoning). Rendered as a
