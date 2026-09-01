@@ -41,7 +41,7 @@ export const settingsShell = tv({
 
 /** The section container under a heading — the axis-C surface. */
 export const settingsCard = tv({
-  base: "border-[0.5px] border-transparent transition-[background-color,border-color,box-shadow] duration-200 ease-out",
+  base: "oreo-squircle border-[0.5px] border-transparent transition-[background-color,border-color,box-shadow] duration-200 ease-out",
   variants: {
     card: {
       outline: [

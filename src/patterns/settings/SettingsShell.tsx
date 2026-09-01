@@ -76,9 +76,10 @@ export function SettingsShell({ appearance, groups, active, onNavigate, contentK
             type="tertiary"
             size="sm"
             shape="rectangle"
+            className="oreo-squircle"
             aria-label="Open settings navigation"
             aria-expanded={drawerOpen}
-            icon={<Icon name="list" />}
+            icon={<Icon name="list" weight="light" />}
             onClick={() => setDrawerOpen(true)}
           />
         </div>

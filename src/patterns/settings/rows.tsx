@@ -85,6 +85,7 @@ export function SettingsLinkRow({
       <Icon
         name="arrow-out"
         size="sm"
+        weight="light"
         className="shrink-0 text-[var(--color-text-tertiary)] transition-transform duration-150 ease-out group-hover:-translate-y-px group-hover:translate-x-px"
       />
     </a>
@@ -184,7 +185,7 @@ export function SettingsEntityRow({
               animate={{ opacity: 1, transform: "scale(1)" }}
               exit={{ opacity: 0, transform: "scale(0.95)" }}
               transition={{ duration: 0.15, ease: easeOut }}
-              className="inline-flex h-8 items-center rounded-[var(--radius-control)] bg-[var(--color-state-hover)] px-3 text-[13px] font-medium text-[var(--color-text-tertiary)]"
+              className="oreo-squircle inline-flex h-8 items-center rounded-[var(--radius-control)] bg-[var(--color-state-hover)] px-3 text-[13px] font-medium text-[var(--color-text-tertiary)]"
             >
               {selectedLabel}
             </motion.span>
@@ -233,7 +234,7 @@ export function SettingsEditor({
       onChange={onChange ? (e) => onChange(e.target.value) : undefined}
       placeholder={placeholder}
       rows={rows}
-      className="w-full resize-y rounded-[var(--radius-card-small)] border-[0.5px] border-[var(--color-border-default)] bg-transparent px-3.5 py-3 text-[13px] leading-6 text-[var(--color-text-primary)] outline-none transition-colors duration-150 placeholder:text-[var(--color-text-placeholder)] focus:border-[var(--color-text-tertiary)]"
+      className="oreo-squircle w-full resize-y rounded-[var(--radius-card-small)] border-[0.5px] border-[var(--color-border-default)] bg-transparent px-3.5 py-3 text-[13px] leading-6 text-[var(--color-text-primary)] outline-none transition-colors duration-150 placeholder:text-[var(--color-text-placeholder)] focus:border-[var(--color-text-tertiary)]"
     />
   );
 }
@@ -252,8 +253,8 @@ export function SettingsCallout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={cn("flex items-start gap-2.5 rounded-[var(--radius-card-small)] px-3.5 py-3", CALLOUT_TONES[tone])}>
-      <Icon name="warning-circle" size="sm" className="mt-0.5 shrink-0" />
+    <div className={cn("oreo-squircle flex items-start gap-2.5 rounded-[var(--radius-card-small)] px-3.5 py-3", CALLOUT_TONES[tone])}>
+      <Icon name="warning-circle" size="sm" weight="light" className="mt-0.5 shrink-0" />
       <p className="text-[13px] leading-5">{children}</p>
     </div>
   );

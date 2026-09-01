@@ -7,7 +7,7 @@ import { settingsCard } from "./settings.variants";
 export function SettingsPageHeader({ title, description }: { title: string; description?: React.ReactNode }) {
   return (
     <header className="pl-4">
-      <h1 className="text-[22px] font-semibold tracking-tight">{title}</h1>
+      <h1 className="text-[22px] font-semibold">{title}</h1>
       {description && (
         <p className="mt-2 max-w-[60ch] text-[13px] leading-5 text-[var(--color-text-secondary)] [&_a]:font-medium [&_a]:text-[var(--color-text-primary)] [&_a]:underline [&_a]:underline-offset-2">
           {description}

@@ -31,8 +31,8 @@ export function SettingsNav({
 
   return (
     <nav aria-label="Settings" className="flex min-h-0 flex-1 flex-col px-3 pb-3 pt-4">
-      <label className="flex h-9 shrink-0 items-center gap-2 rounded-[var(--radius-control-large)] border-[0.5px] border-[var(--color-border-default)] bg-[var(--settings-field-bg)] px-2.5 shadow-[var(--shadow-default)] transition-colors duration-200 ease-out focus-within:border-[var(--color-text-tertiary)]">
-        <Icon name="search" size="sm" className="shrink-0 text-[var(--color-text-tertiary)]" />
+      <label className="oreo-squircle flex h-9 shrink-0 items-center gap-2 rounded-[var(--radius-control-large)] border-[0.5px] border-[var(--color-border-default)] bg-[var(--settings-field-bg)] px-2.5 shadow-[var(--shadow-default)] transition-colors duration-200 ease-out focus-within:border-[var(--color-text-tertiary)]">
+        <Icon name="search" size="sm" weight="light" className="shrink-0 text-[var(--color-text-tertiary)]" />
         <input
           type="search"
           value={query}
@@ -79,7 +79,7 @@ function NavRow({
   const { navIcons } = useSettingsAppearance();
 
   const className = cn(
-    "flex w-full items-center rounded-[var(--radius-control-large)] px-2.5 py-2 text-left text-[13px] font-medium transition-colors",
+    "oreo-squircle flex w-full items-center rounded-[var(--radius-control-large)] px-2.5 py-2 text-left text-[13px] font-medium transition-colors",
     active
       ? "bg-[var(--color-state-press)] text-[var(--color-text-primary)]"
       : "text-[var(--color-text-secondary)] hover:bg-[var(--color-state-hover)] hover:text-[var(--color-text-primary)]",
@@ -91,7 +91,7 @@ function NavRow({
       className="grid shrink-0 place-items-center overflow-hidden transition-[width,margin-right,opacity] duration-200 ease-out motion-reduce:transition-none"
       style={{ width: navIcons ? 16 : 0, marginRight: navIcons ? 8 : 0, opacity: navIcons ? 1 : 0 }}
     >
-      {item.icon && <Icon name={item.icon} size="sm" />}
+      {item.icon && <Icon name={item.icon} size="sm" weight="light" />}
     </span>
   );
 
@@ -103,6 +103,7 @@ function NavRow({
         <Icon
           name="arrow-out"
           size="sm"
+          weight="light"
           className="ml-auto shrink-0 text-[var(--color-text-tertiary)] transition-transform duration-150 ease-out group-hover:-translate-y-px group-hover:translate-x-px"
         />
       </a>

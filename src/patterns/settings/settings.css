@@ -49,3 +49,13 @@
   --settings-card-bg: var(--color-bg-surface);
   --settings-field-bg: var(--color-bg-surface);
 }
+
+/* iOS-style smooth corners (Figma cornerSmoothing 0.6) on the pattern's
+ * rounded surfaces — cards, nav items, fields, row controls. Capsule shapes
+ * (Switch, Meter) stay `round`. Browsers without `corner-shape` keep plain
+ * rounded corners; nothing else changes. */
+@supports (corner-shape: squircle) {
+  .oreo-squircle {
+    corner-shape: squircle;
+  }
+}
